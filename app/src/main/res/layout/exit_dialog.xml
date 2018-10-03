@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_gravity="center" android:layout_width="match_parent" android:layout_height="wrap_content">
+    <RelativeLayout android:background="@drawable/bg_title_dialog" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="20dp" android:layout_centerInParent="true">
+        <TextView android:textColor="@color/white" android:gravity="center" android:id="@+id/tvTitle" android:padding="5dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/app_name" style="?android:attr/textAppearanceLarge"/>
+        <ImageView android:id="@+id/imgLine" android:layout_width="match_parent" android:layout_height="0.5dp" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:src="@drawable/ic_line_menu" android:layout_below="@+id/tvTitle" android:contentDescription="@string/app_name"/>
+        <LinearLayout android:gravity="center" android:id="@+id/edtNumber" android:padding="20dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@+id/imgLine">
+            <TextView android:textAppearance="?android:attr/textAppearanceSmall" android:textColor="@color/white" android:gravity="center" android:id="@+id/alarm_note_title" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <ImageView android:id="@+id/imgLine1" android:layout_width="match_parent" android:layout_height="0.5dp" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:src="@drawable/ic_line_menu" android:layout_below="@+id/edtNumber" android:contentDescription="@string/app_name"/>
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:paddingBottom="5dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="5dp" android:layout_below="@+id/imgLine1">
+            <TextView android:textAppearance="?android:attr/textAppearanceSmall" android:textColor="@color/white" android:gravity="center" android:id="@+id/tvYes" android:background="@drawable/accept_button" android:layout_width="0dp" android:layout_height="40dp" android:layout_marginLeft="10dp" android:text="Ok" android:layout_weight="1"/>
+            <ImageView android:id="@+id/imgLineBottom1" android:background="@drawable/accept_button" android:layout_width="wrap_content" android:layout_height="40dp" android:layout_marginTop="5dp" android:layout_marginBottom="5dp" android:src="@drawable/ic_midle" android:contentDescription="@string/app_name"/>
+            <TextView android:textAppearance="?android:attr/textAppearanceSmall" android:textColor="@color/white" android:gravity="center" android:id="@+id/tvNo" android:background="@drawable/accept_button" android:layout_width="0dp" android:layout_height="40dp" android:layout_marginRight="10dp" android:text="Cancel" android:layout_weight="1"/>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

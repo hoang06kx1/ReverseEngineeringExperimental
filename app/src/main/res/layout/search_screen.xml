@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:background="#f0f0f0" android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout android:orientation="horizontal" android:id="@+id/llSearch" android:background="@drawable/search_input" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="3dp" android:layout_alignParentTop="true">
+        <EditText android:textAppearance="?android:attr/textAppearanceMedium" android:textColor="#ff828282" android:id="@+id/editSearch" android:background="@android:color/transparent" android:paddingLeft="10dp" android:layout_width="match_parent" android:layout_height="35dp" android:hint="Tìm kiếm..." android:maxLines="1" android:ems="10" android:layout_weight="1"/>
+    </LinearLayout>
+    <ListView android:scrollbarStyle="outsideOverlay" android:id="@+id/listView" android:background="#f0f0f0" android:layout_width="match_parent" android:layout_height="match_parent" android:cacheColorHint="@android:color/transparent" android:divider="#d8d8d8" android:dividerHeight="0.5dp" android:layout_above="@+id/footer" android:layout_below="@+id/llSearch" android:smoothScrollbar="true"/>
+    <LinearLayout android:orientation="vertical" android:id="@+id/footer" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+        <include android:id="@+id/footerView" layout="@layout/play_view"/>
+    </LinearLayout>
+    <ProgressBar android:id="@+id/progressBar" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true"/>
+    <TextView android:textStyle="normal|bold|italic" android:textColor="@color/black1" android:id="@+id/empty" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Empty data" android:layout_centerInParent="true"/>
+    <Button android:textColor="@color/black1" android:id="@+id/retry" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="retry" android:layout_centerInParent="true"/>
+</RelativeLayout>

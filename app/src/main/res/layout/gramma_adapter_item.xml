@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:padding="5dp" android:layout_width="match_parent" android:layout_height="match_parent">
+    <TextView android:textAppearance="?android:attr/textAppearanceMedium" android:textStyle="normal" android:textColor="@color/word_blue" android:id="@+id/tvTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginRight="5dp" android:text="1" android:layout_toLeftOf="@+id/btnSound"/>
+    <TextView android:textAppearance="?android:attr/textAppearanceSmall" android:textStyle="normal" android:textColor="@color/word_solid" android:ellipsize="end" android:id="@+id/tvGenres" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="3dp" android:layout_marginRight="5dp" android:text="4aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" android:maxLines="2" android:layout_toLeftOf="@+id/btnSound" android:layout_below="@+id/tvTitle"/>
+    <ImageView android:id="@+id/btnSound" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_action_favorite" android:layout_alignParentRight="true" android:layout_centerVertical="true"/>
+</RelativeLayout>

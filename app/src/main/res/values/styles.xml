@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppBaseTheme">
+    </style>
+    <style name="AppCompatAlertDialogStyle">
+        <item name="android:textColorPrimary">#000000</item>
+        <item name="android:background">#ffffff</item>
+        <item name="colorAccent">#689f38</item>
+    </style>
+    <style name="AppTheme">
+    </style>
+    <style name="AppTheme.Base">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    </style>
+    <style name="CustomSpinner">
+    </style>
+    <style name="ExoMediaButton">
+        <item name="android:background">@null</item>
+        <item name="android:layout_width">71dp</item>
+        <item name="android:layout_height">52dp</item>
+    </style>
+    <style name="ExoMediaButton.FastForward">
+        <item name="android:src">@drawable/exo_controls_fastforward</item>
+        <item name="android:contentDescription">@string/exo_controls_fastforward_description</item>
+    </style>
+    <style name="ExoMediaButton.Next">
+        <item name="android:src">@drawable/exo_controls_next</item>
+        <item name="android:contentDescription">@string/exo_controls_next_description</item>
+    </style>
+    <style name="ExoMediaButton.Previous">
+        <item name="android:src">@drawable/exo_controls_previous</item>
+        <item name="android:contentDescription">@string/exo_controls_previous_description</item>
+    </style>
+    <style name="ExoMediaButton.Rewind">
+        <item name="android:src">@drawable/exo_controls_rewind</item>
+        <item name="android:contentDescription">@string/exo_controls_rewind_description</item>
+    </style>
+    <style name="MyActionBar">
+        <item name="android:background">@color/custom_color_action_bar</item>
+        <item name="background">@color/custom_color_action_bar</item>
+    </style>
+    <style name="MyDialogTheme">
+        <item name="android:textColorPrimary">@color/black1</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+    <style name="MyTextView">
+        <item name="android:textAppearance">@android:style/TextAppearance.Small</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">left|center_horizontal|clip_horizontal</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+    <style name="WordTest">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">@color/quiz_text_color</item>
+        <item name="android:gravity">right|center_horizontal|clip_horizontal</item>
+        <item name="android:background">@drawable/bg_phrase_answer</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginBottom">3dp</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:text">abc</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+    <style name="WordsStyle">
+        <item name="android:textSize">@dimen/larg_text_size</item>
+        <item name="android:textColor">@color/quiz_text_color</item>
+        <item name="android:gravity">left|center_horizontal|clip_horizontal</item>
+        <item name="android:background">@drawable/selector_items</item>
+        <item name="android:padding">3dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+    </style>
+</resources>

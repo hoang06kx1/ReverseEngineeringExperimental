@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:background="#f0f0f0" android:layout_width="match_parent" android:layout_height="match_parent">
+    <ListView android:scrollbarStyle="outsideOverlay" android:id="@+id/listView" android:background="#f0f0f0" android:layout_width="match_parent" android:layout_height="match_parent" android:cacheColorHint="@android:color/transparent" android:divider="#d8d8d8" android:dividerHeight="0.5dp" android:layout_above="@+id/footer" android:smoothScrollbar="true"/>
+    <LinearLayout android:orientation="vertical" android:id="@+id/footer" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+        <include layout="@layout/play_view"/>
+        <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:id="@+id/llAds" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true"/>
+    </LinearLayout>
+    <ProgressBar android:id="@+id/progressBar" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true"/>
+    <TextView android:textStyle="normal|bold|italic" android:textColor="@color/black1" android:id="@+id/empty" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Chưa có dữ liệu" android:layout_centerInParent="true"/>
+    <Button android:textColor="@color/black1" android:id="@+id/retry" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="retry" android:layout_centerInParent="true"/>
+</RelativeLayout>

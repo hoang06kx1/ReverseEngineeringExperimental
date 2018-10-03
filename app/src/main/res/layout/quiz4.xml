@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:orientation="vertical" android:id="@+id/scContent" android:paddingLeft="10dp" android:paddingRight="10dp" android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <RelativeLayout android:gravity="center_horizontal" android:id="@+id/rlAnswer" android:padding="10dp" android:layout_width="match_parent" android:layout_height="wrap_content">
+            <TextView android:textAppearance="@android:style/TextAppearance.Medium" android:textStyle="bold" android:textColor="@color/red" android:id="@+id/tvQuestion" android:visibility="gone" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Rearrange these words to make meaningful sentences"/>
+            <TextView android:textAppearance="@android:style/TextAppearance.Medium" android:textStyle="bold" android:textColor="@color/red" android:gravity="center_horizontal" android:id="@+id/tvKorean" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="word" android:layout_below="@+id/tvQuestion"/>
+            <TextView android:textAppearance="@android:style/TextAppearance.Small" android:textStyle="bold" android:textColor="@color/word_blue" android:gravity="center_horizontal" android:id="@+id/tvPinyin" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="word" android:layout_below="@+id/tvKorean"/>
+            <LinearLayout android:gravity="left" android:id="@+id/llFlowLayout" android:background="@drawable/bg_phrase_answer_quiz4" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="100dp" android:layout_centerHorizontal="true">
+                <org.apmem.tools.layouts.FlowLayout android:gravity="left|center_vertical|center_horizontal|center" android:layout_gravity="left|center_vertical|center_horizontal|center" android:orientation="horizontal" android:id="@+id/flowLayout" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layoutDirection="ltr"/>
+                <EditText android:textAppearance="@android:style/TextAppearance.Small" android:textColor="@color/black1" android:textColorHint="@color/bg_solid" android:ellipsize="end" android:gravity="center" android:layout_gravity="center_vertical" android:id="@+id/editAnswer" android:background="@color/transference" android:padding="5dp" android:visibility="gone" android:layout_width="match_parent" android:layout_height="50dp" android:hint="How to write" android:maxLines="2" android:singleLine="true" android:imeOptions="actionUnspecified"/>
+            </LinearLayout>
+        </RelativeLayout>
+        <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
+            <com.riontech.staggeredtextgridview.StaggeredTextGridView android:id="@+id/staggeredTextView" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+            <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="30dp">
+                <TextView android:id="@+id/tvSug" android:background="@drawable/selector_items" android:padding="7dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="   ?   " style="@style/WordsStyle"/>
+                <ImageView android:id="@+id/btnPlay" android:background="@drawable/bg_audio_anim" android:focusable="true" android:clickable="true" android:layout_width="80dp" android:layout_height="80dp" android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_centerHorizontal="true"/>
+                <TextView android:id="@+id/tvDel" android:background="@drawable/selector_items" android:padding="7dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" Del " style="@style/WordsStyle"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

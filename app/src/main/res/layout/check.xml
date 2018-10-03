@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/llCheckParent" android:background="@color/transference" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent" android:minHeight="40dp" android:layout_above="@+id/llAds">
+    <RelativeLayout android:gravity="center_horizontal" android:id="@+id/llCheck" android:background="@drawable/bg_phrase_answer" android:layout_width="match_parent" android:layout_height="200dp" android:layout_alignParentBottom="true">
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_above="@+id/tvContinue" android:layout_centerInParent="true">
+            <TextView android:textAppearance="@android:style/TextAppearance.Medium" android:textColor="@color/white" android:gravity="center_horizontal" android:id="@+id/tvCorrect" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Continue"/>
+            <TextView android:textAppearance="@android:style/TextAppearance.Medium" android:textColor="@color/white" android:gravity="center_horizontal" android:id="@+id/tvKoreanTest" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="7dp" android:text="Continue"/>
+            <TextView android:textAppearance="@android:style/TextAppearance.Medium" android:textStyle="italic" android:textColor="@color/white" android:gravity="center_horizontal" android:id="@+id/tvEnglishTest" android:visibility="gone" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="1dp" android:layout_marginBottom="2dp" android:text="Continue"/>
+        </LinearLayout>
+        <TextView android:textAppearance="@android:style/TextAppearance.Medium" android:textColor="@color/white" android:gravity="center" android:id="@+id/tvContinue" android:background="@color/colorPrimary2" android:padding="10dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="5dp" android:text="Continue" android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+</RelativeLayout>

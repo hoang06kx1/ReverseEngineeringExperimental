@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:orientation="vertical" android:paddingLeft="10dp" android:paddingRight="10dp" android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+        <TextView android:textAppearance="@android:style/TextAppearance.Medium" android:textStyle="bold" android:textColor="@color/red" android:id="@+id/tvTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Speak this sentence"/>
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:paddingTop="5dp" android:paddingBottom="5dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="5dp">
+            <ImageView android:id="@+id/btnPlay" android:background="@drawable/bg_audio_anim" android:focusable="true" android:clickable="true" android:layout_width="80dp" android:layout_height="80dp" android:layout_below="@+id/tvTitle"/>
+            <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:id="@+id/llQuest" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toRightOf="@+id/btnPlay">
+                <TextView android:textAppearance="@android:style/TextAppearance.Medium" android:textStyle="bold" android:textColor="@color/red" android:id="@+id/tvEnglish" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="word"/>
+                <TextView android:textAppearance="@android:style/TextAppearance.Medium" android:textStyle="bold" android:textColor="@color/word_blue" android:id="@+id/tvPinyin" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="word"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:padding="10dp" android:layout_width="match_parent" android:layout_height="wrap_content">
+            <ImageView android:layout_gravity="center" android:id="@+id/imgMicro" android:background="@drawable/record_loader" android:layout_width="150dp" android:layout_height="150dp" android:contentDescription="@string/app_name"/>
+            <TextView android:textStyle="normal" android:textColor="@color/word_blue" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tap to record"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
