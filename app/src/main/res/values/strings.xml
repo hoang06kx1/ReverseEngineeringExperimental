@@ -68,4 +68,6 @@
     <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
     <string name="speech_prompt">Say %s…</string>
     <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
 </resources>

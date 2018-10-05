@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:shape="oval">
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       android:shape="oval">
     <solid android:color="#2092be"/>
-    <padding android:left="7dp" android:top="7dp" android:right="7dp" android:bottom="7dp"/>
+    <padding
+        android:bottom="7dp"
+        android:left="7dp"
+        android:right="7dp"
+        android:top="7dp"/>
 </shape>
