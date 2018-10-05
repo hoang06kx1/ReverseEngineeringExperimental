@@ -12,13 +12,13 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import app.giaotieptienghan.R;
-import app.giaotieptienghan.model.MenuItems;
+import app.giaotieptienghan.model.MenuItem;
 
-public class DrawerAdapter extends ArrayAdapter<MenuItems> {
+public class DrawerAdapter extends ArrayAdapter<MenuItem> {
 /* renamed from: a */
 private Context context;
 /* renamed from: b */
-private ArrayList<MenuItems> items;
+private ArrayList<MenuItem> items;
 /* renamed from: c */
 private LayoutInflater inflater;
 /* renamed from: d */
@@ -35,7 +35,7 @@ private class ViewHolder {
     }
 }
 
-    public DrawerAdapter(Context context, ArrayList<MenuItems> arrayList) {
+    public DrawerAdapter(Context context, ArrayList<MenuItem> arrayList) {
         super(context, 0, arrayList);
         this.context = context;
         this.items = arrayList;
@@ -43,14 +43,14 @@ private class ViewHolder {
     }
 
     /* renamed from: a */
-    private void loadIconAndText(ImageView imageView, int i, int i2) {
+    private void loadIcon(ImageView imageView, int i, int i2) {
         ((GradientDrawable) imageView.getBackground()).setColor(this.colors[i2]);
         imageView.setImageDrawable(this.context.getResources().getDrawable(i));
     }
 
     /* renamed from: a */
-    public MenuItems getItem(int i) {
-        return (MenuItems) this.items.get(i);
+    public MenuItem getItem(int i) {
+        return (MenuItem) this.items.get(i);
     }
 
     public int getCount() {
@@ -68,9 +68,9 @@ private class ViewHolder {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        MenuItems item = getItem(i);
+        MenuItem item = getItem(i);
         viewHolder.textView.setText(item.getName());
-        loadIconAndText(viewHolder.imageView, item.getImage(), i);
+        loadIcon(viewHolder.imageView, item.getImage(), i);
         return view;
     }
 }

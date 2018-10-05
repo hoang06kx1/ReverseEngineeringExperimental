@@ -8,16 +8,14 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:titleTextColor="@color/actionBarText"
-            android:background="@color/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+            app:titleTextColor="@android:color/white"
+            android:background="@color/colorPrimary"/>
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
@@ -33,6 +31,7 @@
         android:layout_height="fill_parent"/>
 
     <ListView
+        android:layout_marginTop="?attr/actionBarSize"
         android:id="@+id/left_drawer"
         android:layout_width="240.0dip"
         android:layout_height="fill_parent"

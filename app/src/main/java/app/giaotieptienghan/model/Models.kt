@@ -1,6 +1,6 @@
 package app.giaotieptienghan.model
 
-class MenuItems {
+class MenuItem {
     public var image: Int = 0
     public var name: String? = null
 }
