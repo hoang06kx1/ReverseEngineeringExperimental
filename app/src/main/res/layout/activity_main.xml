@@ -6,36 +6,43 @@
                                         android:layout_height="fill_parent"
                                         android:background="@drawable/wall3">
 
-    <android.support.design.widget.AppBarLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/layout_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:titleTextColor="@android:color/white"
-            android:background="@color/colorPrimary"/>
-    </android.support.design.widget.AppBarLayout>
+            android:layout_height="?attr/actionBarSize">
 
-    <FrameLayout
-        android:id="@+id/transparent"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:alpha="0.7"
-        android:background="@color/black"/>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary"
+                app:titleTextColor="@android:color/white"/>
+        </android.support.design.widget.AppBarLayout>
 
-    <FrameLayout
-        android:id="@+id/content_frame"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"/>
+        <FrameLayout
+            android:id="@+id/transparent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:alpha="0.7"
+            android:background="@color/black"/>
+
+        <FrameLayout
+            android:layout_below="@+id/layout_toolbar"
+            android:id="@+id/content_frame"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"/>
+    </RelativeLayout>
 
     <ListView
-        android:layout_marginTop="?attr/actionBarSize"
         android:id="@+id/left_drawer"
         android:layout_width="240.0dip"
         android:layout_height="fill_parent"
         android:layout_gravity="start"
+        android:layout_marginTop="?attr/actionBarSize"
         android:alpha="0.7"
         android:background="@color/black"
         android:cacheColorHint="@android:color/transparent"

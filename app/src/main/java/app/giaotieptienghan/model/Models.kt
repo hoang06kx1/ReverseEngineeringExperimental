@@ -3,6 +3,7 @@ package app.giaotieptienghan.model
 import android.arch.persistence.room.*
 import android.content.Context
 import com.fstyle.library.helper.AssetSQLiteOpenHelperFactory
+import com.huma.room_for_asset.RoomAsset
 import io.reactivex.Single
 
 class MenuItem {
@@ -11,12 +12,15 @@ class MenuItem {
 }
 
 @Entity(tableName = "category")
-class CategoryItem {
-    var chinese: String? = null
-    var english: String? = null
-    var _id: Int = 0
-    var vietnamese: String? = null
-}
+data class CategoryItem(
+        @PrimaryKey var id: Int = 0,
+        @ColumnInfo(name = "english")
+        var english: String? = "",
+        @ColumnInfo(name = "vietnamese")
+        var vietnamese: String? = "",
+        @ColumnInfo(name = "chinese")
+        var chinese: String? = "")
+
 
 class PhraseExItem {
     var cateId: Int = 0
@@ -28,13 +32,11 @@ class PhraseExItem {
     var vietnamese: String? = null
 }
 
-@Entity(tableName = "phrase")
 class PhraseItem {
-    @ColumnInfo(name = "category_id")
     var categoryId: String? = null
     var chinese: String? = null
     var english: String? = null
-    var favorite: Int = 0
+    var favorite: Int? = 0
     var _id: Int = 0
     var korean: String? = null
     var pinyin: String? = null
@@ -47,10 +49,10 @@ class PhraseItem {
 @Dao
 interface CategoryDao {
     @Query("SELECT * FROM category")
-    fun getAll(): Single<List<CategoryItem>>
+    fun getAll(): List<CategoryItem>
 }
 
-@Database(entities = [CategoryItem::class, PhraseItem::class], version = 1)
+@Database(entities = [CategoryItem::class], version = 2)
 abstract class MainDB : RoomDatabase() {
 
     abstract fun CategoryDao(): CategoryDao
@@ -61,10 +63,10 @@ abstract class MainDB : RoomDatabase() {
         fun getInstance(context: Context): MainDB? {
             if (INSTANCE == null) {
                 synchronized(MainDB::class) {
-                    INSTANCE = Room.databaseBuilder(context.applicationContext,
-                            MainDB::class.java, "enlesslove.dat")
+                    INSTANCE = RoomAsset.databaseBuilder(context.applicationContext,
+                            MainDB::class.java, "endlesslove.db")
                             .allowMainThreadQueries()
-                            .openHelperFactory(AssetSQLiteOpenHelperFactory())
+//                            .openHelperFactory(AssetSQLiteOpenHelperFactory())
                             .build()
                 }
             }

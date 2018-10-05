@@ -12,6 +12,7 @@ import app.giaotieptienghan.adapter.DrawerAdapter
 
 class MainActivity : AppCompatActivity() {
     private val listMenuItem: ArrayList<MenuItem> = ArrayList()
+    lateinit var homeFragment: HomeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,5 +72,11 @@ class MainActivity : AppCompatActivity() {
         menuItems.image = R.drawable.ic_verified_user_white_24dp
         this.listMenuItem.add(menuItems)
         leftDrawer.adapter = DrawerAdapter(this, this.listMenuItem)
+
+        // home screen
+//        if (savedInstanceState == null) {
+            this.homeFragment = HomeFragment()
+            supportFragmentManager.beginTransaction().replace(R.id.content_frame, homeFragment).commit()
+//        }
     }
 }

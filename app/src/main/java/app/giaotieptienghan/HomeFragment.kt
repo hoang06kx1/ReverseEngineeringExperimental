@@ -1,7 +1,6 @@
 package app.giaotieptienghan
 
 import android.support.v4.app.Fragment
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +26,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
     /* renamed from: Y */
     private var progressBar: ProgressBar? = null
 
-
     /* renamed from: b */
     private fun initView(view: View) {
         this.gridView = view.findViewById<View>(R.id.gridView) as GridView
@@ -35,13 +33,9 @@ class HomeFragment : Fragment(), OnItemClickListener {
         if (this.progressBar == null) {
             this.progressBar = view.findViewById<View>(R.id.progressBar) as ProgressBar
         }
-        MainDB.getInstance(activity!!)!!.CategoryDao().getAll()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ list ->
-                    categoryItems = ArrayList(list)
-                    gridView!!.adapter = HomeAdapter(activity, categoryItems)
-                }, Throwable::printStackTrace)
+        categoryItems = ArrayList(MainDB.getInstance(activity!!)!!.CategoryDao().getAll())
+        gridView!!.adapter = HomeAdapter(activity, categoryItems)
+        gridView!!.visibility = View.VISIBLE
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -53,11 +47,11 @@ class HomeFragment : Fragment(), OnItemClickListener {
     override fun onItemClick(adapterView: AdapterView<*>, view: View, i: Int, j: Long) {
         val stringBuilder = StringBuilder()
         stringBuilder.append("item ")
-        stringBuilder.append(this.categoryItems!![i]._id)
+        stringBuilder.append(this.categoryItems!![i].id)
         //C0769c.m2995b("onitemclic", stringBuilder.toString());
         //Intent intent = new Intent(getActivity(), PhraseDetail.class);
         //intent.setFlags(268435456);
-        //intent.putExtra("bundle_id", categoryItem.get_id());
+        //intent.putExtra("bundle_id", categoryItem.getId());
         //intent.putExtra("bundle_title", categoryItem.getVietnamese());
         //getActivity().startActivity(intent);
     }
