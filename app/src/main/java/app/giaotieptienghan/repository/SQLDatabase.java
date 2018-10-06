@@ -5,29 +5,31 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import java.io.IOException;
+
 import java.util.ArrayList;
 
+import app.giaotieptienghan.Utils;
 import app.giaotieptienghan.cipher.Decryption;
 import app.giaotieptienghan.cipher.ObfuscatedString;
+import app.giaotieptienghan.model.CategoryItem;
 import app.giaotieptienghan.model.PhraseItem;
 
 /* renamed from: com.example.english.b.c */
 public class SQLDatabase {
     /* renamed from: a */
-    private Context f1947a;
+    private Context context;
     /* renamed from: b */
-    private SQLiteDatabase f1948b;
+    private SQLiteDatabase sqLiteDatabase;
     /* renamed from: c */
-    private C0762a f1949c;
+    private DatabaseHelper helper;
     /* renamed from: d */
-    private Decryption f1950d;
+    private Decryption decryption;
 
     public SQLDatabase(Context context) {
         try {
-            this.f1947a = context;
-            this.f1949c = new C0762a(this.f1947a);
-            this.f1950d = new Decryption(new ObfuscatedString(new long[]{54233370504433150L, 4898902494104535733L, -5807597149084756791L, 8156855886985688596L}).toString());
+            this.context = context;
+            this.helper = new DatabaseHelper(this.context);
+            this.decryption = new Decryption(new ObfuscatedString(new long[]{54233370504433150L, 4898902494104535733L, -5807597149084756791L, 8156855886985688596L}).toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -36,11 +38,11 @@ public class SQLDatabase {
     /* renamed from: a */
     private PhraseItem m2972a(Cursor cursor) {
         PhraseItem phraseItem = new PhraseItem();
-        phraseItem.f2071id = cursor.getInt(cursor.getColumnIndex("_id"));
+        phraseItem.id = cursor.getInt(cursor.getColumnIndex("_id"));
         phraseItem.categoryId = cursor.getString(cursor.getColumnIndex("category_id"));
         phraseItem.english = cursor.getString(cursor.getColumnIndex("english"));
         phraseItem.pinyin = cursor.getString(cursor.getColumnIndex("pinyin"));
-        phraseItem.korean = this.f1950d.mo2918a(cursor.getString(cursor.getColumnIndex("korean"))).replace("# ", ", ");
+        phraseItem.korean = this.decryption.decrypt(cursor.getString(cursor.getColumnIndex("korean"))).replace("# ", ", ");
         phraseItem.favorite = cursor.getInt(cursor.getColumnIndex("favorite"));
         phraseItem.voice = cursor.getString(cursor.getColumnIndex("voice"));
         phraseItem.status = cursor.getString(cursor.getColumnIndex("status"));
@@ -54,11 +56,11 @@ public class SQLDatabase {
     private PhraseItem m2973a(Cursor cursor, boolean z) {
         String str;
         PhraseItem phraseItem = new PhraseItem();
-        phraseItem.f2071id = cursor.getInt(cursor.getColumnIndex("_id"));
+        phraseItem.id = cursor.getInt(cursor.getColumnIndex("_id"));
         phraseItem.categoryId = cursor.getString(cursor.getColumnIndex("category_id"));
         phraseItem.english = cursor.getString(cursor.getColumnIndex("english"));
         phraseItem.pinyin = cursor.getString(cursor.getColumnIndex("pinyin"));
-        phraseItem.korean = this.f1950d.mo2918a(cursor.getString(cursor.getColumnIndex("korean"))).replace("# ", ", ");
+        phraseItem.korean = this.decryption.decrypt(cursor.getString(cursor.getColumnIndex("korean"))).replace("# ", ", ");
         phraseItem.favorite = cursor.getInt(cursor.getColumnIndex("favorite"));
         if (z) {
             phraseItem.voice = cursor.getString(cursor.getColumnIndex("vietnamese")).replace("honhan", "honnhan");
@@ -77,9 +79,9 @@ public class SQLDatabase {
     /* renamed from: b */
     private PhraseItem m2974b(Cursor cursor) {
         PhraseItem phraseItem = new PhraseItem();
-        phraseItem.f2071id = cursor.getInt(cursor.getColumnIndex("_id"));
+        phraseItem.id = cursor.getInt(cursor.getColumnIndex("_id"));
         phraseItem.categoryId = String.valueOf(cursor.getInt(cursor.getColumnIndex("cateId")));
-        phraseItem.korean = this.f1950d.mo2918a(cursor.getString(cursor.getColumnIndex("korean")));
+        phraseItem.korean = this.decryption.decrypt(cursor.getString(cursor.getColumnIndex("korean")));
         phraseItem.favorite = cursor.getInt(cursor.getColumnIndex("favorite"));
         phraseItem.vietnamese = cursor.getString(cursor.getColumnIndex("vietnamese"));
         phraseItem.search = cursor.getString(cursor.getColumnIndex("search"));
@@ -87,17 +89,9 @@ public class SQLDatabase {
     }
 
     /* renamed from: a */
-    public C0764c mo2871a() {
-        try {
-            this.f1949c.mo2861a();
-            return this;
-        } catch (IOException e) {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(e.toString());
-            stringBuilder.append("  UnableToCreateDatabase");
-            Log.e("GetData", stringBuilder.toString());
-            throw new Error("UnableToCreateDatabase");
-        }
+    public SQLDatabase mo2871a() {
+        this.helper.updateDatabase();
+        return this;
     }
 
     /* renamed from: a */
@@ -112,7 +106,7 @@ public class SQLDatabase {
                 stringBuilder.append(i);
                 str = stringBuilder.toString();
             }
-            Cursor rawQuery = this.f1948b.rawQuery(str, null);
+            Cursor rawQuery = this.sqLiteDatabase.rawQuery(str, null);
             StringBuilder stringBuilder2 = new StringBuilder();
             stringBuilder2.append("c ");
             stringBuilder2.append(rawQuery);
@@ -138,14 +132,14 @@ public class SQLDatabase {
         try {
             StringBuilder stringBuilder;
             String str2 = "SELECT * FROM category";
-            if (!C0778h.m3033a(str)) {
+            if (!Utils.isStringEmpty(str)) {
                 stringBuilder = new StringBuilder();
                 stringBuilder.append(str2);
                 stringBuilder.append(" where _id=");
                 stringBuilder.append(str);
                 str2 = stringBuilder.toString();
             }
-            Cursor rawQuery = this.f1948b.rawQuery(str2, null);
+            Cursor rawQuery = this.sqLiteDatabase.rawQuery(str2, null);
             stringBuilder = new StringBuilder();
             stringBuilder.append("c ");
             stringBuilder.append(rawQuery);
@@ -153,10 +147,10 @@ public class SQLDatabase {
             if (rawQuery.moveToFirst()) {
                 do {
                     CategoryItem categoryItem = new CategoryItem();
-                    categoryItem.f2068id = rawQuery.getInt(rawQuery.getColumnIndex("_id"));
-                    categoryItem.english = rawQuery.getString(rawQuery.getColumnIndex("english"));
-                    categoryItem.vietnamese = rawQuery.getString(rawQuery.getColumnIndex("vietnamese"));
-                    categoryItem.chinese = rawQuery.getString(rawQuery.getColumnIndex("chinese"));
+                    categoryItem.setId(rawQuery.getInt(rawQuery.getColumnIndex("_id")));
+                    categoryItem.setEnglish(rawQuery.getString(rawQuery.getColumnIndex("english")));
+                    categoryItem.setVietnamese(rawQuery.getString(rawQuery.getColumnIndex("vietnamese")));
+                    categoryItem.setChinese(rawQuery.getString(rawQuery.getColumnIndex("chinese")));
                     arrayList.add(categoryItem);
                 } while (rawQuery.moveToNext());
             }
@@ -178,7 +172,7 @@ public class SQLDatabase {
         stringBuilder.append(" WHERE _id=");
         stringBuilder.append(i2);
         try {
-            this.f1948b.execSQL(stringBuilder.toString());
+            this.sqLiteDatabase.execSQL(stringBuilder.toString());
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -187,11 +181,11 @@ public class SQLDatabase {
     }
 
     /* renamed from: b */
-    public C0764c mo2875b() {
+    public SQLDatabase mo2875b() {
         try {
-            this.f1949c.mo2862b();
-            this.f1949c.close();
-            this.f1948b = this.f1949c.getReadableDatabase();
+            this.helper.isDatabaseOpenable();
+            this.helper.close();
+            this.sqLiteDatabase = this.helper.getReadableDatabase();
             return this;
         } catch (SQLException e) {
             StringBuilder stringBuilder = new StringBuilder();
@@ -215,7 +209,7 @@ public class SQLDatabase {
                 stringBuilder.append(i);
                 str = stringBuilder.toString();
             }
-            Cursor rawQuery = this.f1948b.rawQuery(str, null);
+            Cursor rawQuery = this.sqLiteDatabase.rawQuery(str, null);
             stringBuilder = new StringBuilder();
             stringBuilder.append("c ");
             stringBuilder.append(rawQuery);
@@ -243,7 +237,7 @@ public class SQLDatabase {
         stringBuilder.append(" WHERE _id=");
         stringBuilder.append(i2);
         try {
-            this.f1948b.execSQL(stringBuilder.toString());
+            this.sqLiteDatabase.execSQL(stringBuilder.toString());
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -253,14 +247,14 @@ public class SQLDatabase {
 
     /* renamed from: c */
     public void mo2878c() {
-        this.f1949c.close();
+        this.helper.close();
     }
 
     /* renamed from: d */
     public ArrayList<PhraseItem> mo2879d() {
         ArrayList<PhraseItem> arrayList = new ArrayList();
         try {
-            Cursor rawQuery = this.f1948b.rawQuery("SELECT * FROM sub where favorite=1", null);
+            Cursor rawQuery = this.sqLiteDatabase.rawQuery("SELECT * FROM sub where favorite=1", null);
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("c ");
             stringBuilder.append(rawQuery);
@@ -284,7 +278,7 @@ public class SQLDatabase {
     public ArrayList<PhraseItem> mo2880e() {
         ArrayList<PhraseItem> arrayList = new ArrayList();
         try {
-            Cursor rawQuery = this.f1948b.rawQuery("SELECT * FROM phrase where favorite=1", null);
+            Cursor rawQuery = this.sqLiteDatabase.rawQuery("SELECT * FROM phrase where favorite=1", null);
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("c ");
             stringBuilder.append(rawQuery);

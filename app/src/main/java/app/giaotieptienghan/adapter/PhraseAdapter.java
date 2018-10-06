@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import app.giaotieptienghan.R;
 import app.giaotieptienghan.model.PhraseItem;
+import app.giaotieptienghan.repository.SQLDatabase;
 
 public class PhraseAdapter extends ArrayAdapter<PhraseItem> {
     /* renamed from: a */
@@ -61,7 +62,7 @@ public class PhraseAdapter extends ArrayAdapter<PhraseItem> {
     /* renamed from: a */
     private void m2927a(int i, int i2) {
         try {
-            C0764c c0764c = new C0764c(this.context);
+            SQLDatabase c0764c = new SQLDatabase(this.context);
             c0764c.mo2871a();
             c0764c.mo2875b();
             c0764c.mo2874a(i, i2);
@@ -143,7 +144,7 @@ public class PhraseAdapter extends ArrayAdapter<PhraseItem> {
         }
         final PhraseItem b = getItem(i);
         view.setBackgroundColor(i == this.f1900d ? this.context.getResources().getColor(R.color.bg_solid) : 0);
-        if (b.getFavorite() == 1) {
+        if (b.favorite == 1) {
             i2 = R.drawable.ic_action_favorite_active;
         } else {
             i2 = R.drawable.ic_action_favorite;
@@ -154,17 +155,17 @@ public class PhraseAdapter extends ArrayAdapter<PhraseItem> {
             public void onClick(View view) {
                 ImageView imageView;
                 int i;
-                if (b.getFavorite() == 0) {
-                    b.setFavorite(1);
+                if (b.favorite == 0) {
+                    b.favorite = 1;
                     imageView = imgFavorite;
                     i = R.drawable.ic_action_favorite_active;
                 } else {
-                    b.setFavorite(0);
+                    b.favorite = 0;
                     imageView = imgFavorite;
                     i = R.drawable.ic_action_favorite;
                 }
                 imageView.setImageResource(i);
-                PhraseAdapter.this.m2927a(b.getFavorite(), b.get_id());
+                PhraseAdapter.this.m2927a(b.favorite, b.id);
             }
         });
         phraseViewHolder.imgCopy.setOnClickListener(new OnClickListener() {
@@ -172,7 +173,7 @@ public class PhraseAdapter extends ArrayAdapter<PhraseItem> {
             public void onClick(View view) {
                 try {
                     Context a = PhraseAdapter.this.context;
-                    ((ClipboardManager) a.getSystemService("clipboard")).setPrimaryClip(ClipData.newPlainText("korean", b.getKorean()));
+                    ((ClipboardManager) a.getSystemService("clipboard")).setPrimaryClip(ClipData.newPlainText("korean", b.korean));
                     Toast.makeText(PhraseAdapter.this.context, "Copy to clipboard...", 0).show();
                 } catch (Exception unused) {
                     Toast.makeText(PhraseAdapter.this.context, "Device not support copy to clipboard", 0).show();
@@ -183,10 +184,10 @@ public class PhraseAdapter extends ArrayAdapter<PhraseItem> {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(i + 1);
         stringBuilder.append(". ");
-        stringBuilder.append(b.getKorean());
+        stringBuilder.append(b.korean);
         c.setText(stringBuilder.toString());
-        phraseViewHolder.tvGenres.setText(b.getPinyin());
-        m2928a(phraseViewHolder.tvGenres1, b.getVietnamese(), b.getSearch());
+        phraseViewHolder.tvGenres.setText(b.pinyin);
+        m2928a(phraseViewHolder.tvGenres1, b.vietnamese, b.search);
         return view;
     }
 }
