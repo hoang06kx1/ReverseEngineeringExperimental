@@ -1,7 +1,9 @@
 package app.giaotieptienghan
 
-import android.support.v4.app.Fragment
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +11,14 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.GridView
 import android.widget.ProgressBar
-
-import java.util.ArrayList
-
 import app.giaotieptienghan.adapter.HomeAdapter
 import app.giaotieptienghan.model.CategoryItem
 import app.giaotieptienghan.model.MainDB
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import java.util.*
+import app.giaotieptienghan.repository.EndlessLoveDB
+
+
+
 
 class HomeFragment : Fragment(), OnItemClickListener {
     /* renamed from: V */
@@ -33,9 +35,19 @@ class HomeFragment : Fragment(), OnItemClickListener {
         if (this.progressBar == null) {
             this.progressBar = view.findViewById<View>(R.id.progressBar) as ProgressBar
         }
-        categoryItems = ArrayList(MainDB.getInstance(activity!!)!!.CategoryDao().getAll())
-        gridView!!.adapter = HomeAdapter(activity, categoryItems)
-        gridView!!.visibility = View.VISIBLE
+        val endlessLove = EndlessLoveDB(context)
+        try {
+            endlessLove.initDB()
+            endlessLove.readableDB
+            categoryItems = endlessLove.mo2873a("")
+            gridView!!.adapter = HomeAdapter(activity, categoryItems)
+            gridView!!.visibility = View.VISIBLE
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } catch (th: Throwable) {
+            endlessLove.closeDB()
+        }
+        endlessLove.closeDB()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,15 +56,16 @@ class HomeFragment : Fragment(), OnItemClickListener {
         return inflate
     }
 
+    @SuppressLint("WrongConstant")
     override fun onItemClick(adapterView: AdapterView<*>, view: View, i: Int, j: Long) {
+        val categoryItem = this.categoryItems!!.get(i)
         val stringBuilder = StringBuilder()
         stringBuilder.append("item ")
         stringBuilder.append(this.categoryItems!![i].id)
-        //C0769c.m2995b("onitemclic", stringBuilder.toString());
-        //Intent intent = new Intent(getActivity(), PhraseDetail.class);
-        //intent.setFlags(268435456);
-        //intent.putExtra("bundle_id", categoryItem.getId());
-        //intent.putExtra("bundle_title", categoryItem.getVietnamese());
-        //getActivity().startActivity(intent);
+        val intent = Intent(getActivity(), PhraseDetailActivity::class.java)
+        intent.setFlags(268435456);
+        intent.putExtra("bundle_id", categoryItem.id)
+        intent.putExtra("bundle_title", categoryItem.vietnamese)
+        getActivity()!!.startActivity(intent)
     }
 }

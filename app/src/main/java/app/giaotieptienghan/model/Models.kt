@@ -38,7 +38,7 @@ interface CategoryDao {
     fun getAll(): List<CategoryItem>
 }
 
-@Database(entities = [CategoryItem::class], version = 2)
+@Database(entities = [CategoryItem::class], version = 22)
 abstract class MainDB : RoomDatabase() {
 
     abstract fun CategoryDao(): CategoryDao
@@ -51,6 +51,7 @@ abstract class MainDB : RoomDatabase() {
                 synchronized(MainDB::class) {
                     INSTANCE = RoomAsset.databaseBuilder(context.applicationContext,
                             MainDB::class.java, "endlesslove.db")
+                            .fallbackToDestructiveMigration()
                             .allowMainThreadQueries()
                             .build()
                 }
