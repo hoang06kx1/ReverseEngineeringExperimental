@@ -66,7 +66,7 @@ public class PhraseAdapter extends ArrayAdapter<PhraseItem> {
             c0764c.initDB();
             c0764c.getReadableDB();
             c0764c.mo2874a(i, i2);
-            c0764c.mo2878c();
+            c0764c.closeDB();
         } catch (Exception e) {
             e.printStackTrace();
         }

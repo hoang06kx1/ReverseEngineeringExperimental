@@ -254,7 +254,7 @@ public class EndlessLoveDB {
     }
 
     /* renamed from: c */
-    public void mo2878c() {
+    public void closeDB() {
         this.helper.close();
     }
 
