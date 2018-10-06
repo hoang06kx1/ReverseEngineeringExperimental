@@ -31,26 +31,26 @@ class MainActivity : AppCompatActivity() {
         menuItems.name = "Yêu Thích"
         menuItems.image = R.drawable.ic_love4
         this.listMenuItem.add(menuItems)
-        menuItems = MenuItem()
-        menuItems.name = "Tìm Kiếm"
-        menuItems.image = R.drawable.ic_search_3
-        this.listMenuItem.add(menuItems)
-        menuItems = MenuItem()
-        menuItems.name = "Chủ Đề Khác"
-        menuItems.image = R.drawable.ic_heart203
-        this.listMenuItem.add(menuItems)
-        menuItems = MenuItem()
-        menuItems.name = "Quiz"
-        menuItems.image = R.drawable.ic_action_dictionary
-        this.listMenuItem.add(menuItems)
+//        menuItems = MenuItem()
+//        menuItems.name = "Tìm Kiếm"
+//        menuItems.image = R.drawable.ic_search_3
+//        this.listMenuItem.add(menuItems)
+//        menuItems = MenuItem()
+//        menuItems.name = "Chủ Đề Khác"
+//        menuItems.image = R.drawable.ic_heart203
+//        this.listMenuItem.add(menuItems)
+//        menuItems = MenuItem()
+//        menuItems.name = "Quiz"
+//        menuItems.image = R.drawable.ic_action_dictionary
+//        this.listMenuItem.add(menuItems)
         menuItems = MenuItem()
         menuItems.name = "Ngữ Pháp"
         menuItems.image = R.drawable.ic_comments16
         this.listMenuItem.add(menuItems)
-        menuItems = MenuItem()
-        menuItems.name = "Nâng Cao"
-        menuItems.image = R.drawable.ic_world8
-        this.listMenuItem.add(menuItems)
+//        menuItems = MenuItem()
+//        menuItems.name = "Nâng Cao"
+//        menuItems.image = R.drawable.ic_world8
+//        this.listMenuItem.add(menuItems)
         menuItems = MenuItem()
         menuItems.name = "Đánh Giá"
         menuItems.image = R.drawable.ic_favorite
@@ -63,20 +63,20 @@ class MainActivity : AppCompatActivity() {
         menuItems.name = "Our App"
         menuItems.image = R.drawable.ic_family4
         this.listMenuItem.add(menuItems)
-        menuItems = MenuItem()
-        menuItems.name = "Notification"
-        menuItems.image = R.drawable.ic_notifications_white_48dp
-        this.listMenuItem.add(menuItems)
-        menuItems = MenuItem()
-        menuItems.name = "Privacy Policy"
-        menuItems.image = R.drawable.ic_verified_user_white_24dp
-        this.listMenuItem.add(menuItems)
+//        menuItems = MenuItem()
+//        menuItems.name = "Notification"
+//        menuItems.image = R.drawable.ic_notifications_white_48dp
+//        this.listMenuItem.add(menuItems)
+//        menuItems = MenuItem()
+//        menuItems.name = "Privacy Policy"
+//        menuItems.image = R.drawable.ic_verified_user_white_24dp
+//        this.listMenuItem.add(menuItems)
         leftDrawer.adapter = DrawerAdapter(this, this.listMenuItem)
 
         // home screen
-//        if (savedInstanceState == null) {
+        if (savedInstanceState == null) {
             this.homeFragment = HomeFragment()
             supportFragmentManager.beginTransaction().replace(R.id.content_frame, homeFragment).commit()
-//        }
+        }
     }
 }
