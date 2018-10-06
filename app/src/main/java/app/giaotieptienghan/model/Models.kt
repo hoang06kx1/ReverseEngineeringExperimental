@@ -32,19 +32,19 @@ class PhraseExItem {
     var vietnamese: String? = null
 }
 
-class PhraseItem {
-    var categoryId: String? = null
-    var chinese: String? = null
-    var english: String? = null
-    var favorite: Int? = 0
-    var _id: Int = 0
-    var korean: String? = null
-    var pinyin: String? = null
-    var search: String? = null
-    var status: String? = null
-    var vietnamese: String? = null
-    var voice: String? = null
-}
+data class PhraseItem(
+        var categoryId: String? = null,
+        var chinese: String? = null,
+        var english: String? = null,
+        var favorite: Int? = 0,
+        var _id: Int = 0,
+        var korean: String? = null,
+        var pinyin: String? = null,
+        var search: String? = null,
+        var status: String? = null,
+        var vietnamese: String? = null,
+        var voice: String? = null)
+
 
 @Dao
 interface CategoryDao {
@@ -66,7 +66,6 @@ abstract class MainDB : RoomDatabase() {
                     INSTANCE = RoomAsset.databaseBuilder(context.applicationContext,
                             MainDB::class.java, "endlesslove.db")
                             .allowMainThreadQueries()
-//                            .openHelperFactory(AssetSQLiteOpenHelperFactory())
                             .build()
                 }
             }
