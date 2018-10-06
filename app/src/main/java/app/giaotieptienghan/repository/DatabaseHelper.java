@@ -77,7 +77,7 @@ public class DatabaseHelper extends SQLiteOpenHelper { // enlesslove.dat helper
     }
 
     /* renamed from: a */
-    public void updateDatabase() {
+    public void tryCreateDatabase() {
         if (!(!isFileExist() || 22 == this.appPreference.getDBVersion() || this.context.getDatabasePath(fileName).delete())) {
             Log.w(TAG, "Unable to update database");
         }

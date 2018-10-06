@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 import app.giaotieptienghan.R;
 import app.giaotieptienghan.model.PhraseItem;
-import app.giaotieptienghan.repository.SQLDatabase;
+import app.giaotieptienghan.repository.EndlessLoveDB;
 
 public class PhraseAdapter extends ArrayAdapter<PhraseItem> {
     /* renamed from: a */
@@ -62,9 +62,9 @@ public class PhraseAdapter extends ArrayAdapter<PhraseItem> {
     /* renamed from: a */
     private void m2927a(int i, int i2) {
         try {
-            SQLDatabase c0764c = new SQLDatabase(this.context);
-            c0764c.mo2871a();
-            c0764c.mo2875b();
+            EndlessLoveDB c0764c = new EndlessLoveDB(this.context);
+            c0764c.initDB();
+            c0764c.getReadableDB();
             c0764c.mo2874a(i, i2);
             c0764c.mo2878c();
         } catch (Exception e) {

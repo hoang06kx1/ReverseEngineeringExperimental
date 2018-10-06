@@ -15,7 +15,7 @@ import app.giaotieptienghan.model.CategoryItem;
 import app.giaotieptienghan.model.PhraseItem;
 
 /* renamed from: com.example.english.b.c */
-public class SQLDatabase {
+public class EndlessLoveDB {
     /* renamed from: a */
     private Context context;
     /* renamed from: b */
@@ -25,7 +25,7 @@ public class SQLDatabase {
     /* renamed from: d */
     private Decryption decryption;
 
-    public SQLDatabase(Context context) {
+    public EndlessLoveDB(Context context) {
         try {
             this.context = context;
             this.helper = new DatabaseHelper(this.context);
@@ -89,9 +89,17 @@ public class SQLDatabase {
     }
 
     /* renamed from: a */
-    public SQLDatabase mo2871a() {
-        this.helper.updateDatabase();
-        return this;
+    public EndlessLoveDB initDB() {
+        try {
+            this.helper.tryCreateDatabase();
+            return this;
+        } catch (Exception ex) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(ex.toString());
+            stringBuilder.append("  UnableToCreateDatabase");
+            Log.e("GetData", stringBuilder.toString());
+            throw new Error("UnableToCreateDatabase");
+        }
     }
 
     /* renamed from: a */
@@ -181,7 +189,7 @@ public class SQLDatabase {
     }
 
     /* renamed from: b */
-    public SQLDatabase mo2875b() {
+    public EndlessLoveDB getReadableDB() {
         try {
             this.helper.isDatabaseOpenable();
             this.helper.close();
