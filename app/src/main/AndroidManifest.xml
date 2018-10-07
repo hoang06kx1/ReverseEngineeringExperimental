@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="app.giaotieptienghan">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -18,7 +21,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".RecordActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".PhraseDetailActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".PhraseDetailActivity" android:screenOrientation="portrait" android:parentActivityName=".MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".MainActivity"/>
+        </activity>
+        <activity android:name=".GrammaDetail" android:screenOrientation="portrait"/>
+        <activity android:name=".GrammaActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".FavoriteActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".FavoriteDetailActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
 //        menuItems.image = R.drawable.ic_verified_user_white_24dp
 //        this.listMenuItem.add(menuItems)
         left_drawer.adapter = DrawerAdapter(this, this.listMenuItem)
-
+        left_drawer.onItemClickListener = onMenuItemClicked()
         // home screen
         if (savedInstanceState == null) {
             this.homeFragment = HomeFragment()
@@ -88,9 +88,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private inner class C0712a private constructor() : OnItemClickListener {
+    private inner class onMenuItemClicked: OnItemClickListener {
         override fun onItemClick(adapterView: AdapterView<*>, view: View, i: Int, j: Long) {
-            this@MainActivity.m16223b(i)
+            this@MainActivity.selectDrawerItem(i)
         }
     }
 
@@ -103,16 +103,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     /* renamed from: b */
-    private fun m16223b(i: Int) {
+    private fun selectDrawerItem(i: Int) {
         this.drawer_layout.closeDrawer(this.left_drawer)
         Handler().postDelayed(Runnable {
             try {
-                val mainActivity: MainActivity
-                val cls: Class<*>? = null
+                var cls: Class<*>? = null
                 if (i == 0) {
-//                    cls = FavoriteDetail::class.java
+                    cls = FavoriteDetailActivity::class.java
                 } else if (i == 1) {
-//                    cls = SearchActivity::class.java
+                    cls = GrammaActivity::class.java
                 } else if (i == 2) {
                     this@MainActivity.openPlayStore(packageName)
                 } else if (i == 3) {
