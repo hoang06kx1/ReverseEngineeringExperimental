@@ -1,13 +1,22 @@
 package app.giaotieptienghan
 
+import android.annotation.SuppressLint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.Toolbar
-import android.widget.ListView
 import app.giaotieptienghan.model.MenuItem
 import app.giaotieptienghan.adapter.DrawerAdapter
+import android.content.Intent
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.net.Uri
+import android.os.Handler
+import android.view.View
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +33,6 @@ class MainActivity : AppCompatActivity() {
                 this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         mDrawerLayout.addDrawerListener(mDrawerToggle)
         mDrawerToggle.syncState()
-        val leftDrawer = findViewById<ListView>(R.id.left_drawer)
 
         // init menu
         var menuItems = MenuItem()
@@ -71,7 +79,7 @@ class MainActivity : AppCompatActivity() {
 //        menuItems.name = "Privacy Policy"
 //        menuItems.image = R.drawable.ic_verified_user_white_24dp
 //        this.listMenuItem.add(menuItems)
-        leftDrawer.adapter = DrawerAdapter(this, this.listMenuItem)
+        left_drawer.adapter = DrawerAdapter(this, this.listMenuItem)
 
         // home screen
         if (savedInstanceState == null) {
@@ -79,4 +87,66 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction().replace(R.id.content_frame, homeFragment).commit()
         }
     }
+
+    private inner class C0712a private constructor() : OnItemClickListener {
+        override fun onItemClick(adapterView: AdapterView<*>, view: View, i: Int, j: Long) {
+            this@MainActivity.m16223b(i)
+        }
+    }
+
+    /* renamed from: a */
+    @SuppressLint("WrongConstant")
+    private fun startActivity(context: Context, cls: Class<*>?) {
+        val intent = Intent(this, cls)
+        intent.flags = 268435456
+        startActivity(intent)
+    }
+
+    /* renamed from: b */
+    private fun m16223b(i: Int) {
+        this.drawer_layout.closeDrawer(this.left_drawer)
+        Handler().postDelayed(Runnable {
+            try {
+                val mainActivity: MainActivity
+                val cls: Class<*>? = null
+                if (i == 0) {
+//                    cls = FavoriteDetail::class.java
+                } else if (i == 1) {
+//                    cls = SearchActivity::class.java
+                } else if (i == 2) {
+                    this@MainActivity.openPlayStore(packageName)
+                } else if (i == 3) {
+                    this@MainActivity.ourApp()
+                    return@Runnable
+                }
+                startActivity(this, cls)
+            } catch (unused: Exception) {
+        }}, 200)
+    }
+
+    private fun openPlayStore(str: String) {
+        var stringBuilder: StringBuilder
+        try {
+            stringBuilder = StringBuilder()
+            stringBuilder.append("market://details?id=")
+            stringBuilder.append(str)
+            startActivity(Intent("android.intent.action.VIEW", Uri.parse(stringBuilder.toString())))
+        } catch (unused: ActivityNotFoundException) {
+            stringBuilder = StringBuilder()
+            stringBuilder.append("http://play.google.com/store/apps/details?id=")
+            stringBuilder.append(str)
+            startActivity(Intent("android.intent.action.VIEW", Uri.parse(stringBuilder.toString())))
+        }
+
+    }
+
+    private fun ourApp() {
+        try {
+            startActivity(Intent("android.intent.action.VIEW", Uri.parse("market://search?q=pub: WingsApp Studio")))
+        } catch (unused: ActivityNotFoundException) {
+            startActivity(Intent("android.intent.action.VIEW", Uri.parse("https://play.google.com/store/search?q=pub: WingsApp Studio")))
+        }
+
+    }
+
 }
