@@ -87,8 +87,8 @@ public class FavoriteDetailActivity extends BaseAudioPlayActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_detail, menu);
-        return true;
+        //getMenuInflater().inflate(R.menu.menu_detail, menu);
+        return false;
     }
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {

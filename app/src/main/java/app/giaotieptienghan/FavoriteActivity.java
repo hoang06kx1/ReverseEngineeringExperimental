@@ -19,13 +19,13 @@ import app.giaotieptienghan.repository.EndlessloveDB1;
 @SuppressLint("WrongConstant")
 public class FavoriteActivity extends BaseAudioPlayActivity implements OnItemClickListener {
     /* renamed from: M */
-    private ProgressBar f12059M;
+    private ProgressBar progressBar1;
     /* renamed from: N */
-    private ListView f12060N;
+    private ListView listView1;
     /* renamed from: O */
-    private GrammarAdapter f12061O;
+    private GrammarAdapter grammarAdapter;
     /* renamed from: P */
-    private ArrayList<GrammaItem> f12062P;
+    private ArrayList<GrammaItem> grammaItems;
 
     /* renamed from: com.example.english.FavoriteActivity$a */
     private class LoadFavoriteGrammaItems extends AsyncTask<String, Void, ArrayList<GrammaItem>> {
@@ -38,29 +38,29 @@ public class FavoriteActivity extends BaseAudioPlayActivity implements OnItemCli
             try {
                 EndlessloveDB1.mo2881a();
                 EndlessloveDB1.mo2884b();
-                FavoriteActivity.this.f12062P = EndlessloveDB1.mo2882a(1);
+                FavoriteActivity.this.grammaItems = EndlessloveDB1.mo2882a(1);
             } catch (Exception e) {
                 e.printStackTrace();
             } catch (Throwable th) {
                 EndlessloveDB1.mo2885c();
             }
             EndlessloveDB1.mo2885c();
-            return FavoriteActivity.this.f12062P;
+            return FavoriteActivity.this.grammaItems;
         }
 
         /* renamed from: a */
         protected void onPostExecute(ArrayList<GrammaItem> arrayList) {
             super.onPostExecute(arrayList);
             if (arrayList != null) {
-                FavoriteActivity.this.f12061O = new GrammarAdapter(FavoriteActivity.this, arrayList);
-                FavoriteActivity.this.f12060N.setAdapter(FavoriteActivity.this.f12061O);
-                FavoriteActivity.this.f12059M.setVisibility(8);
+                FavoriteActivity.this.grammarAdapter = new GrammarAdapter(FavoriteActivity.this, arrayList);
+                FavoriteActivity.this.listView1.setAdapter(FavoriteActivity.this.grammarAdapter);
+                FavoriteActivity.this.progressBar1.setVisibility(8);
             }
         }
 
         protected void onPreExecute() {
             super.onPreExecute();
-            FavoriteActivity.this.f12059M.setVisibility(0);
+            FavoriteActivity.this.progressBar1.setVisibility(0);
         }
     }
 
@@ -80,7 +80,7 @@ public class FavoriteActivity extends BaseAudioPlayActivity implements OnItemCli
     }
 
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long j) {
-        GrammaItem grammaItem = (GrammaItem) this.f12062P.get(i);
+        GrammaItem grammaItem = (GrammaItem) this.grammaItems.get(i);
         Intent intent = new Intent(this, GrammaDetail.class);
         intent.setFlags(268435456);
         intent.putExtra("bundle_title", grammaItem.phrase);
@@ -89,14 +89,14 @@ public class FavoriteActivity extends BaseAudioPlayActivity implements OnItemCli
     }
 
     /* renamed from: r */
-    public void mo10050r() {
-        if (this.f12060N == null) {
-            this.f12060N = (ListView) findViewById(R.id.listView);
+    private void mo10050r() {
+        if (this.listView1 == null) {
+            this.listView1 = (ListView) findViewById(R.id.listView);
         }
-        if (this.f12059M == null) {
-            this.f12059M = (ProgressBar) findViewById(R.id.progressBar);
+        if (this.progressBar1 == null) {
+            this.progressBar1 = (ProgressBar) findViewById(R.id.progressBar);
         }
-        this.f12060N.setOnItemClickListener(this);
+        this.listView1.setOnItemClickListener(this);
         new LoadFavoriteGrammaItems().execute(new String[0]);
     }
 }

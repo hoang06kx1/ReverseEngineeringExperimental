@@ -573,6 +573,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
             if (this.appPreference == null) {
                 this.appPreference = new AppPreference(this);
             }
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             //mo10033n();
         } catch (Exception e) {
             e.printStackTrace();
