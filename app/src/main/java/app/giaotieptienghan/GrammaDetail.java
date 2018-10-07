@@ -1,24 +1,19 @@
 package app.giaotieptienghan;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.webkit.WebView;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class GrammaDetail extends BaseAudioPlayActivity {
     /* renamed from: M */
-    private WebView f12068M;
+    private WebView webView;
     /* renamed from: N */
-    private TextView f12069N;
+    private TextView tvTitle;
     /* renamed from: O */
-    private String f12070O;
+    private String title;
     /* renamed from: P */
-    private String f12071P;
+    private String word_title;
 
     public void onBackPressed() {
         super.onBackPressed();
@@ -29,8 +24,8 @@ public class GrammaDetail extends BaseAudioPlayActivity {
             super.onCreate(bundle);
             setContentView((int) R.layout.gramma_detail_screen);
             bundle = getIntent().getExtras();
-            this.f12070O = bundle.getString("bundle_title");
-            this.f12071P = bundle.getString("bundle_word_title");
+            this.title = bundle.getString("bundle_title");
+            this.word_title = bundle.getString("bundle_word_title");
             mo10050r();
         } catch (Exception unused) {
         }
@@ -50,10 +45,10 @@ public class GrammaDetail extends BaseAudioPlayActivity {
 
     /* renamed from: r */
     public void mo10050r() {
-        this.f12068M = (WebView) findViewById(R.id.webView);
-        this.f12068M.setScrollContainer(false);
-        this.f12068M.loadDataWithBaseURL(null, this.f12071P, "text/html", "utf-8", null);
-        this.f12069N = (TextView) findViewById(R.id.title);
-        this.f12069N.setText(this.f12070O);
+        this.webView = (WebView) findViewById(R.id.webView);
+        this.webView.setScrollContainer(false);
+        this.webView.loadDataWithBaseURL(null, this.word_title, "text/html", "utf-8", null);
+        this.tvTitle = (TextView) findViewById(R.id.title);
+        this.tvTitle.setText(this.title);
     }
 }

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public class C0768b {
     /* renamed from: a */
-    public static ArrayList<PhraseItem> f1957a;
+    public static ArrayList<PhraseItem> phraseItems;
     /* renamed from: b */
-    public static ArrayList<GrammaItem> f1958b;
+    public static ArrayList<GrammaItem> grammaItems;
     /* renamed from: c */
     //public static C0758a f1959c; // advertising
     /* renamed from: d */
@@ -19,13 +19,13 @@ public class C0768b {
 
     /* renamed from: a */
     public static void m2993a() {
-        if (f1957a != null) {
-            f1957a.clear();
-            f1957a = null;
+        if (phraseItems != null) {
+            phraseItems.clear();
+            phraseItems = null;
         }
-        if (f1958b != null) {
-            f1958b.clear();
-            f1958b = null;
+        if (grammaItems != null) {
+            grammaItems.clear();
+            grammaItems = null;
         }
         f1960d = false;
         f1961e = 0;

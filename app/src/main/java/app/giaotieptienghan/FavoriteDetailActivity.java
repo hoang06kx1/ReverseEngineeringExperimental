@@ -18,7 +18,7 @@ import app.giaotieptienghan.repository.EndlessLoveDB;
 @SuppressLint("WrongConstant")
 public class FavoriteDetailActivity extends BaseAudioPlayActivity {
     /* renamed from: M */
-    private TextView f12063M;
+    private TextView tvEmpty;
 
     /* renamed from: com.example.english.FavoriteDetailActivity$a */
     private class LoadFavoritePhrases extends AsyncTask<String, Void, ArrayList<PhraseItem>> {
@@ -45,11 +45,11 @@ public class FavoriteDetailActivity extends BaseAudioPlayActivity {
         protected void onPostExecute(ArrayList<PhraseItem> arrayList) {
             super.onPostExecute(arrayList);
             if (arrayList == null || arrayList.size() <= 0) {
-                FavoriteDetailActivity.this.f12063M.setVisibility(0);
+                FavoriteDetailActivity.this.tvEmpty.setVisibility(0);
             } else {
                 FavoriteDetailActivity.this.phraseAdapter = new PhraseAdapter(FavoriteDetailActivity.this, arrayList);
                 FavoriteDetailActivity.this.listView.setAdapter(FavoriteDetailActivity.this.phraseAdapter);
-                FavoriteDetailActivity.this.f12063M.setVisibility(8);
+                FavoriteDetailActivity.this.tvEmpty.setVisibility(8);
             }
             FavoriteDetailActivity.this.progressBar.setVisibility(8);
         }
@@ -118,8 +118,8 @@ public class FavoriteDetailActivity extends BaseAudioPlayActivity {
         if (this.listView == null) {
             this.listView = (ListView) findViewById(R.id.listView);
         }
-        if (this.f12063M == null) {
-            this.f12063M = (TextView) findViewById(R.id.empty);
+        if (this.tvEmpty == null) {
+            this.tvEmpty = (TextView) findViewById(R.id.empty);
         }
         //mo10030k();
         mo10031l();

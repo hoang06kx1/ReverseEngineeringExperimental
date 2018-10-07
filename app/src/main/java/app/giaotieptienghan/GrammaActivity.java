@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
-import app.giaotieptienghan.adapter.C0742c;
+import app.giaotieptienghan.adapter.GrammarAdapter;
 import app.giaotieptienghan.model.C0768b;
 import app.giaotieptienghan.model.GrammaItem;
 import app.giaotieptienghan.repository.EndlessloveDB1;
@@ -24,17 +24,17 @@ import app.giaotieptienghan.repository.EndlessloveDB1;
 @SuppressLint("WrongConstant")
 public class GrammaActivity extends BaseAudioPlayActivity implements OnItemClickListener {
     /* renamed from: M */
-    private ProgressBar f12064M;
+    private ProgressBar progressBar1;
     /* renamed from: N */
-    private ListView f12065N;
+    private ListView listView1;
     /* renamed from: O */
-    private C0742c f12066O;
+    private GrammarAdapter grammarAdapter;
     /* renamed from: P */
     private C0709b f12067P;
 
     /* renamed from: com.example.english.GrammaActivity$a */
-    private class C0708a extends AsyncTask<String, Void, ArrayList<GrammaItem>> {
-        private C0708a() {
+    private class GetGrammaItemTask extends AsyncTask<String, Void, ArrayList<GrammaItem>> {
+        private GetGrammaItemTask() {
         }
 
         /* renamed from: a */
@@ -43,34 +43,34 @@ public class GrammaActivity extends BaseAudioPlayActivity implements OnItemClick
             try {
                 EndlessloveDB1.mo2881a();
                 EndlessloveDB1.mo2884b();
-                C0768b.f1958b = EndlessloveDB1.mo2882a(-1);
+                C0768b.grammaItems = EndlessloveDB1.mo2882a(-1);
             } catch (Exception e) {
                 e.printStackTrace();
             } catch (Throwable th) {
                 EndlessloveDB1.mo2885c();
             }
             EndlessloveDB1.mo2885c();
-            return C0768b.f1958b;
+            return C0768b.grammaItems;
         }
 
         /* renamed from: a */
         protected void onPostExecute(ArrayList<GrammaItem> arrayList) {
             super.onPostExecute(arrayList);
             if (arrayList != null) {
-                if (GrammaActivity.this.f12066O == null) {
-                    GrammaActivity.this.f12066O = new C0742c(GrammaActivity.this, arrayList);
-                    GrammaActivity.this.f12065N.setAdapter(GrammaActivity.this.f12066O);
+                if (GrammaActivity.this.grammarAdapter == null) {
+                    GrammaActivity.this.grammarAdapter = new GrammarAdapter(GrammaActivity.this, arrayList);
+                    GrammaActivity.this.listView1.setAdapter(GrammaActivity.this.grammarAdapter);
                 } else {
-                    GrammaActivity.this.f12066O.mo2820a(C0768b.f1958b);
-                    GrammaActivity.this.f12066O.notifyDataSetChanged();
+                    GrammaActivity.this.grammarAdapter.mo2820a(C0768b.grammaItems);
+                    GrammaActivity.this.grammarAdapter.notifyDataSetChanged();
                 }
-                GrammaActivity.this.f12064M.setVisibility(8);
+                GrammaActivity.this.progressBar1.setVisibility(8);
             }
         }
 
         protected void onPreExecute() {
             super.onPreExecute();
-            GrammaActivity.this.f12064M.setVisibility(0);
+            GrammaActivity.this.progressBar1.setVisibility(0);
         }
     }
 
@@ -79,7 +79,7 @@ public class GrammaActivity extends BaseAudioPlayActivity implements OnItemClick
         public void onReceive(Context context, Intent intent) {
             //C0769c.m2995b("broad", "ok");
             try {
-                new C0708a().execute(new String[0]);
+                new GetGrammaItemTask().execute(new String[0]);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -104,7 +104,7 @@ public class GrammaActivity extends BaseAudioPlayActivity implements OnItemClick
     }
 
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long j) {
-        GrammaItem grammaItem = (GrammaItem) C0768b.f1958b.get(i);
+        GrammaItem grammaItem = (GrammaItem) C0768b.grammaItems.get(i);
         Intent intent = new Intent(this, GrammaDetail.class);
         intent.setFlags(268435456);
         intent.putExtra("bundle_title", grammaItem.phrase);
@@ -132,18 +132,18 @@ public class GrammaActivity extends BaseAudioPlayActivity implements OnItemClick
             this.f12067P = new C0709b();
             registerReceiver(this.f12067P, new IntentFilter("com.fun.korean"));
         }
-        if (this.f12065N == null) {
-            this.f12065N = (ListView) findViewById(R.id.listView);
+        if (this.listView1 == null) {
+            this.listView1 = (ListView) findViewById(R.id.listView);
         }
-        if (this.f12064M == null) {
-            this.f12064M = (ProgressBar) findViewById(R.id.progressBar);
+        if (this.progressBar1 == null) {
+            this.progressBar1 = (ProgressBar) findViewById(R.id.progressBar);
         }
-        this.f12065N.setOnItemClickListener(this);
-        if (C0768b.f1958b == null) {
-            new C0708a().execute(new String[0]);
+        this.listView1.setOnItemClickListener(this);
+        if (C0768b.grammaItems == null) {
+            new GetGrammaItemTask().execute(new String[0]);
             return;
         }
-        this.f12066O = new C0742c(this, C0768b.f1958b);
-        this.f12065N.setAdapter(this.f12066O);
+        this.grammarAdapter = new GrammarAdapter(this, C0768b.grammaItems);
+        this.listView1.setAdapter(this.grammarAdapter);
     }
 }

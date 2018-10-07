@@ -18,44 +18,44 @@ import app.giaotieptienghan.model.GrammaItem;
 import app.giaotieptienghan.repository.EndlessloveDB1;
 
 /* renamed from: com.example.english.a.c */
-public class C0742c extends ArrayAdapter<GrammaItem> {
+public class GrammarAdapter extends ArrayAdapter<GrammaItem> {
     /* renamed from: a */
-    private Context f1871a;
+    private Context context;
     /* renamed from: b */
-    private ArrayList<GrammaItem> f1872b;
+    private ArrayList<GrammaItem> items;
     /* renamed from: c */
-    private LayoutInflater f1873c;
+    private LayoutInflater inflater;
 
     /* renamed from: com.example.english.a.c$a */
-    private class C0741a {
+    private class Holder {
         /* renamed from: b */
-        private TextView f1868b;
+        private TextView tvTitle;
         /* renamed from: c */
-        private TextView f1869c;
+        private TextView tvGenres;
         /* renamed from: d */
-        private ImageView f1870d;
+        private ImageView icFavorite;
 
-        private C0741a() {
+        private Holder() {
         }
     }
 
-    public C0742c(Context context, ArrayList<GrammaItem> arrayList) {
+    public GrammarAdapter(Context context, ArrayList<GrammaItem> arrayList) {
         super(context, 0, arrayList);
-        this.f1871a = context;
-        this.f1872b = arrayList;
-        this.f1873c = LayoutInflater.from(context);
+        this.context = context;
+        this.items = arrayList;
+        this.inflater = LayoutInflater.from(context);
     }
 
     /* renamed from: a */
     private void m2906a(int i, int i2) {
-        EndlessloveDB1 EndlessloveDB1 = new EndlessloveDB1(this.f1871a);
+        EndlessloveDB1 EndlessloveDB1 = new EndlessloveDB1(this.context);
         try {
             EndlessloveDB1.mo2881a();
             EndlessloveDB1.mo2884b();
             EndlessloveDB1.mo2883a(i, i2);
             notifyDataSetChanged();
-            if (this.f1872b.size() < C0768b.f1958b.size()) {
-                this.f1871a.sendBroadcast(new Intent("com.fun.korean"));
+            if (this.items.size() < C0768b.grammaItems.size()) {
+                this.context.sendBroadcast(new Intent("com.fun.korean"));
             }
         } catch (Exception unused) {
             EndlessloveDB1.mo2885c();
@@ -66,65 +66,65 @@ public class C0742c extends ArrayAdapter<GrammaItem> {
 
     /* renamed from: a */
     public GrammaItem getItem(int i) {
-        return (GrammaItem) this.f1872b.get(i);
+        return (GrammaItem) this.items.get(i);
     }
 
     /* renamed from: a */
     public void mo2820a(ArrayList<GrammaItem> arrayList) {
-        this.f1872b = arrayList;
+        this.items = arrayList;
     }
 
     public int getCount() {
-        return this.f1872b.size();
+        return this.items.size();
     }
 
     public View getView(int i, View view, ViewGroup viewGroup) {
-        C0741a c0741a;
+        Holder holder;
         ImageView a;
         int i2;
         if (view == null) {
-            view = this.f1873c.inflate(R.layout.gramma_adapter_item, null);
-            c0741a = new C0741a();
-            c0741a.f1868b = (TextView) view.findViewById(R.id.tvTitle);
-            c0741a.f1869c = (TextView) view.findViewById(R.id.tvGenres);
-            c0741a.f1870d = (ImageView) view.findViewById(R.id.ic_favorite);
-            view.setTag(c0741a);
+            view = this.inflater.inflate(R.layout.gramma_adapter_item, null);
+            holder = new Holder();
+            holder.tvTitle = (TextView) view.findViewById(R.id.tvTitle);
+            holder.tvGenres = (TextView) view.findViewById(R.id.tvGenres);
+            holder.icFavorite = (ImageView) view.findViewById(R.id.ic_favorite);
+            view.setTag(holder);
         } else {
-            c0741a = (C0741a) view.getTag();
+            holder = (Holder) view.getTag();
         }
         final GrammaItem a2 = getItem(i);
         if (a2.favorites == 1) {
-            a = c0741a.f1870d;
+            a = holder.icFavorite;
             i2 = R.drawable.ic_action_favorite_active;
         } else {
-            a = c0741a.f1870d;
+            a = holder.icFavorite;
             i2 = R.drawable.ic_action_favorite;
         }
         a.setImageResource(i2);
-        c0741a.f1870d.setOnClickListener(new OnClickListener() {
+        holder.icFavorite.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 ImageView a;
                 int i;
                 if (a2.favorites == 0) {
                     a2.favorites = 1;
-                    a = c0741a.f1870d;
+                    a = holder.icFavorite;
                     i = R.drawable.ic_action_favorite_active;
                 } else {
                     a2.favorites = 0;
-                    a = c0741a.f1870d;
+                    a = holder.icFavorite;
                     i = R.drawable.ic_action_favorite;
                 }
                 a.setImageResource(i);
-                C0742c.this.m2906a(a2.favorites, a2.id);
+                GrammarAdapter.this.m2906a(a2.favorites, a2.id);
             }
         });
-        TextView b = c0741a.f1868b;
+        TextView b = holder.tvTitle;
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(i + 1);
         stringBuilder.append(". ");
         stringBuilder.append(a2.phrase);
         b.setText(stringBuilder.toString());
-        c0741a.f1869c.setText(a2.description);
+        holder.tvGenres.setText(a2.description);
         return view;
     }
 }

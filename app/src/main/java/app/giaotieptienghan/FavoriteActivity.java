@@ -7,13 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
-import app.giaotieptienghan.adapter.C0742c;
+import app.giaotieptienghan.adapter.GrammarAdapter;
 import app.giaotieptienghan.model.GrammaItem;
 import app.giaotieptienghan.repository.EndlessloveDB1;
 
@@ -24,7 +23,7 @@ public class FavoriteActivity extends BaseAudioPlayActivity implements OnItemCli
     /* renamed from: N */
     private ListView f12060N;
     /* renamed from: O */
-    private C0742c f12061O;
+    private GrammarAdapter f12061O;
     /* renamed from: P */
     private ArrayList<GrammaItem> f12062P;
 
@@ -53,7 +52,7 @@ public class FavoriteActivity extends BaseAudioPlayActivity implements OnItemCli
         protected void onPostExecute(ArrayList<GrammaItem> arrayList) {
             super.onPostExecute(arrayList);
             if (arrayList != null) {
-                FavoriteActivity.this.f12061O = new C0742c(FavoriteActivity.this, arrayList);
+                FavoriteActivity.this.f12061O = new GrammarAdapter(FavoriteActivity.this, arrayList);
                 FavoriteActivity.this.f12060N.setAdapter(FavoriteActivity.this.f12061O);
                 FavoriteActivity.this.f12059M.setVisibility(8);
             }
