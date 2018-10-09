@@ -3,187 +3,226 @@ package com.riontech.staggeredtextgridview;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.os.Build.VERSION;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import java.io.PrintStream;
 import app.giaotieptienghan.R;
 
-@SuppressLint("WrongConstant")
+
 public class StaggeredTextGridView extends ScrollView {
-    /* renamed from: a */
-    private BaseAdapter f7084a;
-    /* renamed from: b */
-    private int f7085b;
-    /* renamed from: c */
-    private int f7086c;
-    /* renamed from: d */
-    private LinearLayout f7087d;
-    /* renamed from: e */
-    private LinearLayout f7088e;
-    /* renamed from: f */
-    private Context f7089f;
+
+    private BaseAdapter mAdapter;
+    // Row full width
+    private int mDeviceWidth;
+    // Width of added child in single row.
+    private int mRowWidth;
+    // HORIZONTAL LinearLayout row
+    private LinearLayout mRow;
+    // VERTICAL LinearLayout Parent
+    private LinearLayout mParent;
+    // Activity context
+    private Context mContext;
+
     public StaggeredTextGridView(Context context) {
         super(context);
-        this.f7089f = context;
-        m8225c();
+        this.mContext = context;
+        init();
     }
 
-    public StaggeredTextGridView(Context context, AttributeSet attributeSet) {
-        super(context, attributeSet);
-        this.f7089f = context;
-        m8225c();
+
+    @SuppressLint("NewApi")
+    public StaggeredTextGridView(Context context, AttributeSet attrs,
+                                 int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        this.mContext = context;
+        init();
     }
 
-    @SuppressLint({"NewApi"})
-    public StaggeredTextGridView(Context context, AttributeSet attributeSet, int i) {
-        super(context, attributeSet, i);
-        this.f7089f = context;
-        m8225c();
+
+    @SuppressLint("NewApi")
+    public StaggeredTextGridView(Context context, AttributeSet attrs,
+                                 int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        this.mContext = context;
+        init();
     }
 
-    @SuppressLint({"NewApi"})
-    public StaggeredTextGridView(Context context, AttributeSet attributeSet, int i, int i2) {
-        super(context, attributeSet, i, i2);
-        this.f7089f = context;
-        m8225c();
+
+    public StaggeredTextGridView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        this.mContext = context;
+        init();
     }
 
-    /* renamed from: a */
-    private void m8222a(final TextView textView) {
-        textView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-            @SuppressLint({"NewApi"})
-            public void onGlobalLayout() {
-                int width = textView.getWidth();
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-2, -1);
-                layoutParams.width = width;
-                layoutParams.gravity = 17;
-                layoutParams.rightMargin = 7;
-                textView.setLayoutParams(layoutParams);
-                textView.setMaxLines(1);
-                System.out.println("resetchild");
-                if (VERSION.SDK_INT < 11) {
-                    textView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+
+    private void init(){
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        ((Activity) mContext).getWindowManager().getDefaultDisplay()
+                .getMetrics(displaymetrics);
+
+        mDeviceWidth = displaymetrics.widthPixels;
+
+        // ScrollView params
+        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        setLayoutParams(params);
+
+        // LinearLayout params
+        mParent = new LinearLayout(mContext);
+        mParent.setOrientation(LinearLayout.VERTICAL);
+        params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        mParent.setLayoutParams(params);
+        addView(mParent);
+    }
+
+    public void setmAdapter(BaseAdapter mAdapter){
+        this.mAdapter = mAdapter;
+        generateSpannableTextGridView();
+    }
+
+    private void generateSpannableTextGridView(){
+        for (int i = 0; i < mAdapter.getCount(); i++) {
+            // get textview from adapter
+            TextView textView = (TextView) mAdapter.getView(i, null, this);
+            //int padding = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
+            // padding calculation
+            int padding;
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                padding = textView.getPaddingEnd() + textView.getPaddingStart();
+            } else {
+                padding = textView.getPaddingLeft() + textView.getPaddingRight();
+            }
+
+            // get string object
+            String item = (String) mAdapter.getItem(i);
+            // init item width base on its text width and padding
+            int itemWidth = (int) (textView.getPaint().measureText(item) + padding);
+
+            // init first row
+            if(i == 0){
+                mRow = getRow();
+                addChildView(textView, itemWidth);
+            } else {
+                // add TextView into row as columns
+                if(mRowWidth + itemWidth <= mDeviceWidth){
+                    addChildView(textView, itemWidth);
                 } else {
-                    textView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    setFullWidthRow();
+                    mParent.addView(mRow);
+                    mRow = getRow();
+                    addChildView(textView, itemWidth);
                 }
+                // add last row into parent view
+                if(i == (mAdapter.getCount() - 1)){
+                    mParent.addView(mRow);
+                }
+            }
+        }
+    }
+
+    /**
+     * Distribute and append equally remaining
+     * free space width to all row's child and fill row
+     * base on device width
+     */
+    private void setFullWidthRow(){
+        // Difference between row with child and device width
+        int remainWidth = mDeviceWidth - mRowWidth;
+        // Distributes equally remaining space between child
+        int childSpace = remainWidth / mRow.getChildCount();
+        int spaceReminder = remainWidth % mRow.getChildCount();
+
+        // reset width of all child
+        for (int i = 0; i < mRow.getChildCount(); i++) {
+
+            if(spaceReminder > 0 && i == (mRow.getChildCount() - 1)){
+                childSpace = childSpace + spaceReminder;
+            }
+
+            View view = mRow.getChildAt(i);
+            resetChildWidth(view, childSpace);
+        }
+
+        mRowWidth = 0;
+    }
+
+    /**
+     * Append child space with child width
+     * @param view child TextView
+     * @param childSpace remaining space
+     */
+    private void resetChildWidth(final View view, final int childSpace) {
+
+        view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @SuppressWarnings("deprecation")
+            @SuppressLint("NewApi")
+            @Override
+            public void onGlobalLayout() {
+                int childWidth = view.getWidth();
+
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.width = childWidth + childSpace + 10;
+                view.setLayoutParams(params);
+
+                if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+                    view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                else
+                    view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
+
     }
 
-    /* renamed from: a */
-    private void m8223a(TextView textView, int i) {
-        this.f7087d.addView(textView);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(i, -1);
-        layoutParams.gravity = 17;
-        layoutParams.rightMargin = 7;
-        textView.setLayoutParams(layoutParams);
-        textView.setMaxLines(1);
-        m8224b(i);
+    /**
+     * Add child into row
+     * @param view child TextView
+     * @param newWidth width of child TextView
+     */
+    private void addChildView(View view, int newWidth){
+        mRow.addView(view);
+        resizeRow(newWidth, view);
     }
 
-    /* renamed from: b */
-    private void m8224b(int i) {
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) this.f7087d.getLayoutParams();
-        this.f7086c = (this.f7086c + i) + 7;
-        PrintStream printStream = System.out;
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("mRowWidth ");
-        stringBuilder.append(this.f7086c);
-        printStream.println(stringBuilder.toString());
-        layoutParams.gravity = 1;
-        this.f7087d.setLayoutParams(layoutParams);
+    /**
+     * Resize row width base on child
+     * @param width incremental width row
+     * @param view child view will add into row
+     */
+    private void resizeRow(int width, View view){
+        // LinearLayout row params
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mRow
+                .getLayoutParams();
+        mRowWidth = mRowWidth + width;
+        params.weight = mRow.getChildCount();
+        mRow.setLayoutParams(params);
     }
 
-    /* renamed from: c */
-    private void m8225c() {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        ((Activity) this.f7089f).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        this.f7085b = (int) (((double) displayMetrics.widthPixels) * 0.8d);
-        setLayoutParams(new FrameLayout.LayoutParams(-1, -1));
-        this.f7088e = new LinearLayout(this.f7089f);
-        this.f7088e.setOrientation(1);
-        LayoutParams layoutParams = new FrameLayout.LayoutParams(-2, -2);
-        layoutParams.gravity = 17;
-        this.f7088e.setLayoutParams(layoutParams);
-        this.f7088e.setGravity(17);
-        addView(this.f7088e);
-    }
-
-    /* JADX WARNING: Removed duplicated region for block: B:24:0x008b A:{SYNTHETIC} */
-    /* JADX WARNING: Removed duplicated region for block: B:19:0x0084  */
-    /* Code decompiled incorrectly, please refer to instructions dump. */
-    /* renamed from: d */
-    private void m8226d() {
-        for (int i = 0; i < this.f7084a.getCount(); i++) {
-            int paddingEnd;
-            int paddingStart;
-            TextView textView = (TextView) this.f7084a.getView(i, null, this);
-            PrintStream printStream = System.out;
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("generateSpannableTextGridView ");
-            stringBuilder.append(textView);
-            printStream.println(stringBuilder.toString());
-            if (VERSION.SDK_INT >= 21) {
-                paddingEnd = textView.getPaddingEnd();
-                paddingStart = textView.getPaddingStart();
-            } else {
-                paddingEnd = textView.getPaddingLeft();
-                paddingStart = textView.getPaddingRight();
-            }
-            paddingEnd += paddingStart;
-            paddingEnd = (int) (textView.getPaint().measureText((String) this.f7084a.getItem(i)) + ((float) paddingEnd));
-            paddingStart = this.f7085b / 8;
-            if (paddingEnd < paddingStart) {
-                paddingEnd = paddingStart;
-            }
-            if (i != 0) {
-                if (this.f7086c + paddingEnd >= this.f7085b) {
-                    m8227e();
-                    this.f7088e.addView(this.f7087d);
-                }
-                m8223a(textView, paddingEnd);
-                if (i != this.f7084a.getCount() - 1) {
-                    this.f7088e.addView(this.f7087d);
-                }
-            }
-            this.f7087d = getRow();
-            m8223a(textView, paddingEnd);
-            if (i != this.f7084a.getCount() - 1) {
-            }
-        }
-    }
-
-    /* renamed from: e */
-    private void m8227e() {
-        for (int i = 0; i < this.f7087d.getChildCount(); i++) {
-            m8222a((TextView) this.f7087d.getChildAt(i));
-        }
-        this.f7086c = 0;
-    }
-
-    @SuppressLint({"InflateParams"})
+    /**
+     * Generate new row
+     * @return row LinearLayout
+     */
+    @SuppressLint("InflateParams")
     private LinearLayout getRow() {
-        LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.row_item_spanneble, null);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(this.f7085b, this.f7085b / 8);
-        layoutParams.gravity = 17;
-        layoutParams.topMargin = 7;
-        linearLayout.setLayoutParams(layoutParams);
-        linearLayout.setOrientation(0);
-        return linearLayout;
+        final LinearLayout lRow = (LinearLayout) LayoutInflater.from(getContext()).inflate(
+                R.layout.row_item_spanneble, null);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        lRow.setLayoutParams(params);
+        lRow.setOrientation(LinearLayout.HORIZONTAL);
+        return lRow;
     }
 
-    /* renamed from: a */
     public TextView mo7083a(int i) {
-        for (int i2 = 0; i2 < this.f7088e.getChildCount(); i2++) {
-            LinearLayout linearLayout = (LinearLayout) this.f7088e.getChildAt(i2);
+        for (int i2 = 0; i2 < this.mParent.getChildCount(); i2++) {
+            LinearLayout linearLayout = (LinearLayout) this.mParent.getChildAt(i2);
             if (i < linearLayout.getChildCount()) {
                 return (TextView) linearLayout.getChildAt(i);
             }
@@ -194,21 +233,12 @@ public class StaggeredTextGridView extends ScrollView {
 
     /* renamed from: a */
     public void mo7084a() {
-        this.f7086c = 0;
-        this.f7087d = null;
+        this.mRowWidth = 0;
+        this.mRow = null;
     }
 
     /* renamed from: b */
     public void mo7085b() {
-        this.f7088e.removeAllViews();
-    }
-
-    public int getChildsCount() {
-        return this.f7088e != null ? this.f7088e.getChildCount() + 1 : 1;
-    }
-
-    public void setmAdapter(BaseAdapter baseAdapter) {
-        this.f7084a = baseAdapter;
-        m8226d();
+        this.mParent.removeAllViews();
     }
 }
