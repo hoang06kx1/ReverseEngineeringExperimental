@@ -79,7 +79,7 @@
     <style name="WordTest">
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
         <item name="android:textColor">@color/quiz_text_color</item>
-        <item name="android:gravity">right|center_horizontal|clip_horizontal</item>
+        <item name="android:gravity">left|center_horizontal|clip_horizontal</item>
         <item name="android:background">@drawable/bg_phrase_answer</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
