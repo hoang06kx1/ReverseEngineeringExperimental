@@ -116,7 +116,7 @@ public class PhraseDetailActivity extends BaseAudioPlayActivity implements OnIte
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_detail, menu);
-        return false;
+        return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {
@@ -125,6 +125,7 @@ public class PhraseDetailActivity extends BaseAudioPlayActivity implements OnIte
         if (itemId != R.id.action_quiz1) {
             if (itemId == R.id.action_settings) {
                 intent = new Intent(this, QuizDetailSmal.class);
+                startActivity(intent);
             }
             return super.onOptionsItemSelected(menuItem);
         }

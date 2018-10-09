@@ -20,7 +20,6 @@ public class FavoriteDetailActivity extends BaseAudioPlayActivity {
     /* renamed from: M */
     private TextView tvEmpty;
 
-    /* renamed from: com.example.english.FavoriteDetailActivity$a */
     private class LoadFavoritePhrases extends AsyncTask<String, Void, ArrayList<PhraseItem>> {
         private LoadFavoritePhrases() {
         }
@@ -88,17 +87,18 @@ public class FavoriteDetailActivity extends BaseAudioPlayActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_detail, menu);
-        return false;
+        return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         try {
-            Class cls;
+            Class cls = null;
             int itemId = menuItem.getItemId();
             if (itemId != R.id.action_quiz1) {
                 if (itemId == R.id.action_settings) {
                     cls = QuizDetailSmal.class;
                 }
+                m16308a(cls);
                 return super.onOptionsItemSelected(menuItem);
             }
             cls = QuizActivity1.class;

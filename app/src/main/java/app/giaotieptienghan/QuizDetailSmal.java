@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -423,19 +424,20 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
 
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+        setContentView((int) R.layout.quiz_detail_screen);
         bundle = getIntent().getExtras();
         if (bundle != null) {
-            setContentView((int) R.layout.quiz_detail_screen);
             try {
                 this.f12138ac = bundle.getInt("bundle_id");
                 this.f12139ad = bundle.getString("bundle_fav_id");
                 this.f12140ae = bundle.getString("bundle_plus_id");
                 this.f12013n = bundle.getString("bundle_title");
                 setTitle(!Utils.isStringEmpty(this.f12013n) ? this.f12013n : "Quiz");
-                mo10050r();
             } catch (Exception unused) {
             }
         }
+        mo10050r();
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

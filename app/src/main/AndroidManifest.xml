@@ -32,6 +32,7 @@
         <activity android:name=".FavoriteDetailActivity" android:screenOrientation="portrait"/>
         <activity android:name=".SearchActivity" android:screenOrientation="portrait"/>
         <activity android:name=".QuizDetail" android:screenOrientation="portrait"/>
+        <activity android:name=".QuizDetailSmal" android:screenOrientation="portrait"/>
         <activity android:name=".QuizActivity1" android:screenOrientation="portrait"/>
     </application>
 
