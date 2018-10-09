@@ -113,6 +113,8 @@ class MainActivity : AppCompatActivity() {
                 } else if (i == 1) {
                     cls = SearchActivity::class.java
                 } else if (i == 2) {
+                    cls = QuizDetail::class.java
+                } else if (i == 2) {
                     cls = GrammaActivity::class.java
                 } else if (i == 3) {
                     this@MainActivity.openPlayStore(packageName)
