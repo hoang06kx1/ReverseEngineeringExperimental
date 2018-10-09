@@ -255,7 +255,6 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         if (Utils.m3035b(this) >= 800) {
             layoutParams2 = new RelativeLayout.LayoutParams(-1, -2);
             layoutParams2.addRule(12);
-            //this.RemoveAds.setLayoutParams(layoutParams2);
         }
     }
 
