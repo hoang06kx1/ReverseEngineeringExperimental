@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class C0768b {
     /* renamed from: a */
-    public static ArrayList<PhraseItem> phraseItems;
+    public static ArrayList<PhraseItem> f1957a;
     /* renamed from: b */
     public static ArrayList<GrammaItem> grammaItems;
     /* renamed from: c */
@@ -19,9 +19,9 @@ public class C0768b {
 
     /* renamed from: a */
     public static void m2993a() {
-        if (phraseItems != null) {
-            phraseItems.clear();
-            phraseItems = null;
+        if (f1957a != null) {
+            f1957a.clear();
+            f1957a = null;
         }
         if (grammaItems != null) {
             grammaItems.clear();

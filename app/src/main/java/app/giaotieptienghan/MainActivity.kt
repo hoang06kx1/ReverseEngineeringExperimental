@@ -39,18 +39,18 @@ class MainActivity : AppCompatActivity() {
         menuItems.name = "Yêu Thích"
         menuItems.image = R.drawable.ic_love4
         this.listMenuItem.add(menuItems)
-//        menuItems = MenuItem()
-//        menuItems.name = "Tìm Kiếm"
-//        menuItems.image = R.drawable.ic_search_3
-//        this.listMenuItem.add(menuItems)
+        menuItems = MenuItem()
+        menuItems.name = "Tìm Kiếm"
+        menuItems.image = R.drawable.ic_search_3
+        this.listMenuItem.add(menuItems)
 //        menuItems = MenuItem()
 //        menuItems.name = "Chủ Đề Khác"
 //        menuItems.image = R.drawable.ic_heart203
 //        this.listMenuItem.add(menuItems)
-//        menuItems = MenuItem()
-//        menuItems.name = "Quiz"
-//        menuItems.image = R.drawable.ic_action_dictionary
-//        this.listMenuItem.add(menuItems)
+        menuItems = MenuItem()
+        menuItems.name = "Quiz"
+        menuItems.image = R.drawable.ic_action_dictionary
+        this.listMenuItem.add(menuItems)
         menuItems = MenuItem()
         menuItems.name = "Ngữ Pháp"
         menuItems.image = R.drawable.ic_comments16
@@ -111,10 +111,12 @@ class MainActivity : AppCompatActivity() {
                 if (i == 0) {
                     cls = FavoriteDetailActivity::class.java
                 } else if (i == 1) {
-                    cls = GrammaActivity::class.java
+                    cls = SearchActivity::class.java
                 } else if (i == 2) {
-                    this@MainActivity.openPlayStore(packageName)
+                    cls = GrammaActivity::class.java
                 } else if (i == 3) {
+                    this@MainActivity.openPlayStore(packageName)
+                } else if (i == 4) {
                     this@MainActivity.ourApp()
                     return@Runnable
                 }
