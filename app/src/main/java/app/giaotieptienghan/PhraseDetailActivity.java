@@ -115,24 +115,24 @@ public class PhraseDetailActivity extends BaseAudioPlayActivity implements OnIte
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.menu_detail, menu);
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
         return false;
     }
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        //Intent intent;
-        //int itemId = menuItem.getItemId();
-        //if (itemId != R.id.action_quiz1) {
-        //    if (itemId == R.id.action_settings) {
-        //        intent = new Intent(this, QuizDetailSmal.class);
-        //    }
-        //    return super.onOptionsItemSelected(menuItem);
-        //}
-        //intent = new Intent(this, QuizActivity1.class);
-        //intent.setFlags(268435456);
-        //intent.putExtra("bundle_title", this.vietnamese);
-        //intent.putExtra("bundle_id", this.phraseId);
-        //startActivity(intent);
+        Intent intent;
+        int itemId = menuItem.getItemId();
+        if (itemId != R.id.action_quiz1) {
+            if (itemId == R.id.action_settings) {
+                intent = new Intent(this, QuizDetailSmal.class);
+            }
+            return super.onOptionsItemSelected(menuItem);
+        }
+        intent = new Intent(this, QuizActivity1.class);
+        intent.setFlags(268435456);
+        intent.putExtra("bundle_title", this.vietnamese);
+        intent.putExtra("bundle_id", this.phraseId);
+        startActivity(intent);
         return super.onOptionsItemSelected(menuItem);
     }
 

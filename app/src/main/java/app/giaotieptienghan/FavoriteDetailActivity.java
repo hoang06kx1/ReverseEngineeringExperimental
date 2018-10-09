@@ -87,25 +87,25 @@ public class FavoriteDetailActivity extends BaseAudioPlayActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.menu_detail, menu);
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
         return false;
     }
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        //try {
-        //    Class cls;
-        //    int itemId = menuItem.getItemId();
-        //    if (itemId != R.id.action_quiz1) {
-        //        if (itemId == R.id.action_settings) {
-        //            cls = QuizDetailSmal.class;
-        //        }
-        //        return super.onOptionsItemSelected(menuItem);
-        //    }
-        //    cls = QuizActivity1.class;
-        //    m16308a(cls);
-        //} catch (Exception e) {
-        //    e.printStackTrace();
-        //}
+        try {
+            Class cls;
+            int itemId = menuItem.getItemId();
+            if (itemId != R.id.action_quiz1) {
+                if (itemId == R.id.action_settings) {
+                    cls = QuizDetailSmal.class;
+                }
+                return super.onOptionsItemSelected(menuItem);
+            }
+            cls = QuizActivity1.class;
+            m16308a(cls);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return super.onOptionsItemSelected(menuItem);
     }
 
