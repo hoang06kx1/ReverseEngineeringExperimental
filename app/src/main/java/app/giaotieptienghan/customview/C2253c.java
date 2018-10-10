@@ -9,12 +9,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.riontech.staggeredtextgridview.StaggeredTextGridView;
@@ -29,8 +27,8 @@ import org.apmem.tools.layouts.FlowLayout;
 
 import app.giaotieptienghan.Utils;
 import app.giaotieptienghan.adapter.C0757h;
-import app.giaotieptienghan.model.C2249g;
-import app.giaotieptienghan.model.C2249g.C0753a;
+import app.giaotieptienghan.model.QuizAdapter;
+import app.giaotieptienghan.model.QuizAdapter.C0753a;
 import app.giaotieptienghan.model.PhraseItem;
 import app.giaotieptienghan.adapter.C0757h.C0756b;
 import app.giaotieptienghan.repository.AppPreference;
@@ -62,7 +60,7 @@ public class C2253c extends LinearLayout implements OnClickListener, C0756b {
     /* renamed from: k */
     private C0757h f7884k;
     /* renamed from: l */
-    private C2249g.C0753a f7885l;
+    private QuizAdapter.C0753a f7885l;
     /* renamed from: m */
     private int f7886m = 0;
     /* renamed from: n */
@@ -235,7 +233,7 @@ public class C2253c extends LinearLayout implements OnClickListener, C0756b {
             textView.setLayoutParams(c0779a);
             textView.setPadding(20, 20, 20, 20);
             textView.setMinWidth(Utils.m3026a(getContext()) / 8);
-            textView.setTextColor(Utils.m3036b(getContext(), R.color.quiz_text_color));
+            textView.setTextColor(Utils.getColor(getContext(), R.color.quiz_text_color));
             this.f7880g.addView(textView, c0779a);
             this.f7887n.add(str);
             if (this.f7886m < this.f7889p.size() - 1) {

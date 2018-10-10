@@ -16,14 +16,13 @@ import java.util.List;
 import java.util.Random;
 
 import app.giaotieptienghan.Utils;
-import app.giaotieptienghan.model.C2249g;
-import app.giaotieptienghan.model.C2249g.C0753a;
+import app.giaotieptienghan.model.QuizAdapter.C0753a;
 import app.giaotieptienghan.model.PhraseItem;
 import app.giaotieptienghan.repository.AppPreference;
 import app.giaotieptienghan.R;
 /* renamed from: com.example.english.customview.a */
 @SuppressLint("WrongConstant")
-public class C0785a extends LinearLayout implements OnClickListener {
+public class QuizTypeOne extends LinearLayout implements OnClickListener {
     /* renamed from: a */
     private TextView f2032a;
     /* renamed from: b */
@@ -51,7 +50,7 @@ public class C0785a extends LinearLayout implements OnClickListener {
     /* renamed from: m */
     private ImageView f2044m;
 
-    public C0785a(Context context) {
+    public QuizTypeOne(Context context) {
         super(context);
         m3119a(context);
     }
@@ -66,7 +65,7 @@ public class C0785a extends LinearLayout implements OnClickListener {
         stringBuilder.append("listener ");
         stringBuilder.append(this.f2043l);
         printStream.println(stringBuilder.toString());
-        C0785a.inflate(getContext(), R.layout.quiz1, this);
+        QuizTypeOne.inflate(getContext(), R.layout.quiz1, this);
         this.f2032a = (TextView) findViewById(R.id.tvEnglish);
         this.f2033b = (TextView) findViewById(R.id.tvPinyin);
         this.f2037f = (TextView) findViewById(R.id.btnAns1);
@@ -86,9 +85,9 @@ public class C0785a extends LinearLayout implements OnClickListener {
 
     /* renamed from: a */
     private void m3120a(boolean z, TextView textView) {
-        mo3006a();
+        resetQuiz();
         textView.setBackgroundResource(R.drawable.bg_phrase_answer_true_quiz);
-        textView.setTextColor(Utils.m3036b(getContext(), R.color.white));
+        textView.setTextColor(Utils.getColor(getContext(), R.color.white));
         if (this.f2043l != null) {
             String trim = textView.getText().toString().trim();
             this.f2043l.mo2842a(this.f2041j, trim, trim.contains(this.f2034c.trim()));
@@ -101,20 +100,20 @@ public class C0785a extends LinearLayout implements OnClickListener {
         this.f2038g.setText("");
         this.f2039h.setText("");
         this.f2040i.setText("");
-        mo3006a();
+        resetQuiz();
     }
 
     /* renamed from: a */
-    public void mo3006a() {
+    public void resetQuiz() {
         System.out.println("setBGDefault");
         this.f2037f.setBackgroundResource(R.drawable.bg_phrase_answer);
         this.f2038g.setBackgroundResource(R.drawable.bg_phrase_answer);
         this.f2039h.setBackgroundResource(R.drawable.bg_phrase_answer);
         this.f2040i.setBackgroundResource(R.drawable.bg_phrase_answer);
-        this.f2037f.setTextColor(Utils.m3036b(getContext(), R.color.quiz_text_color));
-        this.f2038g.setTextColor(Utils.m3036b(getContext(), R.color.quiz_text_color));
-        this.f2039h.setTextColor(Utils.m3036b(getContext(), R.color.quiz_text_color));
-        this.f2040i.setTextColor(Utils.m3036b(getContext(), R.color.quiz_text_color));
+        this.f2037f.setTextColor(Utils.getColor(getContext(), R.color.quiz_text_color));
+        this.f2038g.setTextColor(Utils.getColor(getContext(), R.color.quiz_text_color));
+        this.f2039h.setTextColor(Utils.getColor(getContext(), R.color.quiz_text_color));
+        this.f2040i.setTextColor(Utils.getColor(getContext(), R.color.quiz_text_color));
     }
 
     /* renamed from: a */

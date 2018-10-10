@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import app.giaotieptienghan.customview.C0785a;
+import app.giaotieptienghan.customview.QuizTypeOne;
 import app.giaotieptienghan.customview.C0789b;
 import app.giaotieptienghan.customview.C2253c;
 
 /* renamed from: com.example.english.a.g */
-public class C2249g extends PagerAdapter {
+public class QuizAdapter extends PagerAdapter {
     /* renamed from: a */
     private LayoutInflater f7860a;
     /* renamed from: b */
@@ -37,7 +37,7 @@ public class C2249g extends PagerAdapter {
         void mo2844t();
     }
 
-    public C2249g(Context context, List<PhraseItem> list) {
+    public QuizAdapter(Context context, List<PhraseItem> list) {
         this.f7861b = context;
         this.f7862c = list;
         m9486d();
@@ -83,8 +83,8 @@ public class C2249g extends PagerAdapter {
         View c0785a;
         switch (i % 3) {
             case 0:
-                c0785a = new C0785a(this.f7861b);
-                ((C0785a) c0785a).mo3007a(this.f7862c, i);
+                c0785a = new QuizTypeOne(this.f7861b);
+                ((QuizTypeOne) c0785a).mo3007a(this.f7862c, i);
                 break;
             case 1:
                 c0785a = new C2253c(this.f7861b);

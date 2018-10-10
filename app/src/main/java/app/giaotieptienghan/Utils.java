@@ -52,7 +52,7 @@ public class Utils {
 
     /* renamed from: a */
     public static int m3026a(Context context) {
-        return Utils.m3041f(context).widthPixels;
+        return Utils.getDisplayMetric(context).widthPixels;
     }
 
     /* renamed from: a */
@@ -226,17 +226,17 @@ public class Utils {
     }
 
     /* renamed from: b */
-    public static int m3035b(Context context) {
-        return Utils.m3041f(context).heightPixels;
+    public static int getScreenHeight(Context context) {
+        return Utils.getDisplayMetric(context).heightPixels;
     }
 
     /* renamed from: b */
-    public static int m3036b(Context context, int i) {
+    public static int getColor(Context context, int i) {
         return VERSION.SDK_INT >= 23 ? context.getResources().getColor(i, null) : context.getResources().getColor(i);
     }
 
     /* renamed from: c */
-    public static Drawable m3037c(Context context, int i) {
+    public static Drawable getDrawable(Context context, int i) {
         return VERSION.SDK_INT >= 21 ? context.getResources().getDrawable(i, null) : context.getResources().getDrawable(i);
     }
 
@@ -281,7 +281,7 @@ public class Utils {
     }
 
     /* renamed from: f */
-    private static DisplayMetrics m3041f(Context context) {
+    private static DisplayMetrics getDisplayMetric(Context context) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         return displayMetrics;

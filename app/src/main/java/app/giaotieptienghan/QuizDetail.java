@@ -10,8 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -204,7 +202,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
 
     /* renamed from: s */
     private void m16363s() {
-        int b = Utils.m3035b(this);
+        int b = Utils.getScreenHeight(this);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(-2, -2);
         layoutParams.addRule(11);
         double d = (double) b;
@@ -252,7 +250,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         this.f12108S.setPadding(i2, i2, i2, i2);
         this.f12108S.setGravity(1);
         this.f12108S.setLayoutParams(layoutParams2);
-        if (Utils.m3035b(this) >= 800) {
+        if (Utils.getScreenHeight(this) >= 800) {
             layoutParams2 = new RelativeLayout.LayoutParams(-1, -2);
             layoutParams2.addRule(12);
         }
