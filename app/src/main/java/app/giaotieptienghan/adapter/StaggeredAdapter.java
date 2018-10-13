@@ -10,6 +10,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import app.giaotieptienghan.R;
 import app.giaotieptienghan.Utils;
@@ -96,8 +99,9 @@ public class StaggeredAdapter extends ArrayAdapter<String> {
     }
 
     /* renamed from: a */
-    public void mo2851a(List<String> list) {
-        this.items = list;
+    public void setData(List<String> list) {
+        //this.items = list;
+        this.items = new ArrayList<>(Arrays.asList("123",""));
     }
 
     public int getCount() {

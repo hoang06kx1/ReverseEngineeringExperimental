@@ -116,7 +116,7 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
     }
 
     /* renamed from: a */
-    private void m9508a(String str) {
+    private void renderFirstCharacter(String str) {
         str = String.valueOf(str.charAt(0));
         int b = m9510b(str);
         this.staggeredAdapter.renderViewWithAnimation(str, b, this.staggeredTextGridView.getTextViewAtIndex(b), true);
@@ -126,7 +126,7 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
     }
 
     /* renamed from: a */
-    private void m9509a(List<String> list) {
+    private void renderFirstWord(List<String> list) {
         String str = (String) list.get(0);
         int b = m9510b(str);
         this.staggeredAdapter.renderViewWithAnimation(str, b, this.staggeredTextGridView.getTextViewAtIndex(b), true);
@@ -309,7 +309,7 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
                         this.linearLayout.setBackgroundResource(R.drawable.bg_phrase_answer_false);
                         return;
                     }
-                    m9509a(list);
+                    renderFirstWord(list);
                     return;
                 }
                 obj = this.edtAnswer.getText().toString();
@@ -321,7 +321,7 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
                     Utils.animateTextView(this.edtAnswer);
                     return;
                 }
-                m9508a(obj);
+                renderFirstCharacter(obj);
             }
         } else if (this.f7894u) {
             if (this.listWords.size() > 0) {
@@ -415,7 +415,7 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
         printStream.println(stringBuilder2.toString());
         this.f7889p = (ArrayList) this.f7888o.clone();
         Collections.shuffle(this.f7888o, new Random(System.nanoTime()));
-        this.staggeredAdapter.mo2851a(this.f7888o);
+        this.staggeredAdapter.setData(this.f7888o);
         mo8072a();
     }
 }
