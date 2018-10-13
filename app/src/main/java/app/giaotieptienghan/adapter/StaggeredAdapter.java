@@ -21,7 +21,7 @@ public class StaggeredAdapter extends ArrayAdapter<String> {
     /* renamed from: b */
     private List<String> items;
     /* renamed from: c */
-    private onStaggeredTextViewClick f1915c;
+    private onStaggeredTextViewClick onStaggeredTextViewClick;
     /* renamed from: d */
     private String word;
     /* renamed from: e */
@@ -77,7 +77,7 @@ public class StaggeredAdapter extends ArrayAdapter<String> {
 
     /* renamed from: a */
     public void mo2848a(onStaggeredTextViewClick onStaggeredTextViewClick) {
-        this.f1915c = onStaggeredTextViewClick;
+        this.onStaggeredTextViewClick = onStaggeredTextViewClick;
     }
 
     /* renamed from: a */
@@ -136,8 +136,8 @@ public class StaggeredAdapter extends ArrayAdapter<String> {
                     String charSequence = textView.getText().toString();
                     StaggeredAdapter.this.setBackground(textView, ContextCompat.getDrawable(StaggeredAdapter.this.context, R.drawable.bg_item_click), false);
                     textView.setText("");
-                    if (StaggeredAdapter.this.f1915c != null) {
-                        StaggeredAdapter.this.f1915c.mo2846a(charSequence, i);
+                    if (StaggeredAdapter.this.onStaggeredTextViewClick != null) {
+                        StaggeredAdapter.this.onStaggeredTextViewClick.mo2846a(charSequence, i);
                     }
                 }
             });
