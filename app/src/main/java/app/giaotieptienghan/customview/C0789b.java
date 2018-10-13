@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import app.giaotieptienghan.model.QuizAdapter.C0753a;
+import app.giaotieptienghan.model.QuizAdapter.QuizInterface;
 import app.giaotieptienghan.model.PhraseItem;
 import app.giaotieptienghan.repository.AppPreference;
 import app.giaotieptienghan.R;
@@ -22,7 +22,7 @@ public class C0789b extends LinearLayout {
     /* renamed from: c */
     private ImageView f2052c;
     /* renamed from: d */
-    private C0753a f2053d;
+    private QuizInterface f2053d;
     /* renamed from: e */
     private ImageView f2054e;
     /* renamed from: f */
@@ -57,8 +57,8 @@ public class C0789b extends LinearLayout {
 
     /* renamed from: a */
     private void m3125a(Context context) {
-        if (context instanceof C0753a) {
-            this.f2053d = (C0753a) context;
+        if (context instanceof QuizInterface) {
+            this.f2053d = (QuizInterface) context;
         }
         C0789b.inflate(getContext(), R.layout.quiz3, this);
         if (this.f2056g == null) {

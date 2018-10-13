@@ -220,7 +220,7 @@ public class StaggeredTextGridView extends ScrollView {
         return lRow;
     }
 
-    public TextView mo7083a(int i) {
+    public TextView getTextViewAtIndex(int i) {
         for (int i2 = 0; i2 < this.mParent.getChildCount(); i2++) {
             LinearLayout linearLayout = (LinearLayout) this.mParent.getChildAt(i2);
             if (i < linearLayout.getChildCount()) {
@@ -232,13 +232,13 @@ public class StaggeredTextGridView extends ScrollView {
     }
 
     /* renamed from: a */
-    public void mo7084a() {
+    public void resetRow() {
         this.mRowWidth = 0;
         this.mRow = null;
     }
 
     /* renamed from: b */
-    public void mo7085b() {
+    public void removeViews() {
         this.mParent.removeAllViews();
     }
 }

@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Random;
 
 import app.giaotieptienghan.Utils;
-import app.giaotieptienghan.model.QuizAdapter.C0753a;
+import app.giaotieptienghan.model.QuizAdapter.QuizInterface;
 import app.giaotieptienghan.model.PhraseItem;
 import app.giaotieptienghan.repository.AppPreference;
 import app.giaotieptienghan.R;
@@ -46,7 +46,7 @@ public class QuizTypeOne extends LinearLayout implements OnClickListener {
     /* renamed from: k */
     private AppPreference f2042k;
     /* renamed from: l */
-    private C0753a f2043l;
+    private QuizInterface f2043l;
     /* renamed from: m */
     private ImageView f2044m;
 
@@ -57,8 +57,8 @@ public class QuizTypeOne extends LinearLayout implements OnClickListener {
 
     /* renamed from: a */
     private void m3119a(Context context) {
-        if (context instanceof C0753a) {
-            this.f2043l = (C0753a) context;
+        if (context instanceof QuizInterface) {
+            this.f2043l = (QuizInterface) context;
         }
         PrintStream printStream = System.out;
         StringBuilder stringBuilder = new StringBuilder();

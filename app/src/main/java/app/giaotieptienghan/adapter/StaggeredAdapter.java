@@ -76,7 +76,7 @@ public class StaggeredAdapter extends ArrayAdapter<String> {
     }
 
     /* renamed from: a */
-    public void mo2848a(onStaggeredTextViewClick onStaggeredTextViewClick) {
+    public void setOnClick(onStaggeredTextViewClick onStaggeredTextViewClick) {
         this.onStaggeredTextViewClick = onStaggeredTextViewClick;
     }
 

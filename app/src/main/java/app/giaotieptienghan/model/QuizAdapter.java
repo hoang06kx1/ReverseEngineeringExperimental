@@ -23,7 +23,7 @@ public class QuizAdapter extends PagerAdapter {
     private List<PhraseItem> f7862c;
 
     /* renamed from: com.example.english.a.g$a */
-    public interface C0753a {
+    public interface QuizInterface {
         /* renamed from: a */
         void mo2841a(PhraseItem phraseItem, OnCompletionListener onCompletionListener);
 

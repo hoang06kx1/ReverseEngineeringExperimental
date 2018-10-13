@@ -37,7 +37,7 @@ import app.giaotieptienghan.model.PhraseItem;
 import app.giaotieptienghan.repository.EndlessLoveDB;
 
 @SuppressLint("WrongConstant")
-public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListener, QuizAdapter.C0753a {
+public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListener, QuizAdapter.QuizInterface {
     /* renamed from: M */
     private CustomViewPager viewPager;
     /* renamed from: N */

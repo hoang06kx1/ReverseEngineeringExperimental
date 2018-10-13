@@ -27,8 +27,7 @@ import org.apmem.tools.layouts.FlowLayout;
 
 import app.giaotieptienghan.Utils;
 import app.giaotieptienghan.adapter.StaggeredAdapter;
-import app.giaotieptienghan.model.QuizAdapter;
-import app.giaotieptienghan.model.QuizAdapter.C0753a;
+import app.giaotieptienghan.model.QuizAdapter.QuizInterface;
 import app.giaotieptienghan.model.PhraseItem;
 import app.giaotieptienghan.adapter.StaggeredAdapter.onStaggeredTextViewClick;
 import app.giaotieptienghan.repository.AppPreference;
@@ -38,33 +37,33 @@ import app.giaotieptienghan.R;
 @SuppressLint("WrongConstant")
 public class QuizTypeTwoView extends LinearLayout implements OnClickListener, onStaggeredTextViewClick {
     /* renamed from: a */
-    private TextView f7874a;
+    private TextView tvKorean;
     /* renamed from: b */
-    private TextView f7875b;
+    private TextView tvPinyin;
     /* renamed from: c */
-    private TextView f7876c;
+    private TextView tvDel;
     /* renamed from: d */
-    private TextView f7877d;
+    private TextView tvSug;
     /* renamed from: e */
-    private ImageView f7878e;
+    private ImageView btnPlay;
     /* renamed from: f */
-    private String f7879f = null;
+    private String korean = null;
     /* renamed from: g */
-    private FlowLayout f7880g;
+    private FlowLayout flowLayout;
     /* renamed from: h */
-    private EditText f7881h;
+    private EditText edtAnswer;
     /* renamed from: i */
-    private LinearLayout f7882i;
+    private LinearLayout linearLayout;
     /* renamed from: j */
     private StaggeredTextGridView staggeredTextGridView;
     /* renamed from: k */
     private StaggeredAdapter staggeredAdapter;
     /* renamed from: l */
-    private QuizAdapter.C0753a f7885l;
+    private QuizInterface quizInterface;
     /* renamed from: m */
-    private int f7886m = 0;
+    private int selectedWordCount = 0;
     /* renamed from: n */
-    private List<String> f7887n = new ArrayList();
+    private List<String> listWords = new ArrayList();
     /* renamed from: o */
     private ArrayList<String> f7888o = new ArrayList();
     /* renamed from: p */
@@ -72,47 +71,47 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
     /* renamed from: q */
     private List<Integer> f7890q = new ArrayList();
     /* renamed from: r */
-    private AppPreference f7891r;
+    private AppPreference appPreference;
     /* renamed from: s */
-    private PhraseItem f7892s;
+    private PhraseItem phraseItem;
     /* renamed from: t */
-    private StringBuilder f7893t = new StringBuilder();
+    private StringBuilder selectedWords = new StringBuilder();
     /* renamed from: u */
     private boolean f7894u;
 
     public QuizTypeTwoView(Context context) {
         super(context);
-        m9507a(context);
+        init(context);
     }
 
     /* renamed from: a */
-    private void m9507a(Context context) {
-        if (context instanceof C0753a) {
-            this.f7885l = (C0753a) context;
+    private void init(Context context) {
+        if (context instanceof QuizInterface) {
+            this.quizInterface = (QuizInterface) context;
         }
         QuizTypeTwoView.inflate(getContext(), R.layout.quiz4, this);
-        this.f7874a = (TextView) findViewById(R.id.tvKorean);
-        if (this.f7891r == null) {
-            this.f7891r = new AppPreference(context);
+        this.tvKorean = (TextView) findViewById(R.id.tvKorean);
+        if (this.appPreference == null) {
+            this.appPreference = new AppPreference(context);
         }
-        this.f7875b = (TextView) findViewById(R.id.tvPinyin);
-        if (!this.f7891r.mo2917j()) {
-            this.f7875b.setVisibility(8);
+        this.tvPinyin = (TextView) findViewById(R.id.tvPinyin);
+        if (!this.appPreference.mo2917j()) {
+            this.tvPinyin.setVisibility(8);
         }
-        this.f7880g = (FlowLayout) findViewById(R.id.flowLayout);
-        this.f7881h = (EditText) findViewById(R.id.editAnswer);
-        this.f7881h.setInputType(0);
-        this.f7882i = (LinearLayout) findViewById(R.id.llFlowLayout);
-        this.f7882i.setLayoutParams(getLayoutParam());
-        this.f7878e = (ImageView) findViewById(R.id.btnPlay);
-        this.f7878e.setOnClickListener(this);
-        this.f7876c = (TextView) findViewById(R.id.tvDel);
-        this.f7877d = (TextView) findViewById(R.id.tvSug);
-        this.f7876c.setOnClickListener(this);
-        this.f7877d.setOnClickListener(this);
+        this.flowLayout = (FlowLayout) findViewById(R.id.flowLayout);
+        this.edtAnswer = (EditText) findViewById(R.id.editAnswer);
+        this.edtAnswer.setInputType(0);
+        this.linearLayout = (LinearLayout) findViewById(R.id.llFlowLayout);
+        this.linearLayout.setLayoutParams(getLayoutParam());
+        this.btnPlay = (ImageView) findViewById(R.id.btnPlay);
+        this.btnPlay.setOnClickListener(this);
+        this.tvDel = (TextView) findViewById(R.id.tvDel);
+        this.tvSug = (TextView) findViewById(R.id.tvSug);
+        this.tvDel.setOnClickListener(this);
+        this.tvSug.setOnClickListener(this);
         this.staggeredTextGridView = (StaggeredTextGridView) findViewById(R.id.staggeredTextView);
         this.staggeredAdapter = new StaggeredAdapter(getContext(), this.f7888o);
-        this.staggeredAdapter.mo2848a((onStaggeredTextViewClick) this);
+        this.staggeredAdapter.setOnClick((onStaggeredTextViewClick) this);
         this.staggeredTextGridView.setmAdapter(this.staggeredAdapter);
     }
 
@@ -120,9 +119,9 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
     private void m9508a(String str) {
         str = String.valueOf(str.charAt(0));
         int b = m9510b(str);
-        this.staggeredAdapter.renderViewWithAnimation(str, b, this.staggeredTextGridView.mo7083a(b), true);
-        if (this.f7885l != null) {
-            this.f7885l.mo2844t();
+        this.staggeredAdapter.renderViewWithAnimation(str, b, this.staggeredTextGridView.getTextViewAtIndex(b), true);
+        if (this.quizInterface != null) {
+            this.quizInterface.mo2844t();
         }
     }
 
@@ -130,7 +129,7 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
     private void m9509a(List<String> list) {
         String str = (String) list.get(0);
         int b = m9510b(str);
-        this.staggeredAdapter.renderViewWithAnimation(str, b, this.staggeredTextGridView.mo7083a(b), true);
+        this.staggeredAdapter.renderViewWithAnimation(str, b, this.staggeredTextGridView.getTextViewAtIndex(b), true);
     }
 
     /* renamed from: b */
@@ -154,8 +153,8 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
 
     /* renamed from: c */
     private int m9512c(String str) {
-        for (int childCount = this.f7880g.getChildCount() - 1; childCount >= 0; childCount--) {
-            TextView textView = (TextView) this.f7880g.getChildAt(childCount);
+        for (int childCount = this.flowLayout.getChildCount() - 1; childCount >= 0; childCount--) {
+            TextView textView = (TextView) this.flowLayout.getChildAt(childCount);
             PrintStream printStream = System.out;
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("textView ");
@@ -172,7 +171,7 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
 
     private String getAllText() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (String append : this.f7887n) {
+        for (String append : this.listWords) {
             stringBuilder.append(append);
             stringBuilder.append(" ");
         }
@@ -185,7 +184,7 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
     private List<String> getArrayList() {
         List<String> arrayList = new ArrayList();
         for (int i = 0; i < this.f7889p.size(); i++) {
-            if (i >= this.f7887n.size()) {
+            if (i >= this.listWords.size()) {
                 arrayList.add(this.f7889p.get(i));
             }
         }
@@ -208,14 +207,14 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
 
     /* renamed from: a */
     public void mo8072a() {
-        this.f7880g.removeAllViews();
-        if (this.f7887n != null) {
-            this.f7887n.clear();
+        this.flowLayout.removeAllViews();
+        if (this.listWords != null) {
+            this.listWords.clear();
         }
-        this.f7886m = 0;
-        this.f7893t = new StringBuilder();
-        this.staggeredTextGridView.mo7085b();
-        this.staggeredTextGridView.mo7084a();
+        this.selectedWordCount = 0;
+        this.selectedWords = new StringBuilder();
+        this.staggeredTextGridView.removeViews();
+        this.staggeredTextGridView.resetRow();
         this.staggeredTextGridView.setmAdapter(this.staggeredAdapter);
     }
 
@@ -234,23 +233,23 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
             textView.setPadding(20, 20, 20, 20);
             textView.setMinWidth(Utils.m3026a(getContext()) / 8);
             textView.setTextColor(Utils.getColor(getContext(), R.color.quiz_text_color));
-            this.f7880g.addView(textView, c0779a);
-            this.f7887n.add(str);
-            if (this.f7886m < this.f7889p.size() - 1) {
-                this.f7886m++;
+            this.flowLayout.addView(textView, c0779a);
+            this.listWords.add(str);
+            if (this.selectedWordCount < this.f7889p.size() - 1) {
+                this.selectedWordCount++;
                 return;
             }
             StringBuilder stringBuilder;
-            this.f7886m++;
-            for (String str2 : this.f7887n) {
-                stringBuilder = this.f7893t;
+            this.selectedWordCount++;
+            for (String str2 : this.listWords) {
+                stringBuilder = this.selectedWords;
                 StringBuilder stringBuilder2 = new StringBuilder();
                 stringBuilder2.append(str2);
                 stringBuilder2.append(" ");
                 stringBuilder.append(stringBuilder2.toString());
             }
-            if (this.f7885l != null) {
-                str = this.f7893t.toString().trim();
+            if (this.quizInterface != null) {
+                str = this.selectedWords.toString().trim();
                 PrintStream printStream = System.out;
                 stringBuilder = new StringBuilder();
                 stringBuilder.append("ans ");
@@ -259,14 +258,14 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
                 printStream = System.out;
                 stringBuilder = new StringBuilder();
                 stringBuilder.append("korean ");
-                stringBuilder.append(this.f7879f);
+                stringBuilder.append(this.korean);
                 printStream.println(stringBuilder.toString());
-                this.f7885l.mo2842a(this.f7892s, str, str.equals(this.f7879f.replace(",", "").replace(".", "").trim()));
+                this.quizInterface.mo2842a(this.phraseItem, str, str.equals(this.korean.replace(",", "").replace(".", "").trim()));
                 return;
             }
         }
-        this.f7893t.append(str);
-        this.f7881h.setText(this.f7893t.toString());
+        this.selectedWords.append(str);
+        this.edtAnswer.setText(this.selectedWords.toString());
     }
 
     /* JADX WARNING: Missing block: B:28:0x00a2, code:
@@ -279,10 +278,10 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
         int intValue;
         TextView a;
         if (id == R.id.btnPlay) {
-            final AnimationDrawable animationDrawable = (AnimationDrawable) this.f7878e.getBackground();
+            final AnimationDrawable animationDrawable = (AnimationDrawable) this.btnPlay.getBackground();
             animationDrawable.start();
-            if (this.f7885l != null) {
-                this.f7885l.mo2841a(this.f7892s, new OnCompletionListener() {
+            if (this.quizInterface != null) {
+                this.quizInterface.mo2841a(this.phraseItem, new OnCompletionListener() {
                     public void onCompletion(MediaPlayer mediaPlayer) {
                         System.out.println("onCompletion");
                         animationDrawable.stop();
@@ -294,9 +293,9 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
             if (id == R.id.tvSug) {
                 if (this.f7894u) {
                     List list;
-                    if (this.f7887n.size() <= 0) {
+                    if (this.listWords.size() <= 0) {
                         list = this.f7889p;
-                    } else if (this.f7879f.replace(",", "").replace(".", "").startsWith(getAllText())) {
+                    } else if (this.korean.replace(",", "").replace(".", "").startsWith(getAllText())) {
                         list = getArrayList();
                         if (list.size() > 0) {
                             PrintStream printStream = System.out;
@@ -304,69 +303,69 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
                             stringBuilder.append("list ");
                             stringBuilder.append(list.size());
                             printStream.println(stringBuilder.toString());
-                            this.f7882i.setBackgroundResource(R.drawable.bg_phrase_answer_true);
+                            this.linearLayout.setBackgroundResource(R.drawable.bg_phrase_answer_true);
                         }
                     } else {
-                        this.f7882i.setBackgroundResource(R.drawable.bg_phrase_answer_false);
+                        this.linearLayout.setBackgroundResource(R.drawable.bg_phrase_answer_false);
                         return;
                     }
                     m9509a(list);
                     return;
                 }
-                obj = this.f7881h.getText().toString();
+                obj = this.edtAnswer.getText().toString();
                 if (Utils.isStringEmpty(obj)) {
-                    obj = this.f7879f;
-                } else if (this.f7879f.startsWith(obj)) {
-                    obj = this.f7879f.replace(obj, "");
+                    obj = this.korean;
+                } else if (this.korean.startsWith(obj)) {
+                    obj = this.korean.replace(obj, "");
                 } else {
-                    Utils.animateTextView(this.f7881h);
+                    Utils.animateTextView(this.edtAnswer);
                     return;
                 }
                 m9508a(obj);
             }
         } else if (this.f7894u) {
-            if (this.f7887n.size() > 0) {
-                obj = (String) this.f7887n.get(this.f7887n.size() - 1);
+            if (this.listWords.size() > 0) {
+                obj = (String) this.listWords.get(this.listWords.size() - 1);
                 PrintStream printStream2 = System.out;
                 StringBuilder stringBuilder2 = new StringBuilder();
                 stringBuilder2.append("value ");
                 stringBuilder2.append(obj);
                 printStream2.println(stringBuilder2.toString());
                 intValue = ((Integer) this.f7890q.get(this.f7890q.size() - 1)).intValue();
-                a = this.staggeredTextGridView.mo7083a(intValue);
+                a = this.staggeredTextGridView.getTextViewAtIndex(intValue);
                 this.f7890q.remove(this.f7890q.size() - 1);
-                this.f7880g.removeView(this.f7880g.getChildAt(m9512c(obj)));
-                this.f7887n.remove(this.f7887n.size() - 1);
-                this.f7886m--;
-                this.f7893t = new StringBuilder();
+                this.flowLayout.removeView(this.flowLayout.getChildAt(m9512c(obj)));
+                this.listWords.remove(this.listWords.size() - 1);
+                this.selectedWordCount--;
+                this.selectedWords = new StringBuilder();
                 this.staggeredAdapter.renderView(obj, intValue, a);
-                if (this.f7885l != null) {
-                    this.f7885l.mo2842a(this.f7892s, "", false);
+                if (this.quizInterface != null) {
+                    this.quizInterface.mo2842a(this.phraseItem, "", false);
                 }
             }
-        } else if (this.f7893t.length() >= 1) {
-            obj = String.valueOf(this.f7893t.charAt(this.f7893t.length() - 1));
+        } else if (this.selectedWords.length() >= 1) {
+            obj = String.valueOf(this.selectedWords.charAt(this.selectedWords.length() - 1));
             intValue = ((Integer) this.f7890q.get(this.f7890q.size() - 1)).intValue();
-            a = this.staggeredTextGridView.mo7083a(intValue);
-            this.f7893t.deleteCharAt(this.f7893t.length() - 1);
+            a = this.staggeredTextGridView.getTextViewAtIndex(intValue);
+            this.selectedWords.deleteCharAt(this.selectedWords.length() - 1);
             this.f7890q.remove(this.f7890q.size() - 1);
             if (!Utils.isStringEmpty(obj)) {
                 this.staggeredAdapter.renderView(obj, intValue, a);
             }
-            this.f7881h.setText(this.f7893t.toString());
+            this.edtAnswer.setText(this.selectedWords.toString());
         }
     }
 
     public void setData(final PhraseItem phraseItem) {
-        this.f7892s = phraseItem;
+        this.phraseItem = phraseItem;
         if (this.f7890q != null) {
             this.f7890q.clear();
         }
         String trim = phraseItem.korean.replace(",", "").trim();
         String obj = phraseItem.vietnamese;
-        this.f7874a.setText(obj);
-        this.f7875b.setText(phraseItem.pinyin);
-        this.f7879f = trim.replaceAll("\\(.*\\)", "").trim();
+        this.tvKorean.setText(obj);
+        this.tvPinyin.setText(phraseItem.pinyin);
+        this.korean = trim.replaceAll("\\(.*\\)", "").trim();
         if (this.f7888o == null) {
             this.f7888o = new ArrayList();
         } else {
@@ -374,9 +373,9 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
         }
         int i = 0;
         int length;
-        if (this.f7879f.length() >= 10) {
-            this.f7880g.setVisibility(0);
-            String[] split = this.f7879f.split(" ");
+        if (this.korean.length() >= 10) {
+            this.flowLayout.setVisibility(0);
+            String[] split = this.korean.split(" ");
             length = split.length;
             while (i < length) {
                 this.f7888o.add(split[i].replace(".", ""));
@@ -384,17 +383,17 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
             }
             this.f7894u = true;
         } else {
-            this.f7881h.setVisibility(0);
-            for (length = 0; length < this.f7879f.length(); length++) {
-                this.f7888o.add(String.valueOf(this.f7879f.charAt(length)));
+            this.edtAnswer.setVisibility(0);
+            for (length = 0; length < this.korean.length(); length++) {
+                this.f7888o.add(String.valueOf(this.korean.charAt(length)));
             }
             this.f7894u = false;
-            EditText editText = this.f7881h;
+            EditText editText = this.edtAnswer;
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("How to write ");
             stringBuilder.append(obj);
             editText.setHint(stringBuilder.toString());
-            this.f7881h.addTextChangedListener(new TextWatcher() {
+            this.edtAnswer.addTextChangedListener(new TextWatcher() {
                 public void afterTextChanged(Editable editable) {
                 }
 
@@ -402,9 +401,9 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
                 }
 
                 public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                    if (charSequence != null && QuizTypeTwoView.this.f7885l != null) {
+                    if (charSequence != null && QuizTypeTwoView.this.quizInterface != null) {
                         String trim = charSequence.toString().trim();
-                        QuizTypeTwoView.this.f7885l.mo2842a(phraseItem, trim, trim.equals(QuizTypeTwoView.this.f7879f));
+                        QuizTypeTwoView.this.quizInterface.mo2842a(phraseItem, trim, trim.equals(QuizTypeTwoView.this.korean));
                     }
                 }
             });
