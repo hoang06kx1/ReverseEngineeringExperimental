@@ -11,7 +11,7 @@ import java.util.List;
 
 import app.giaotieptienghan.customview.QuizTypeOne;
 import app.giaotieptienghan.customview.C0789b;
-import app.giaotieptienghan.customview.C2253c;
+import app.giaotieptienghan.customview.QuizTypeTwoView;
 
 /* renamed from: com.example.english.a.g */
 public class QuizAdapter extends PagerAdapter {
@@ -87,8 +87,8 @@ public class QuizAdapter extends PagerAdapter {
                 ((QuizTypeOne) c0785a).mo3007a(this.f7862c, i);
                 break;
             case 1:
-                c0785a = new C2253c(this.f7861b);
-                ((C2253c) c0785a).setData((PhraseItem) this.f7862c.get(i));
+                c0785a = new QuizTypeTwoView(this.f7861b);
+                ((QuizTypeTwoView) c0785a).setData((PhraseItem) this.f7862c.get(i));
                 break;
             case 2:
                 c0785a = new C0789b(this.f7861b);

@@ -26,17 +26,17 @@ import java.util.Random;
 import org.apmem.tools.layouts.FlowLayout;
 
 import app.giaotieptienghan.Utils;
-import app.giaotieptienghan.adapter.C0757h;
+import app.giaotieptienghan.adapter.StaggeredAdapter;
 import app.giaotieptienghan.model.QuizAdapter;
 import app.giaotieptienghan.model.QuizAdapter.C0753a;
 import app.giaotieptienghan.model.PhraseItem;
-import app.giaotieptienghan.adapter.C0757h.C0756b;
+import app.giaotieptienghan.adapter.StaggeredAdapter.onStaggeredTextViewClick;
 import app.giaotieptienghan.repository.AppPreference;
 import app.giaotieptienghan.R;
 
 /* renamed from: com.example.english.customview.c */
 @SuppressLint("WrongConstant")
-public class C2253c extends LinearLayout implements OnClickListener, C0756b {
+public class QuizTypeTwoView extends LinearLayout implements OnClickListener, onStaggeredTextViewClick {
     /* renamed from: a */
     private TextView f7874a;
     /* renamed from: b */
@@ -56,9 +56,9 @@ public class C2253c extends LinearLayout implements OnClickListener, C0756b {
     /* renamed from: i */
     private LinearLayout f7882i;
     /* renamed from: j */
-    private StaggeredTextGridView f7883j;
+    private StaggeredTextGridView staggeredTextGridView;
     /* renamed from: k */
-    private C0757h f7884k;
+    private StaggeredAdapter staggeredAdapter;
     /* renamed from: l */
     private QuizAdapter.C0753a f7885l;
     /* renamed from: m */
@@ -80,7 +80,7 @@ public class C2253c extends LinearLayout implements OnClickListener, C0756b {
     /* renamed from: u */
     private boolean f7894u;
 
-    public C2253c(Context context) {
+    public QuizTypeTwoView(Context context) {
         super(context);
         m9507a(context);
     }
@@ -90,7 +90,7 @@ public class C2253c extends LinearLayout implements OnClickListener, C0756b {
         if (context instanceof C0753a) {
             this.f7885l = (C0753a) context;
         }
-        C2253c.inflate(getContext(), R.layout.quiz4, this);
+        QuizTypeTwoView.inflate(getContext(), R.layout.quiz4, this);
         this.f7874a = (TextView) findViewById(R.id.tvKorean);
         if (this.f7891r == null) {
             this.f7891r = new AppPreference(context);
@@ -110,17 +110,17 @@ public class C2253c extends LinearLayout implements OnClickListener, C0756b {
         this.f7877d = (TextView) findViewById(R.id.tvSug);
         this.f7876c.setOnClickListener(this);
         this.f7877d.setOnClickListener(this);
-        this.f7883j = (StaggeredTextGridView) findViewById(R.id.staggeredTextView);
-        this.f7884k = new C0757h(getContext(), this.f7888o);
-        this.f7884k.mo2848a((C0756b) this);
-        this.f7883j.setmAdapter(this.f7884k);
+        this.staggeredTextGridView = (StaggeredTextGridView) findViewById(R.id.staggeredTextView);
+        this.staggeredAdapter = new StaggeredAdapter(getContext(), this.f7888o);
+        this.staggeredAdapter.mo2848a((onStaggeredTextViewClick) this);
+        this.staggeredTextGridView.setmAdapter(this.staggeredAdapter);
     }
 
     /* renamed from: a */
     private void m9508a(String str) {
         str = String.valueOf(str.charAt(0));
         int b = m9510b(str);
-        this.f7884k.mo2850a(str, b, this.f7883j.mo7083a(b), true);
+        this.staggeredAdapter.renderViewWithAnimation(str, b, this.staggeredTextGridView.mo7083a(b), true);
         if (this.f7885l != null) {
             this.f7885l.mo2844t();
         }
@@ -130,7 +130,7 @@ public class C2253c extends LinearLayout implements OnClickListener, C0756b {
     private void m9509a(List<String> list) {
         String str = (String) list.get(0);
         int b = m9510b(str);
-        this.f7884k.mo2850a(str, b, this.f7883j.mo7083a(b), true);
+        this.staggeredAdapter.renderViewWithAnimation(str, b, this.staggeredTextGridView.mo7083a(b), true);
     }
 
     /* renamed from: b */
@@ -214,9 +214,9 @@ public class C2253c extends LinearLayout implements OnClickListener, C0756b {
         }
         this.f7886m = 0;
         this.f7893t = new StringBuilder();
-        this.f7883j.mo7085b();
-        this.f7883j.mo7084a();
-        this.f7883j.setmAdapter(this.f7884k);
+        this.staggeredTextGridView.mo7085b();
+        this.staggeredTextGridView.mo7084a();
+        this.staggeredTextGridView.setmAdapter(this.staggeredAdapter);
     }
 
     /* renamed from: a */
@@ -319,7 +319,7 @@ public class C2253c extends LinearLayout implements OnClickListener, C0756b {
                 } else if (this.f7879f.startsWith(obj)) {
                     obj = this.f7879f.replace(obj, "");
                 } else {
-                    Utils.m3032a(this.f7881h);
+                    Utils.animateTextView(this.f7881h);
                     return;
                 }
                 m9508a(obj);
@@ -333,13 +333,13 @@ public class C2253c extends LinearLayout implements OnClickListener, C0756b {
                 stringBuilder2.append(obj);
                 printStream2.println(stringBuilder2.toString());
                 intValue = ((Integer) this.f7890q.get(this.f7890q.size() - 1)).intValue();
-                a = this.f7883j.mo7083a(intValue);
+                a = this.staggeredTextGridView.mo7083a(intValue);
                 this.f7890q.remove(this.f7890q.size() - 1);
                 this.f7880g.removeView(this.f7880g.getChildAt(m9512c(obj)));
                 this.f7887n.remove(this.f7887n.size() - 1);
                 this.f7886m--;
                 this.f7893t = new StringBuilder();
-                this.f7884k.mo2849a(obj, intValue, a);
+                this.staggeredAdapter.renderView(obj, intValue, a);
                 if (this.f7885l != null) {
                     this.f7885l.mo2842a(this.f7892s, "", false);
                 }
@@ -347,11 +347,11 @@ public class C2253c extends LinearLayout implements OnClickListener, C0756b {
         } else if (this.f7893t.length() >= 1) {
             obj = String.valueOf(this.f7893t.charAt(this.f7893t.length() - 1));
             intValue = ((Integer) this.f7890q.get(this.f7890q.size() - 1)).intValue();
-            a = this.f7883j.mo7083a(intValue);
+            a = this.staggeredTextGridView.mo7083a(intValue);
             this.f7893t.deleteCharAt(this.f7893t.length() - 1);
             this.f7890q.remove(this.f7890q.size() - 1);
             if (!Utils.isStringEmpty(obj)) {
-                this.f7884k.mo2849a(obj, intValue, a);
+                this.staggeredAdapter.renderView(obj, intValue, a);
             }
             this.f7881h.setText(this.f7893t.toString());
         }
@@ -402,9 +402,9 @@ public class C2253c extends LinearLayout implements OnClickListener, C0756b {
                 }
 
                 public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                    if (charSequence != null && C2253c.this.f7885l != null) {
+                    if (charSequence != null && QuizTypeTwoView.this.f7885l != null) {
                         String trim = charSequence.toString().trim();
-                        C2253c.this.f7885l.mo2842a(phraseItem, trim, trim.equals(C2253c.this.f7879f));
+                        QuizTypeTwoView.this.f7885l.mo2842a(phraseItem, trim, trim.equals(QuizTypeTwoView.this.f7879f));
                     }
                 }
             });
@@ -416,7 +416,7 @@ public class C2253c extends LinearLayout implements OnClickListener, C0756b {
         printStream.println(stringBuilder2.toString());
         this.f7889p = (ArrayList) this.f7888o.clone();
         Collections.shuffle(this.f7888o, new Random(System.nanoTime()));
-        this.f7884k.mo2851a(this.f7888o);
+        this.staggeredAdapter.mo2851a(this.f7888o);
         mo8072a();
     }
 }

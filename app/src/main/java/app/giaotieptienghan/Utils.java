@@ -181,7 +181,7 @@ public class Utils {
     }
 
     /* renamed from: a */
-    public static void m3032a(final View view) {
+    public static void animateTextView(final View view) {
         ValueAnimator ofFloat = ValueAnimator.ofFloat(new float[]{16.0f, 28.0f, 16.0f});
         ofFloat.setDuration(200);
         ofFloat.addUpdateListener(new AnimatorUpdateListener() {
