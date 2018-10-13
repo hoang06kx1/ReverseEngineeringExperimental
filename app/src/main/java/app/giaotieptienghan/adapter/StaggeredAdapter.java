@@ -100,8 +100,7 @@ public class StaggeredAdapter extends ArrayAdapter<String> {
 
     /* renamed from: a */
     public void setData(List<String> list) {
-        //this.items = list;
-        this.items = new ArrayList<>(Arrays.asList("123",""));
+        this.items = list;
     }
 
     public int getCount() {
@@ -146,8 +145,8 @@ public class StaggeredAdapter extends ArrayAdapter<String> {
                 }
             });
             return view;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
             return view;
         }
     }

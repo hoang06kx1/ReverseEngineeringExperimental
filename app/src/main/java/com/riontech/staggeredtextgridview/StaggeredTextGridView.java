@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import app.giaotieptienghan.R;
 
 
@@ -62,7 +63,7 @@ public class StaggeredTextGridView extends ScrollView {
     }
 
 
-    private void init(){
+    private void init() {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         ((Activity) mContext).getWindowManager().getDefaultDisplay()
                 .getMetrics(displaymetrics);
@@ -81,19 +82,19 @@ public class StaggeredTextGridView extends ScrollView {
         addView(mParent);
     }
 
-    public void setmAdapter(BaseAdapter mAdapter){
+    public void setmAdapter(BaseAdapter mAdapter) {
         this.mAdapter = mAdapter;
         generateSpannableTextGridView();
     }
 
-    private void generateSpannableTextGridView(){
+    private void generateSpannableTextGridView() {
         for (int i = 0; i < mAdapter.getCount(); i++) {
             // get textview from adapter
             TextView textView = (TextView) mAdapter.getView(i, null, this);
             //int padding = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
             // padding calculation
             int padding;
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 padding = textView.getPaddingEnd() + textView.getPaddingStart();
             } else {
                 padding = textView.getPaddingLeft() + textView.getPaddingRight();
@@ -105,12 +106,12 @@ public class StaggeredTextGridView extends ScrollView {
             int itemWidth = (int) (textView.getPaint().measureText(item) + padding);
 
             // init first row
-            if(i == 0){
+            if (i == 0) {
                 mRow = getRow();
                 addChildView(textView, itemWidth);
             } else {
                 // add TextView into row as columns
-                if(mRowWidth + itemWidth <= mDeviceWidth){
+                if (mRowWidth + itemWidth <= mDeviceWidth) {
                     addChildView(textView, itemWidth);
                 } else {
                     setFullWidthRow();
@@ -119,9 +120,9 @@ public class StaggeredTextGridView extends ScrollView {
                     addChildView(textView, itemWidth);
                 }
                 // add last row into parent view
-                if(i == (mAdapter.getCount() - 1)){
-                    mParent.addView(mRow);
-                }
+            }
+            if (i == (mAdapter.getCount() - 1)) {
+                mParent.addView(mRow);
             }
         }
     }
@@ -131,7 +132,7 @@ public class StaggeredTextGridView extends ScrollView {
      * free space width to all row's child and fill row
      * base on device width
      */
-    private void setFullWidthRow(){
+    private void setFullWidthRow() {
         // Difference between row with child and device width
         int remainWidth = mDeviceWidth - mRowWidth;
         // Distributes equally remaining space between child
@@ -141,7 +142,7 @@ public class StaggeredTextGridView extends ScrollView {
         // reset width of all child
         for (int i = 0; i < mRow.getChildCount(); i++) {
 
-            if(spaceReminder > 0 && i == (mRow.getChildCount() - 1)){
+            if (spaceReminder > 0 && i == (mRow.getChildCount() - 1)) {
                 childSpace = childSpace + spaceReminder;
             }
 
@@ -154,7 +155,8 @@ public class StaggeredTextGridView extends ScrollView {
 
     /**
      * Append child space with child width
-     * @param view child TextView
+     *
+     * @param view       child TextView
      * @param childSpace remaining space
      */
     private void resetChildWidth(final View view, final int childSpace) {
@@ -172,7 +174,7 @@ public class StaggeredTextGridView extends ScrollView {
                 params.width = childWidth + childSpace + 10;
                 view.setLayoutParams(params);
 
-                if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
                     view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 else
                     view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
@@ -183,20 +185,22 @@ public class StaggeredTextGridView extends ScrollView {
 
     /**
      * Add child into row
-     * @param view child TextView
+     *
+     * @param view     child TextView
      * @param newWidth width of child TextView
      */
-    private void addChildView(View view, int newWidth){
+    private void addChildView(View view, int newWidth) {
         mRow.addView(view);
         resizeRow(newWidth, view);
     }
 
     /**
      * Resize row width base on child
+     *
      * @param width incremental width row
-     * @param view child view will add into row
+     * @param view  child view will add into row
      */
-    private void resizeRow(int width, View view){
+    private void resizeRow(int width, View view) {
         // LinearLayout row params
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mRow
                 .getLayoutParams();
@@ -207,6 +211,7 @@ public class StaggeredTextGridView extends ScrollView {
 
     /**
      * Generate new row
+     *
      * @return row LinearLayout
      */
     @SuppressLint("InflateParams")
