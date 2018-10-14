@@ -29,9 +29,9 @@
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
     <color name="colorAccent">#f44336</color>
-    <color name="colorPrimary">#3f445d</color>
-    <color name="colorPrimary2">#689f38</color>
-    <color name="colorPrimaryDark">#33374a</color>
+    <color name="colorPrimary">#29A03B</color>
+    <color name="colorPrimary2">#ff4081</color>
+    <color name="colorPrimaryDark">#007000</color>
     <color name="color_line_newfeed">#cacaca</color>
     <color name="color_user_follow_menu">#999999</color>
     <color name="custom_color_action_bar">#3f445d</color>

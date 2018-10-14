@@ -38,7 +38,11 @@ public class HomeAdapter extends ArrayAdapter<CategoryItem> {
     /* renamed from: h */
     private final int[] colors = new int[]{-677838, -2735818, -10498817, -4449208, -10701220, -13730867};
     /* renamed from: i */
-    private final int[] drawables = new int[]{R.drawable.ic_abc, R.drawable.ic_salutation, R.drawable.ic_comments16, R.drawable.ic_number, R.drawable.ic_three6, R.drawable.ic_bag2, R.drawable.ic_train15, R.drawable.ic_person193, R.drawable.ic_plate7, R.drawable.ic_bag2, R.drawable.ic_paint41, R.drawable.ic_town, R.drawable.ic_world8, R.drawable.ic_small35, R.drawable.ic_family4, R.drawable.ic_love4, R.drawable.ic_first12, R.drawable.ic_stethoscope2, R.drawable.ic_binoculars8, R.drawable.ic_music, R.drawable.ic_keo, R.drawable.ic_cunghd, R.drawable.ic_vegetable, R.drawable.ic_giavi, R.drawable.ic_common_verb, R.drawable.ic_ck, R.drawable.ic_xnk, R.drawable.ic_road, R.drawable.ic_plan, R.drawable.ic_rail, R.drawable.ic_town, R.drawable.ic_work, R.drawable.ic_work, R.drawable.ic_family4, R.drawable.ic_nature, R.drawable.ic_bug, R.drawable.ic_cook, R.drawable.ic_closthers, R.drawable.ic_person193, R.drawable.ic_holiday, R.drawable.ic_emotion, R.drawable.ic_map49, R.drawable.ic_animal, R.drawable.ic_nature, R.drawable.ic_flower, R.drawable.ic_ck, R.drawable.ic_xnk, R.drawable.ic_town, R.drawable.ic_town, R.drawable.ic_heart203, R.drawable.ic_cunghd, R.drawable.ic_town, R.drawable.ic_giavi, R.drawable.ic_emotion};
+    private final int[] drawables = new int[]{R.drawable.icon_bang_chu_cai, R.drawable.icon_chao_hoi, R.drawable.icon_hoi_thoai_thuong_dung, R.drawable.icon_so_dem, R.drawable.icon_ngay_gio, R.drawable.icon_phuong_huong_dia_diem, R.drawable.icon_phuong_tien_di_lai, R.drawable.icon_dia_diem_nghi_ngoi, R.drawable.icon_an_uong,
+    R.drawable.icon_mua_sam, R.drawable.icon_mau_sac, R.drawable.icon_thanh_pho_tinh, R.drawable.icon_quoc_gia, R.drawable.icon_danh_lam_thang_canh, R.drawable.icon_gia_dinh, R.drawable.icon_hen_ho, R.drawable.icon_khan_cap, R.drawable.icon_dau_om,
+    R.drawable.icon_cau_dong_am_khac_nghia, R.drawable.icon_am_nhac_hoi_hoa, R.drawable.icon_banh_keo_do_kho, R.drawable.icon_cung_hoang_dao, R.drawable.icon_rau_cu_qua, R.drawable.icon_cac_loai_gia_vi, R.drawable.icon_dong_tu_thuong_dung, R.drawable.icon_thi_truong_chung_khoan,
+    R.drawable.icon_xuat_nhap_khau, R.drawable.icon_duong_bo, R.drawable.icon_hang_khong, R.drawable.icon_duong_sat, R.drawable.icon_cu_tru, R.drawable.icon_nghe_nghiep, R.drawable.icon_viec_lam, R.drawable.icon_hon_nhan, R.drawable.icon_nong_nghiep, R.drawable.icon_con_trung, R.drawable.icon_do_dung_trong_bep,
+    R.drawable.icon_do_dung_tre_em, R.drawable.icon_phong_ngu, R.drawable.icon_phong_khach, R.drawable.icon_cam_xuc, R.drawable.icon_du_lich, R.drawable.ic_dong_vat, R.drawable.icon_thien_nhien, R.drawable.icon_cac_loai_hoa, R.drawable.icon_ngan_hang, R.drawable.icon_san_bay, R.drawable.icon_giao_duc, R.drawable.icon_truong_hoc, R.drawable.icon_my_pham, R.drawable.icon_hinh_dang, R.drawable.icon_van_phong, R.drawable.icon_nau_an};
 
     /* renamed from: com.example.english.a.d$a */
     private class ViewHolder {
@@ -68,14 +72,14 @@ public class HomeAdapter extends ArrayAdapter<CategoryItem> {
 
     /* renamed from: a */
     private void setBgColor(ImageView imageView, int i) {
-        Random random = new Random();
-        int nextInt = random.nextInt(this.colors.length);
-        if (this.currentColorIndex == nextInt) {
-            this.currentColorIndex = random.nextInt(this.colors.length);
-        } else {
-            this.currentColorIndex = nextInt;
-        }
-        ((GradientDrawable) imageView.getBackground()).setColor(this.colors[this.currentColorIndex]);
+        //Random random = new Random();
+        //int nextInt = random.nextInt(this.colors.length);
+        //if (this.currentColorIndex == nextInt) {
+        //    this.currentColorIndex = random.nextInt(this.colors.length);
+        //} else {
+        //    this.currentColorIndex = nextInt;
+        //}
+        //((GradientDrawable) imageView.getBackground()).setColor(this.colors[this.currentColorIndex]);
         imageView.setImageDrawable(this.context.getResources().getDrawable(this.drawables[i]));
     }
 
