@@ -107,7 +107,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
         }
 
         public void onFinish() {
-            QuizDetailSmal.this.f12130U.setText("Time's up");
+            QuizDetailSmal.this.f12130U.setText("Hết giờ");
             QuizDetailSmal.this.m16381v();
             cancel();
         }
@@ -282,7 +282,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
         try {
             TextView textView = this.f12125P;
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("Score: ");
+            stringBuilder.append("Điểm: ");
             stringBuilder.append(this.f12134Y);
             textView.setText(stringBuilder.toString());
             m16380u();
@@ -373,12 +373,12 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
         this.f12141af.setVisibility(0);
         TextView textView = this.f12142ag;
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Score: ");
+        stringBuilder.append("Điểm: ");
         stringBuilder.append(this.f12134Y);
         textView.setText(stringBuilder.toString());
         textView = this.f12143ah;
         stringBuilder = new StringBuilder();
-        stringBuilder.append("High Score ");
+        stringBuilder.append("Kỉ lục điểm ");
         stringBuilder.append(this.f12136aa.mo2896a());
         textView.setText(stringBuilder.toString());
         if (this.f12136aa.mo2896a() < this.f12134Y) {

@@ -1,24 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:orientation="vertical" android:background="#f0f0f0" android:layout_width="match_parent" android:layout_height="match_parent">
-    <ScrollView android:id="@+id/slMain" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_above="@+id/llAds">
-        <RelativeLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
-            <TextView android:textAppearance="@android:style/TextAppearance.Large" android:textStyle="bold" android:textColor="@color/red" android:id="@+id/point" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp" android:layout_marginTop="20dp" android:layout_alignParentLeft="true"/>
-            <TextView android:textAppearance="@android:style/TextAppearance.Large" android:textStyle="bold" android:textColor="@color/red" android:id="@+id/tvTime" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:layout_marginRight="10dp" android:layout_toLeftOf="@+id/point" android:layout_alignParentRight="true"/>
-            <TextView android:textAppearance="@android:style/TextAppearance.Large" android:textStyle="bold" android:textColor="@color/red" android:gravity="center_horizontal" android:id="@+id/word" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:layout_below="@+id/point" android:layout_centerHorizontal="true"/>
-            <TextView android:textAppearance="@android:style/TextAppearance.Large" android:textStyle="bold" android:textColor="@color/white" android:gravity="center_horizontal" android:id="@+id/btnAns1" android:background="@drawable/button_char" android:padding="10dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="20dp" android:layout_marginTop="20dp" android:layout_below="@+id/word" android:layout_centerHorizontal="true"/>
-            <TextView android:textAppearance="@android:style/TextAppearance.Large" android:textStyle="bold" android:textColor="@color/white" android:gravity="center_horizontal" android:id="@+id/btnAns2" android:background="@drawable/button_char" android:padding="10dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="20dp" android:layout_below="@+id/btnAns1" android:layout_centerHorizontal="true"/>
-            <TextView android:textAppearance="@android:style/TextAppearance.Large" android:textStyle="bold" android:textColor="@color/white" android:gravity="center_horizontal" android:id="@+id/btnAns3" android:background="@drawable/button_char" android:padding="10dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="20dp" android:layout_below="@+id/btnAns2" android:layout_centerHorizontal="true"/>
-            <TextView android:textAppearance="@android:style/TextAppearance.Large" android:textStyle="bold" android:textColor="@color/white" android:gravity="center_horizontal" android:id="@+id/btnAns4" android:background="@drawable/button_char" android:padding="10dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="20dp" android:layout_below="@+id/btnAns3" android:layout_centerHorizontal="true"/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#f0f0f0"
+                android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/slMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/llAds">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:textColor="@color/red"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_toLeftOf="@+id/point"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:textColor="@color/red"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/word"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/point"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:textColor="@color/red"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/btnAns1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/word"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_char"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/btnAns2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnAns1"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20dp"
+                android:background="@drawable/button_char"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/btnAns3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnAns2"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20dp"
+                android:background="@drawable/button_char"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/btnAns4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnAns3"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20dp"
+                android:background="@drawable/button_char"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
         </RelativeLayout>
     </ScrollView>
-    <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:id="@+id/llAds" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"/>
-    <ProgressBar android:id="@+id/progressBar" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true"/>
-    <RelativeLayout android:gravity="center_vertical" android:id="@+id/rlScore" android:background="@color/black1" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent" android:alpha="0.9">
-        <TextView android:textSize="48dp" android:textStyle="bold" android:textColor="@color/white" android:gravity="center_horizontal" android:id="@+id/tvGameOver" android:padding="10dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="20dp" android:text="Game Over" android:layout_centerHorizontal="true"/>
-        <TextView android:textSize="32dp" android:textStyle="bold" android:textColor="@color/white" android:gravity="center_horizontal" android:id="@+id/tvScore" android:padding="10dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="18dp" android:text="score" android:layout_below="@+id/tvGameOver" android:layout_centerHorizontal="true"/>
-        <TextView android:textSize="32dp" android:textStyle="bold" android:textColor="@color/white" android:gravity="center_horizontal" android:id="@+id/tvHighScore" android:padding="10dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="18dp" android:text="high" android:layout_below="@+id/tvScore" android:layout_centerHorizontal="true"/>
-        <ImageView android:id="@+id/imgTrans" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_line_menu_ver" android:layout_below="@+id/tvHighScore" android:layout_centerHorizontal="true"/>
-        <TextView android:textAppearance="@android:style/TextAppearance.Large" android:textStyle="bold" android:textColor="@color/white" android:gravity="center_horizontal" android:id="@+id/btnHome" android:background="@drawable/button_char" android:padding="10dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="18dp" android:text="home" android:layout_toLeftOf="@+id/imgTrans" android:layout_below="@+id/tvHighScore"/>
-        <TextView android:textAppearance="@android:style/TextAppearance.Large" android:textStyle="bold" android:textColor="@color/white" android:gravity="center_horizontal" android:id="@+id/btnRetry" android:background="@drawable/button_char" android:padding="10dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="18dp" android:text="retry" android:layout_toRightOf="@+id/imgTrans" android:layout_below="@+id/tvHighScore"/>
+
+    <LinearLayout
+        android:id="@+id/llAds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/rlScore"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.9"
+        android:background="@color/black1"
+        android:gravity="center_vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvGameOver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="20dp"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="Kết thúc"
+            android:textColor="@color/white"
+            android:textSize="48dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvScore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvGameOver"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="18dp"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="điểm"
+            android:textColor="@color/white"
+            android:textSize="32dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvHighScore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvScore"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="18dp"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="kỉ lục"
+            android:textColor="@color/white"
+            android:textSize="32dp"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/imgTrans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvHighScore"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_line_menu_ver"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/btnHome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvHighScore"
+            android:layout_margin="18dp"
+            android:layout_toLeftOf="@+id/imgTrans"
+            android:background="@drawable/button_char"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="Thoát"
+            android:textAppearance="@android:style/TextAppearance.Large"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/btnRetry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvHighScore"
+            android:layout_margin="18dp"
+            android:layout_toRightOf="@+id/imgTrans"
+            android:background="@drawable/button_char"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="Thử lại"
+            android:textAppearance="@android:style/TextAppearance.Large"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
     </RelativeLayout>
 </RelativeLayout>
