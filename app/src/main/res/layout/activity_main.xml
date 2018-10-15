@@ -24,30 +24,59 @@
         </android.support.design.widget.AppBarLayout>
 
         <FrameLayout
-            android:visibility="gone"
             android:id="@+id/transparent"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:alpha="0.7"
-            android:background="@color/black"/>
+            android:background="@color/black"
+            android:visibility="gone"/>
 
         <FrameLayout
-            android:layout_below="@+id/layout_toolbar"
             android:id="@+id/content_frame"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"/>
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/layout_toolbar"/>
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/left_drawer"
+    <LinearLayout
+        android:id="@+id/drawer"
         android:layout_width="240.0dip"
         android:layout_height="fill_parent"
         android:layout_gravity="start"
+        android:gravity="center_horizontal"
         android:layout_marginTop="?attr/actionBarSize"
-        android:alpha="0.7"
-        android:background="@color/black"
-        android:cacheColorHint="@android:color/transparent"
-        android:choiceMode="singleChoice"
-        android:divider="@color/transference"
-        android:dividerHeight="5.0dip"/>
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="224dp"
+            android:layout_height="140dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_learn_korea"/>
+
+        <TextView
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_marginBottom="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="@string/app_name"/>
+
+        <ListView
+            android:layout_marginTop="5dp"
+            android:scrollbars="vertical"
+            android:scrollbarStyle="insideOverlay"
+            android:id="@+id/left_drawer_list"
+            android:layout_width="match_parent"
+            android:paddingLeft="12dp"
+            android:layout_height="fill_parent"
+            android:background="@android:color/white"
+            android:cacheColorHint="@android:color/transparent"
+            android:choiceMode="singleChoice"
+            android:divider="@color/transference"
+            android:dividerHeight="5.0dip"/>
+    </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

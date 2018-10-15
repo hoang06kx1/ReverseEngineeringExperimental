@@ -48,13 +48,13 @@ class MainActivity : AppCompatActivity() {
         menuItems.image = R.drawable.ic_world8
         this.listMenuItem.add(menuItems)
         menuItems = MenuItem()
-        menuItems.name = "Quiz"
+        menuItems.name = "Game luyện nghe"
         menuItems.image = R.drawable.ic_action_dictionary
         this.listMenuItem.add(menuItems)
-        menuItems = MenuItem()
-        menuItems.name = "Ngữ Pháp"
-        menuItems.image = R.drawable.ic_comments16
-        this.listMenuItem.add(menuItems)
+//        menuItems = MenuItem()
+//        menuItems.name = "Ngữ Pháp"
+//        menuItems.image = R.drawable.ic_comments16
+//        this.listMenuItem.add(menuItems)
 //        menuItems = MenuItem()
 //        menuItems.name = "Nâng Cao"
 //        menuItems.image = R.drawable.ic_world8
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         menuItems.image = R.drawable.ic_action_facebook
         this.listMenuItem.add(menuItems)
         menuItems = MenuItem()
-        menuItems.name = "Our App"
+        menuItems.name = "Ứng dụng khác"
         menuItems.image = R.drawable.ic_family4
         this.listMenuItem.add(menuItems)
 //        menuItems = MenuItem()
@@ -79,8 +79,8 @@ class MainActivity : AppCompatActivity() {
 //        menuItems.name = "Privacy Policy"
 //        menuItems.image = R.drawable.ic_verified_user_white_24dp
 //        this.listMenuItem.add(menuItems)
-        left_drawer.adapter = DrawerAdapter(this, this.listMenuItem)
-        left_drawer.onItemClickListener = onMenuItemClicked()
+        left_drawer_list.adapter = DrawerAdapter(this, this.listMenuItem)
+        left_drawer_list.onItemClickListener = onMenuItemClicked()
         // home screen
         if (savedInstanceState == null) {
             this.homeFragment = HomeFragment()
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
 
     /* renamed from: b */
     private fun selectDrawerItem(i: Int) {
-        this.drawer_layout.closeDrawer(this.left_drawer)
+        this.drawer_layout.closeDrawer(this.drawer)
         Handler().postDelayed(Runnable {
             try {
                 var cls: Class<*>? = null
@@ -117,9 +117,15 @@ class MainActivity : AppCompatActivity() {
                 } else if (i == 3) {
                     cls = QuizDetail::class.java
                 } else if (i == 4) {
-                    cls = GrammaActivity::class.java
-                } else if (i == 5) {
                     this@MainActivity.openPlayStore(packageName)
+                    return@Runnable
+                } else if (i == 5) {
+                    val intent = Intent()
+                    intent.action = "android.intent.action.SEND"
+                    intent.putExtra("android.intent.extra.TEXT", getString(R.string.share_app_text).replace("__PACKAGE_NAME__", packageName))
+                    intent.type = "text/plain"
+                    startActivity(intent)
+                    return@Runnable
                 } else if (i == 6) {
                     this@MainActivity.ourApp()
                     return@Runnable
@@ -148,9 +154,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun ourApp() {
         try {
-            startActivity(Intent("android.intent.action.VIEW", Uri.parse("market://search?q=pub: WingsApp Studio")))
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Ngoai+Ngu+Software")))
         } catch (unused: ActivityNotFoundException) {
-            startActivity(Intent("android.intent.action.VIEW", Uri.parse("https://play.google.com/store/search?q=pub: WingsApp Studio")))
         }
 
     }

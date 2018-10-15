@@ -37,7 +37,7 @@
     <string name="admob_id">ca-app-pub-8172083498288402/2861142977</string>
     <string name="admob_name">Korean</string>
     <string name="app_id">658391824230261</string>
-    <string name="app_name">Học Tiếng Hàn</string>
+    <string name="app_name">Tiếng Hàn Siêu Tốc</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
     <string name="common_google_play_services_unknown_issue">%1$s is having trouble with Google Play services. Please try again.</string>
     <string name="drawer_close">Close navigation drawer</string>
@@ -70,4 +70,5 @@
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="share_app_text">Ứng dụng học tiếng Hàn siêu tốc rất hay và đầy đủ trên Android đây. Mọi người tải về học nhé! http://play.google.com/store/apps/details?id=__PACKAGE_NAME__</string>
 </resources>
