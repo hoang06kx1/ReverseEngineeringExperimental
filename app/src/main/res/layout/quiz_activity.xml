@@ -80,7 +80,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="High"
+                    android:text="Điểm cao"
                     android:textAppearance="@android:style/TextAppearance.Medium"
                     android:textColor="@color/red"
                     android:textStyle="bold"/>
@@ -137,14 +137,13 @@
 
         <TextView
             android:id="@+id/tvSkip"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_weight="1"
             android:background="@drawable/selector_skip"
             android:gravity="center"
             android:minHeight="40dp"
-            android:text="Skip"
+            android:text="Bỏ qua"
             android:textAppearance="@android:style/TextAppearance.Medium"
             android:textColor="@color/white"/>
     </LinearLayout>

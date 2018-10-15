@@ -378,7 +378,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
         textView.setText(stringBuilder.toString());
         textView = this.f12143ah;
         stringBuilder = new StringBuilder();
-        stringBuilder.append("Kỉ lục điểm ");
+        stringBuilder.append("Kỉ lục điểm: ");
         stringBuilder.append(this.f12136aa.mo2896a());
         textView.setText(stringBuilder.toString());
         if (this.f12136aa.mo2896a() < this.f12134Y) {
@@ -430,7 +430,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
                 this.f12139ad = bundle.getString("bundle_fav_id");
                 this.f12140ae = bundle.getString("bundle_plus_id");
                 this.bundle_title = bundle.getString("bundle_title");
-                setTitle(!Utils.isStringEmpty(this.bundle_title) ? this.bundle_title : "Quiz");
+                setTitle(!Utils.isStringEmpty(this.bundle_title) ? this.bundle_title : "Game luyện nghe");
             } catch (Exception unused) {
             }
         }

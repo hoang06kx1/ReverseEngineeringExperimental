@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Empty data"
+        android:text="Dữ liệu trống"
         android:textColor="@color/black1"
         android:textStyle="normal|bold|italic"
         android:visibility="gone"/>
@@ -75,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="retry"
+        android:text="Thử lại"
         android:textColor="@color/black1"
         android:visibility="gone"/>
 </RelativeLayout>

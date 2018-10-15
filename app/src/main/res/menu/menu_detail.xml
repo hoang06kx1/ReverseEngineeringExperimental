@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:icon="@drawable/ic_quiz2" android:id="@+id/action_quiz1" android:orderInCategory="100" android:title="Quiz1" app:showAsAction="always"/>
-    <item android:icon="@drawable/ic_quiz1" android:id="@+id/action_settings" android:orderInCategory="100" android:title="Quiz" app:showAsAction="always"/>
+    <item android:icon="@drawable/ic_quiz1" android:id="@+id/action_settings" android:orderInCategory="100" android:title="Game luyện nghe" app:showAsAction="always"/>
 </menu>

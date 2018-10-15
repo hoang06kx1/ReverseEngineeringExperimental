@@ -504,7 +504,7 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
             this.favorite_id = extras.getString("bundle_fav_id");
             this.plus_id = extras.getString("bundle_plus_id");
             this.bundle_title = extras.getString("bundle_title");
-            setTitle(!Utils.isStringEmpty(this.bundle_title) ? this.bundle_title : "Quiz");
+            setTitle(!Utils.isStringEmpty(this.bundle_title) ? this.bundle_title : "Game luyện nghe");
             TextView textView = this.tvHigh;
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(this.appPreference.mo2897a(this.bundle_title));

@@ -357,7 +357,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         textView.setText(stringBuilder.toString());
         textView = this.f12119ad;
         stringBuilder = new StringBuilder();
-        stringBuilder.append("Kỉ lục điểm ");
+        stringBuilder.append("Kỉ lục điểm: ");
         stringBuilder.append(this.f12115Z.mo2896a());
         textView.setText(stringBuilder.toString());
         if (this.f12115Z.mo2896a() < this.f12113X) {
@@ -403,7 +403,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         super.onCreate(bundle);
         setContentView((int) R.layout.quiz_detail_screen);
         try {
-            setTitle("Quiz");
+            setTitle("Game luyện nghe");
             mo10050r();
         } catch (Exception unused) {
         }
