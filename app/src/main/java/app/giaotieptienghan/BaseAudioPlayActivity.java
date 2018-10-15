@@ -73,7 +73,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     /* renamed from: m */
     protected LinearLayout linearLayout;
     /* renamed from: n */
-    protected String f12013n;
+    protected String bundle_title;
     /* renamed from: o */
     protected MediaPlayer mediaPlayer;
     /* renamed from: p */
@@ -162,11 +162,11 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     }
 
     ///* renamed from: r */
-    //private void mo10050r() {
+    //private void initViews() {
     //    if (C0768b.f1962f == null) {
     //        C0768b.f1962f = new C1483h(this);
     //        C0768b.f1962f.mo4664a(this.adID);
-    //        final C1456a s = mo10051s();
+    //        final C1456a s = initBundle();
     //        C0768b.f1962f.mo4661a(s.mo4549a());
     //        C0768b.f1962f.mo4660a(new C1447a() {
     //            /* renamed from: b */
@@ -178,12 +178,12 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     //        return;
     //    }
     //    if (C0768b.f1961e >= this.appPreference.mo2915h() + 1 && !C0768b.f1962f.mo4666a()) {
-    //        C0768b.f1962f.mo4661a(mo10051s().mo4549a());
+    //        C0768b.f1962f.mo4661a(initBundle().mo4549a());
     //    }
     //}
     //
     ///* renamed from: s */
-    //private C1456a mo10051s() {
+    //private C1456a initBundle() {
     //    return new C1456a().mo4550b("B3EEABB8EE11C2BE770B684D95219ECB").mo4550b("EE542AF7FF4B2C8FDB8049C8DB5F0B11");
     //}
     //
@@ -415,7 +415,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     //public void mo10033n() {
     //    if (Utils.m3038c(this)) {
     //        C0768b.f1961e++;
-    //        mo10050r();
+    //        initViews();
     //        boolean a = C0768b.f1962f.mo4666a();
     //        if ((!C0768b.f1960d || C0768b.f1961e >= this.appPreference.mo2915h()) && a) {
     //            mo2844t();

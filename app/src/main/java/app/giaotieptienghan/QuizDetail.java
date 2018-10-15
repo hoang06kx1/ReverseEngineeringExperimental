@@ -158,7 +158,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
                 try {
                     db.initDB();
                     db.getReadableDB();
-                    C0768b.f1957a = db.mo2872a(-1);
+                    C0768b.f1957a = db.getPhrasesByCategoryId(-1);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } catch (Throwable th) {

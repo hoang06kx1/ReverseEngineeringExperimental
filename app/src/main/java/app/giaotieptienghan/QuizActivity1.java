@@ -85,11 +85,11 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
     /* renamed from: ai */
     private String selectedAnswerText;
     /* renamed from: aj */
-    private int f12098aj;
+    private int categoryId;
     /* renamed from: ak */
-    private String f12099ak;
+    private String favorite_id;
     /* renamed from: al */
-    private String f12100al;
+    private String plus_id;
     /* renamed from: am */
     private final String[] courageWords = new String[]{"Well Done!", "Nice Job!", "Excellent!", "Fantastic!", "Amazing!", "Awesome!", "Splendid!", "Unbelievable!", "Wonderful!"};
 
@@ -142,11 +142,11 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
     }
 
     /* renamed from: com.example.english.QuizActivity1$a */
-    private class C0718a extends AsyncTask<String, Void, List<PhraseItem>> {
-        private C0718a() {
+    private class getDataTask extends AsyncTask<String, Void, List<PhraseItem>> {
+        private getDataTask() {
         }
 
-        /* synthetic */ C0718a(QuizActivity1 quizActivity1, C07151 c07151) {
+        /* synthetic */ getDataTask(QuizActivity1 quizActivity1, C07151 c07151) {
             this();
         }
 
@@ -157,7 +157,7 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
             try {
                 db.initDB();
                 db.getReadableDB();
-                ArrayList e = strArr[0] == null ? QuizActivity1.this.f12099ak != null ? db.mo2880e() : db.mo2872a(QuizActivity1.this.f12098aj) : "0".equals(QuizActivity1.this.f12099ak) ? db.mo2879d() : db.mo2876b(QuizActivity1.this.f12098aj);
+                ArrayList e = strArr[0] == null ? QuizActivity1.this.favorite_id != null ? db.getFavoritePhrases() : db.getPhrasesByCategoryId(QuizActivity1.this.categoryId) : "0".equals(QuizActivity1.this.favorite_id) ? db.getFavoriteGrammars() : db.getGrammarsByCategoryId(QuizActivity1.this.categoryId);
                 arrayList = e;
             } catch (Exception e2) {
                 e2.printStackTrace();
@@ -199,9 +199,9 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
     }
 
     /* renamed from: a */
-    private void m16331a(Context context) {
-        if (this.appPreference.mo2897a(this.f12013n) < this.currentScore) {
-            this.appPreference.mo2899a(this.f12013n, this.currentScore);
+    private void completeQuiz(Context context) {
+        if (this.appPreference.mo2897a(this.bundle_title) < this.currentScore) {
+            this.appPreference.mo2899a(this.bundle_title, this.currentScore);
             TextView textView = this.tvHigh;
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(this.currentScore);
@@ -394,7 +394,7 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
                         this.tvCheck.setTextColor(ContextCompat.getColor(this, R.color.quiz_text_color));
                         this.tvEnglishTest.setVisibility(8);
                     } else {
-                        m16331a((Context) this);
+                        completeQuiz((Context) this);
                         this.llCheckParent.setVisibility(8);
                         this.tvCheck.setBackgroundResource(R.drawable.bg_phrase_answer);
                         this.tvCheck.setEnabled(false);
@@ -421,7 +421,7 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
                 this.tvCheck.setTextColor(ContextCompat.getColor(this, R.color.quiz_text_color));
                 this.tvEnglishTest.setVisibility(8);
             } else {
-                m16331a((Context) this);
+                completeQuiz((Context) this);
                 this.llCheckParent.setVisibility(8);
                 this.tvCheck.setBackgroundResource(R.drawable.bg_phrase_answer);
                 this.tvCheck.setEnabled(false);
@@ -435,8 +435,8 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
         try {
             super.onCreate(bundle);
             setContentView(R.layout.quiz_activity);
-            mo10050r();
-            mo10051s();
+            initViews();
+            initBundle();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -448,7 +448,7 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
 
     /* renamed from: r */
     @SuppressLint("ResourceType")
-    public void mo10050r() {
+    public void initViews() {
         //mo10030k();
         this.f12090ab = (LinearLayout) findViewById(R.id.view);
         this.progressBar1 = (ProgressBar) findViewById(R.id.progressBar);
@@ -494,24 +494,24 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
     }
 
     /* renamed from: s */
-    public void mo10051s() {
+    public void initBundle() {
         this.tvCheck.setOnClickListener(this);
         this.tvSkip.setOnClickListener(this);
         this.tvContinue.setOnClickListener(this);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            this.f12098aj = extras.getInt("bundle_id");
-            this.f12099ak = extras.getString("bundle_fav_id");
-            this.f12100al = extras.getString("bundle_plus_id");
-            this.f12013n = extras.getString("bundle_title");
-            setTitle(!Utils.isStringEmpty(this.f12013n) ? this.f12013n : "Quiz");
+            this.categoryId = extras.getInt("bundle_id");
+            this.favorite_id = extras.getString("bundle_fav_id");
+            this.plus_id = extras.getString("bundle_plus_id");
+            this.bundle_title = extras.getString("bundle_title");
+            setTitle(!Utils.isStringEmpty(this.bundle_title) ? this.bundle_title : "Quiz");
             TextView textView = this.tvHigh;
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(this.appPreference.mo2897a(this.f12013n));
+            stringBuilder.append(this.appPreference.mo2897a(this.bundle_title));
             stringBuilder.append("");
             textView.setText(stringBuilder.toString());
         }
-        new C0718a(this, null).execute(new String[]{this.f12100al});
+        new getDataTask(this, null).execute(new String[]{this.plus_id});
     }
 
     /* renamed from: t */

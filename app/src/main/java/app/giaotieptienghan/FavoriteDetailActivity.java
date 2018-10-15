@@ -30,7 +30,7 @@ public class FavoriteDetailActivity extends BaseAudioPlayActivity {
             try {
                 db.initDB();
                 db.getReadableDB();
-                FavoriteDetailActivity.this.phraseItems = db.mo2880e();
+                FavoriteDetailActivity.this.phraseItems = db.getFavoritePhrases();
             } catch (Exception e) {
                 e.printStackTrace();
             } catch (Throwable th) {
@@ -68,7 +68,7 @@ public class FavoriteDetailActivity extends BaseAudioPlayActivity {
         Intent intent = new Intent(this, cls);
         intent.setFlags(268435456);
         intent.putExtra("bundle_fav_id", "0");
-        intent.putExtra("bundle_title", this.f12013n);
+        intent.putExtra("bundle_title", this.bundle_title);
         startActivity(intent);
     }
 

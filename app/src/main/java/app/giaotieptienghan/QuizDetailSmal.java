@@ -168,17 +168,17 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
                 if (strArr[0] == null) {
                     if (QuizDetailSmal.this.f12139ad != null) {
                         quizDetailSmal = QuizDetailSmal.this;
-                        e = db.mo2880e();
+                        e = db.getFavoritePhrases();
                     } else {
                         quizDetailSmal = QuizDetailSmal.this;
-                        e = db.mo2872a(QuizDetailSmal.this.f12138ac);
+                        e = db.getPhrasesByCategoryId(QuizDetailSmal.this.f12138ac);
                     }
                 } else if ("0".equals(QuizDetailSmal.this.f12139ad)) {
                     quizDetailSmal = QuizDetailSmal.this;
-                    e = db.mo2879d();
+                    e = db.getFavoriteGrammars();
                 } else {
                     quizDetailSmal = QuizDetailSmal.this;
-                    e = db.mo2876b(QuizDetailSmal.this.f12138ac);
+                    e = db.getGrammarsByCategoryId(QuizDetailSmal.this.f12138ac);
                 }
                 quizDetailSmal.f12122M = e;
             } catch (Exception e2) {
@@ -429,8 +429,8 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
                 this.f12138ac = bundle.getInt("bundle_id");
                 this.f12139ad = bundle.getString("bundle_fav_id");
                 this.f12140ae = bundle.getString("bundle_plus_id");
-                this.f12013n = bundle.getString("bundle_title");
-                setTitle(!Utils.isStringEmpty(this.f12013n) ? this.f12013n : "Quiz");
+                this.bundle_title = bundle.getString("bundle_title");
+                setTitle(!Utils.isStringEmpty(this.bundle_title) ? this.bundle_title : "Quiz");
             } catch (Exception unused) {
             }
         }

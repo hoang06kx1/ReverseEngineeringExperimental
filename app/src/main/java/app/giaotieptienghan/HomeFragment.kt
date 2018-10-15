@@ -13,11 +13,8 @@ import android.widget.GridView
 import android.widget.ProgressBar
 import app.giaotieptienghan.adapter.HomeAdapter
 import app.giaotieptienghan.model.CategoryItem
-import app.giaotieptienghan.model.MainDB
 import java.util.*
 import app.giaotieptienghan.repository.EndlessLoveDB
-
-
 
 
 class HomeFragment : Fragment(), OnItemClickListener {
@@ -39,7 +36,10 @@ class HomeFragment : Fragment(), OnItemClickListener {
         try {
             endlessLove.initDB()
             endlessLove.readableDB
-            categoryItems = endlessLove.mo2873a("")
+            categoryItems = endlessLove.getFavoriteCategories("")
+            categoryItems!!.add(0, CategoryItem(-1, "Practice", "Luyện tập", ""))
+            categoryItems!!.add(1, CategoryItem(-2, "Listening Game", "Game luyện nghe", ""))
+            categoryItems!!.add(2, CategoryItem(-3, "Learning Videos", "Video bài giảng"))
             gridView!!.adapter = HomeAdapter(activity, categoryItems)
             gridView!!.visibility = View.VISIBLE
         } catch (e: Exception) {
@@ -59,13 +59,25 @@ class HomeFragment : Fragment(), OnItemClickListener {
     @SuppressLint("WrongConstant")
     override fun onItemClick(adapterView: AdapterView<*>, view: View, i: Int, j: Long) {
         val categoryItem = this.categoryItems!!.get(i)
-        val stringBuilder = StringBuilder()
-        stringBuilder.append("item ")
-        stringBuilder.append(this.categoryItems!![i].id)
-        val intent = Intent(getActivity(), PhraseDetailActivity::class.java)
-        intent.setFlags(268435456);
-        intent.putExtra("bundle_id", categoryItem.id)
-        intent.putExtra("bundle_title", categoryItem.vietnamese)
-        getActivity()!!.startActivity(intent)
+        if (categoryItem.id > 0) {
+            val intent = Intent(activity, PhraseDetailActivity::class.java)
+            intent.setFlags(268435456);
+            intent.putExtra("bundle_id", categoryItem.id)
+            intent.putExtra("bundle_title", categoryItem.vietnamese)
+            activity!!.startActivity(intent)
+        } else {
+            when (categoryItem.id) {
+                -1 -> {
+                    val intent = Intent(getActivity(), QuizActivity1::class.java)
+                    intent.setFlags(268435456);
+                    activity!!.startActivity(intent)
+                }
+                -2 -> {
+                    val intent = Intent(getActivity(), QuizDetail::class.java)
+                    intent.setFlags(268435456);
+                    activity!!.startActivity(intent)
+                }
+            }
+        }
     }
 }

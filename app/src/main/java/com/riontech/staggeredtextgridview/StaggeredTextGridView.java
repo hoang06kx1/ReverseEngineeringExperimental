@@ -102,10 +102,10 @@ public class StaggeredTextGridView extends ScrollView {
 
             // get string object
             String item = (String) mAdapter.getItem(i);
-            // init item width base on its text width and padding
+            // initViews item width base on its text width and padding
             int itemWidth = (int) (textView.getPaint().measureText(item) + padding);
 
-            // init first row
+            // initViews first row
             if (i == 0) {
                 mRow = getRow();
                 addChildView(textView, itemWidth);

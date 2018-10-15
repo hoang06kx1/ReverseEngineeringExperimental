@@ -36,13 +36,13 @@ public class PhraseDetailActivity extends BaseAudioPlayActivity implements OnIte
             try {
                 db.initDB();
                 db.getReadableDB();
-                PhraseDetailActivity.this.phraseItems = db.mo2872a(PhraseDetailActivity.this.phraseId);
+                PhraseDetailActivity.this.phraseItems = db.getPhrasesByCategoryId(PhraseDetailActivity.this.phraseId);
                 if (PhraseDetailActivity.this.f12073N != 0) {
                     PhraseDetailActivity PhraseDetailActivity = PhraseDetailActivity.this;
                     StringBuilder stringBuilder = new StringBuilder();
                     stringBuilder.append(PhraseDetailActivity.this.phraseId);
                     stringBuilder.append("");
-                    PhraseDetailActivity.vietnamese = ((CategoryItem) db.mo2873a(stringBuilder.toString()).get(0)).getVietnamese();
+                    PhraseDetailActivity.vietnamese = ((CategoryItem) db.getFavoriteCategories(stringBuilder.toString()).get(0)).getVietnamese();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -147,7 +147,7 @@ public class PhraseDetailActivity extends BaseAudioPlayActivity implements OnIte
             this.listView = (ListView) findViewById(R.id.listView);
         }
         //mo10030k();
-        mo10031l(); // init views
+        mo10031l(); // initViews views
     }
 
     /* renamed from: s */

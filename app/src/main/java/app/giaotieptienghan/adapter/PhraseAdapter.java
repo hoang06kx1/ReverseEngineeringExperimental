@@ -65,7 +65,7 @@ public class PhraseAdapter extends ArrayAdapter<PhraseItem> {
             EndlessLoveDB c0764c = new EndlessLoveDB(this.context);
             c0764c.initDB();
             c0764c.getReadableDB();
-            c0764c.mo2874a(i, i2);
+            c0764c.setPhraseFavorite(i, i2);
             c0764c.closeDB();
         } catch (Exception e) {
             e.printStackTrace();

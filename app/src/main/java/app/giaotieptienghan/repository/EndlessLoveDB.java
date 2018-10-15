@@ -103,7 +103,7 @@ public class EndlessLoveDB {
     }
 
     /* renamed from: a */
-    public ArrayList<PhraseItem> mo2872a(int i) {
+    public ArrayList<PhraseItem> getPhrasesByCategoryId(int i) {
         ArrayList<PhraseItem> arrayList = new ArrayList();
         try {
             String str = "SELECT * FROM phrase";
@@ -135,7 +135,7 @@ public class EndlessLoveDB {
     }
 
     /* renamed from: a */
-    public ArrayList<CategoryItem> mo2873a(String str) {
+    public ArrayList<CategoryItem> getFavoriteCategories(String str) {
         ArrayList<CategoryItem> arrayList = new ArrayList();
         try {
             StringBuilder stringBuilder;
@@ -173,7 +173,7 @@ public class EndlessLoveDB {
     }
 
     /* renamed from: a */
-    public boolean mo2874a(int i, int i2) {
+    public boolean setPhraseFavorite(int i, int i2) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("UPDATE phrase SET favorite=");
         stringBuilder.append(i);
@@ -205,7 +205,7 @@ public class EndlessLoveDB {
     }
 
     /* renamed from: b */
-    public ArrayList<PhraseItem> mo2876b(int i) {
+    public ArrayList<PhraseItem> getGrammarsByCategoryId(int i) {
         ArrayList<PhraseItem> arrayList = new ArrayList();
         try {
             StringBuilder stringBuilder;
@@ -259,7 +259,7 @@ public class EndlessLoveDB {
     }
 
     /* renamed from: d */
-    public ArrayList<PhraseItem> mo2879d() {
+    public ArrayList<PhraseItem> getFavoriteGrammars() {
         ArrayList<PhraseItem> arrayList = new ArrayList();
         try {
             Cursor rawQuery = this.sqLiteDatabase.rawQuery("SELECT * FROM sub where favorite=1", null);
@@ -283,7 +283,7 @@ public class EndlessLoveDB {
     }
 
     /* renamed from: e */
-    public ArrayList<PhraseItem> mo2880e() {
+    public ArrayList<PhraseItem> getFavoritePhrases() {
         ArrayList<PhraseItem> arrayList = new ArrayList();
         try {
             Cursor rawQuery = this.sqLiteDatabase.rawQuery("SELECT * FROM phrase where favorite=1", null);

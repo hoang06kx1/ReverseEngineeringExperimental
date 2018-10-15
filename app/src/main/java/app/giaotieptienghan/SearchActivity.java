@@ -75,7 +75,7 @@ public class SearchActivity extends BaseAudioPlayActivity {
                 try {
                     endlessLoveDB.initDB();
                     endlessLoveDB.getReadableDB();
-                    C0768b.f1957a = endlessLoveDB.mo2872a(-1);
+                    C0768b.f1957a = endlessLoveDB.getPhrasesByCategoryId(-1);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } catch (Throwable th) {
