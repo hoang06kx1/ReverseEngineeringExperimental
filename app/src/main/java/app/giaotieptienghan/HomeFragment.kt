@@ -1,7 +1,9 @@
 package app.giaotieptienghan
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +13,7 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.GridView
 import android.widget.ProgressBar
+import android.widget.Toast
 import app.giaotieptienghan.adapter.HomeAdapter
 import app.giaotieptienghan.model.CategoryItem
 import java.util.*
@@ -59,7 +62,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     @SuppressLint("WrongConstant")
     override fun onItemClick(adapterView: AdapterView<*>, view: View, i: Int, j: Long) {
         val categoryItem = this.categoryItems!!.get(i)
-        if (categoryItem.id > 0) {
+        if (categoryItem.id >= 0) {
             val intent = Intent(activity, PhraseDetailActivity::class.java)
             intent.setFlags(268435456);
             intent.putExtra("bundle_id", categoryItem.id)
@@ -76,6 +79,13 @@ class HomeFragment : Fragment(), OnItemClickListener {
                     val intent = Intent(getActivity(), QuizDetail::class.java)
                     intent.setFlags(268435456);
                     activity!!.startActivity(intent)
+                }
+                -3 -> {
+                    try {
+                        startActivity(Intent("android.intent.action.VIEW", Uri.parse("market://details?id=ngoaingu.hoctienghan.video")))
+                    } catch (e: ActivityNotFoundException) {
+                        Toast.makeText(activity, "Không tìm được chợ ứng dụng", Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         }
