@@ -57,11 +57,11 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
     /* renamed from: ab */
     private ScrollView f12137ab;
     /* renamed from: ac */
-    private int f12138ac;
+    private int categoryId;
     /* renamed from: ad */
-    private String f12139ad;
+    private String favoriteId;
     /* renamed from: ae */
-    private String f12140ae;
+    private String plusId;
     /* renamed from: af */
     private RelativeLayout f12141af;
     /* renamed from: ag */
@@ -122,7 +122,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
                 this.f1829b = Utils.m3034a(j / 1000);
                 TextView g = QuizDetailSmal.this.f12130U;
                 StringBuilder stringBuilder3 = new StringBuilder();
-                if (this.f1829b[0] >= 10) {
+                if (this.f1829b[0] >= 60) {
                     valueOf = Integer.valueOf(this.f1829b[0]);
                 } else {
                     stringBuilder = new StringBuilder();
@@ -132,7 +132,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
                 }
                 stringBuilder3.append(valueOf);
                 stringBuilder3.append(":");
-                if (this.f1829b[1] >= 10) {
+                if (this.f1829b[1] >= 60) {
                     valueOf = Integer.valueOf(this.f1829b[1]);
                 } else {
                     stringBuilder = new StringBuilder();
@@ -149,11 +149,11 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
     }
 
     /* renamed from: com.example.english.QuizDetailSmal$b */
-    private class C0726b extends AsyncTask<String, Void, ArrayList<PhraseItem>> {
-        private C0726b() {
+    private class GetDataTask extends AsyncTask<String, Void, ArrayList<PhraseItem>> {
+        private GetDataTask() {
         }
 
-        /* synthetic */ C0726b(QuizDetailSmal quizDetailSmal, C07231 c07231) {
+        /* synthetic */ GetDataTask(QuizDetailSmal quizDetailSmal, C07231 c07231) {
             this();
         }
 
@@ -166,19 +166,19 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
                 db.initDB();
                 db.getReadableDB();
                 if (strArr[0] == null) {
-                    if (QuizDetailSmal.this.f12139ad != null) {
+                    if (QuizDetailSmal.this.favoriteId != null) {
                         quizDetailSmal = QuizDetailSmal.this;
                         e = db.getFavoritePhrases();
                     } else {
                         quizDetailSmal = QuizDetailSmal.this;
-                        e = db.getPhrasesByCategoryId(QuizDetailSmal.this.f12138ac);
+                        e = db.getPhrasesByCategoryId(QuizDetailSmal.this.categoryId);
                     }
-                } else if ("0".equals(QuizDetailSmal.this.f12139ad)) {
+                } else if ("0".equals(QuizDetailSmal.this.favoriteId)) {
                     quizDetailSmal = QuizDetailSmal.this;
                     e = db.getFavoriteGrammars();
                 } else {
                     quizDetailSmal = QuizDetailSmal.this;
-                    e = db.getGrammarsByCategoryId(QuizDetailSmal.this.f12138ac);
+                    e = db.getGrammarsByCategoryId(QuizDetailSmal.this.categoryId);
                 }
                 quizDetailSmal.f12122M = e;
             } catch (Exception e2) {
@@ -426,9 +426,9 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
         bundle = getIntent().getExtras();
         if (bundle != null) {
             try {
-                this.f12138ac = bundle.getInt("bundle_id");
-                this.f12139ad = bundle.getString("bundle_fav_id");
-                this.f12140ae = bundle.getString("bundle_plus_id");
+                this.categoryId = bundle.getInt("bundle_id");
+                this.favoriteId = bundle.getString("bundle_fav_id");
+                this.plusId = bundle.getString("bundle_plus_id");
                 this.bundle_title = bundle.getString("bundle_title");
                 setTitle(!Utils.isStringEmpty(this.bundle_title) ? this.bundle_title : "Game luyện nghe");
             } catch (Exception unused) {
@@ -506,9 +506,9 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
         this.f12129T.setOnClickListener(this);
         this.f12123N = (ProgressBar) findViewById(R.id.progressBar);
         m16378s();
-        this.f12135Z = new C0725a(10000, 1000);
+        this.f12135Z = new C0725a(60000, 1000);
         if (this.f12122M == null) {
-            new C0726b(this, null).execute(new String[]{this.f12140ae});
+            new GetDataTask(this, null).execute(new String[]{this.plusId});
             return;
         }
         m16379t();

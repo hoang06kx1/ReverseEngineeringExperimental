@@ -70,12 +70,12 @@ public class SearchActivity extends BaseAudioPlayActivity {
 
         /* renamed from: a */
         protected ArrayList<PhraseItem> doInBackground(String... strArr) {
-            if (C0768b.f1957a == null) {
+            if (C0768b.phraseItems == null) {
                 EndlessLoveDB endlessLoveDB = new EndlessLoveDB(SearchActivity.this);
                 try {
                     endlessLoveDB.initDB();
                     endlessLoveDB.getReadableDB();
-                    C0768b.f1957a = endlessLoveDB.getPhrasesByCategoryId(-1);
+                    C0768b.phraseItems = endlessLoveDB.getPhrasesByCategoryId(-1);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } catch (Throwable th) {
@@ -83,7 +83,7 @@ public class SearchActivity extends BaseAudioPlayActivity {
                 }
                 endlessLoveDB.closeDB();
             }
-            return C0768b.f1957a;
+            return C0768b.phraseItems;
         }
 
         /* renamed from: a */
