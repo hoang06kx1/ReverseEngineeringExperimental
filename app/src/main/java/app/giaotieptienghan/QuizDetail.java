@@ -418,7 +418,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
     public boolean onCreateOptionsMenu(Menu menu) {
         Resources resources;
         int i;
-        getMenuInflater().inflate(R.menu.menu_search, menu);
+        getMenuInflater().inflate(R.menu.menu_search_2, menu);
         MenuItem findItem = menu.findItem(R.id.action_volume);
         if (this.f12115Z.mo2916i()) {
             resources = getResources();

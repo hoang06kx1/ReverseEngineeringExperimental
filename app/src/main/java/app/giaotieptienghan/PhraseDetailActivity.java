@@ -19,9 +19,9 @@ import app.giaotieptienghan.repository.EndlessLoveDB;
 @SuppressLint("WrongConstant")
 public class PhraseDetailActivity extends BaseAudioPlayActivity implements OnItemClickListener {
     /* renamed from: M */
-    private int phraseId;
+    private int categoryId;
     /* renamed from: N */
-    private int f12073N = 0;
+    private int phraseId = 0;
     /* renamed from: O */
     private String vietnamese;
 
@@ -36,11 +36,11 @@ public class PhraseDetailActivity extends BaseAudioPlayActivity implements OnIte
             try {
                 db.initDB();
                 db.getReadableDB();
-                PhraseDetailActivity.this.phraseItems = db.getPhrasesByCategoryId(PhraseDetailActivity.this.phraseId);
-                if (PhraseDetailActivity.this.f12073N != 0) {
+                PhraseDetailActivity.this.phraseItems = db.getPhrasesByCategoryId(PhraseDetailActivity.this.categoryId);
+                if (PhraseDetailActivity.this.phraseId != 0) {
                     PhraseDetailActivity PhraseDetailActivity = PhraseDetailActivity.this;
                     StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append(PhraseDetailActivity.this.phraseId);
+                    stringBuilder.append(PhraseDetailActivity.this.categoryId);
                     stringBuilder.append("");
                     PhraseDetailActivity.vietnamese = ((CategoryItem) db.getFavoriteCategories(stringBuilder.toString()).get(0)).getVietnamese();
                 }
@@ -60,15 +60,15 @@ public class PhraseDetailActivity extends BaseAudioPlayActivity implements OnIte
                 PhraseDetailActivity.this.phraseAdapter = new PhraseAdapter(PhraseDetailActivity.this, arrayList);
                 PhraseDetailActivity.this.listView.setAdapter(PhraseDetailActivity.this.phraseAdapter);
                 PhraseDetailActivity.this.progressBar.setVisibility(8);
-                if (PhraseDetailActivity.this.f12073N != 0) {
+                if (PhraseDetailActivity.this.phraseId != 0) {
                     PhraseDetailActivity.this.setTitle(PhraseDetailActivity.this.vietnamese);
-                    int a = PhraseDetailActivity.this.m16323a((ArrayList) arrayList, PhraseDetailActivity.this.f12073N);
+                    int a = PhraseDetailActivity.this.m16323a((ArrayList) arrayList, PhraseDetailActivity.this.phraseId);
                     if (a != -1) {
                         PhraseDetailActivity.this.phraseAdapter.mo2830a(a);
                         PhraseDetailActivity.this.phraseAdapter.notifyDataSetChanged();
                         PhraseDetailActivity.this.listView.smoothScrollToPosition(a);
                     }
-                    PhraseDetailActivity.this.f12073N = 0;
+                    PhraseDetailActivity.this.phraseId = 0;
                 }
             }
         }
@@ -94,13 +94,8 @@ public class PhraseDetailActivity extends BaseAudioPlayActivity implements OnIte
         setContentView((int) R.layout.detail_screen);
         try {
             bundle = getIntent().getExtras();
-            this.phraseId = bundle.getInt("bundle_id");
-            this.f12073N = bundle.getInt("bundle_phrase_id");
-            PrintStream printStream = System.out;
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("phraseId ");
-            stringBuilder.append(this.f12073N);
-            printStream.println(stringBuilder.toString());
+            this.categoryId = bundle.getInt("bundle_id");
+            this.phraseId = bundle.getInt("bundle_phrase_id");
             this.f12005H = 2;
             this.vietnamese = bundle.getString("bundle_title");
             if (Utils.isStringEmpty(this.vietnamese)) {
@@ -125,6 +120,7 @@ public class PhraseDetailActivity extends BaseAudioPlayActivity implements OnIte
         if (itemId != R.id.action_quiz1) {
             if (itemId == R.id.action_settings) {
                 intent = new Intent(this, QuizDetailSmal.class);
+                intent.putExtra("bundle_id", this.categoryId);
                 startActivity(intent);
             }
             return super.onOptionsItemSelected(menuItem);
@@ -132,7 +128,7 @@ public class PhraseDetailActivity extends BaseAudioPlayActivity implements OnIte
         intent = new Intent(this, QuizActivity1.class);
         intent.setFlags(268435456);
         intent.putExtra("bundle_title", this.vietnamese);
-        intent.putExtra("bundle_id", this.phraseId);
+        intent.putExtra("bundle_id", this.categoryId);
         startActivity(intent);
         return super.onOptionsItemSelected(menuItem);
     }
