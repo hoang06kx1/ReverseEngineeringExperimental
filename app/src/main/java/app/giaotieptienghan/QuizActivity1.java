@@ -33,6 +33,8 @@ import java.util.Random;
 
 import app.giaotieptienghan.customview.QuizTypeOne;
 import app.giaotieptienghan.customview.CustomViewPager;
+import app.giaotieptienghan.customview.QuizTypeThree;
+import app.giaotieptienghan.customview.QuizTypeTwoView;
 import app.giaotieptienghan.customview.SelectCategoryDialogFragment;
 import app.giaotieptienghan.model.QuizAdapter;
 import app.giaotieptienghan.model.PhraseItem;
@@ -370,20 +372,27 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
                     return;
                 case R.id.tvContinue:
                     if (!this.isAnswerCorrected) {
-                        PrintStream printStream = System.out;
                         StringBuilder stringBuilder2 = new StringBuilder();
                         stringBuilder2.append("getCurrentItem ");
                         stringBuilder2.append(this.viewPager.getCurrentItem());
-                        printStream.println(stringBuilder2.toString());
                         CustomViewPager customViewPager = this.viewPager;
                         stringBuilder2 = new StringBuilder();
                         stringBuilder2.append("myview");
                         stringBuilder2.append(this.viewPager.getCurrentItem());
                         View findViewWithTag = customViewPager.findViewWithTag(stringBuilder2.toString());
-                        if (findViewWithTag != null && (findViewWithTag instanceof QuizTypeOne)) {
-                            ((QuizTypeOne) findViewWithTag).resetQuiz();
-                            break;
+                        if (findViewWithTag != null) {
+                            if (findViewWithTag instanceof QuizTypeOne) {
+                                ((QuizTypeOne) findViewWithTag).resetQuiz();
+                            } else if (findViewWithTag instanceof QuizTypeTwoView) {
+                                ((QuizTypeTwoView) findViewWithTag).resetQuiz();
+                            }
                         }
+                        this.llCheckParent.setVisibility(8);
+                        this.tvCheck.setBackgroundResource(R.drawable.bg_phrase_answer);
+                        this.tvCheck.setEnabled(false);
+                        this.tvCheck.setTextColor(ContextCompat.getColor(this, R.color.quiz_text_color));
+                        this.tvEnglishTest.setVisibility(8);
+                        break;
                     }
                     this.nextViewPagerPageIndex = getViewPagerPagePlusOffset(1);
                     if (this.nextViewPagerPageIndex != this.phraseItems.size()) {

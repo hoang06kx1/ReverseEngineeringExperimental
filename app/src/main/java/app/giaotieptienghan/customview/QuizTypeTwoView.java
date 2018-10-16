@@ -206,7 +206,7 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
     }
 
     /* renamed from: a */
-    public void mo8072a() {
+    public void resetQuiz() {
         this.flowLayout.removeAllViews();
         if (this.listWords != null) {
             this.listWords.clear();
@@ -416,6 +416,6 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
         this.f7889p = (ArrayList) this.f7888o.clone();
         Collections.shuffle(this.f7888o, new Random(System.nanoTime()));
         this.staggeredAdapter.setData(this.f7888o);
-        mo8072a();
+        resetQuiz();
     }
 }
