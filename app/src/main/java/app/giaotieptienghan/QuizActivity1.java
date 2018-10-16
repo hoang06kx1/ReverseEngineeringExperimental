@@ -156,12 +156,12 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
         protected List<PhraseItem> doInBackground(String... strArr) {
             EndlessLoveDB db = new EndlessLoveDB(QuizActivity1.this);
             List<PhraseItem> arrayList = new ArrayList();
-            if (categoryItems.size() == 0) {
-                categoryItems = db.getFavoriteCategories(null);
-            }
             try {
                 db.initDB();
                 db.getReadableDB();
+                if (QuizActivity1.this.categoryItems.size() == 0) {
+                    QuizActivity1.this.categoryItems = db.getFavoriteCategories(null);
+                }
                 ArrayList e = strArr[0] == null ? QuizActivity1.this.favorite_id != null ? db.getFavoritePhrases() : db.getPhrasesByCategoryId(QuizActivity1.this.categoryId) : "0".equals(QuizActivity1.this.favorite_id) ? db.getFavoriteGrammars() : db.getGrammarsByCategoryId(QuizActivity1.this.categoryId);
                 arrayList = e;
             } catch (Exception e2) {
@@ -177,6 +177,7 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
         protected void onPostExecute(List<PhraseItem> list) {
             super.onPostExecute(list);
             if (list != null && list.size() > 0) {
+                QuizActivity1.this.phraseItems.clear();
                 for (PhraseItem phraseItem : list) {
                     QuizActivity1.this.phraseItems.add(phraseItem);
                     QuizActivity1.this.phraseItems.add(phraseItem);
@@ -441,7 +442,7 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
             super.onCreate(bundle);
             setContentView(R.layout.quiz_activity);
             initViews();
-            initBundle();
+            initBundle(this.categoryId);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -509,7 +510,8 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
     }
 
     /* renamed from: s */
-    public void initBundle() {
+    public void initBundle(int categoryId) {
+        this.categoryId = categoryId;
         this.tvCheck.setOnClickListener(this);
         this.tvSkip.setOnClickListener(this);
         this.tvContinue.setOnClickListener(this);
@@ -525,12 +527,19 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
             stringBuilder.append(this.appPreference.mo2897a(this.bundle_title));
             stringBuilder.append("");
             textView.setText(stringBuilder.toString());
+        } else {
+            this.categoryId = Integer.valueOf(appPreference.getSelectedPracticeId());
         }
-        getData(this.plus_id);
+        getData(null, this.plus_id);
     }
 
-    public void getData(String categoryId) {
-        new getDataTask(this, null).execute(new String[]{categoryId});
+    public void getData(String categoryId, String grammarId) {
+        if (categoryId != null) {
+            this.categoryId = Integer.valueOf(categoryId);
+            new getDataTask(this, null).execute(new String[]{null});
+        } else {
+            new getDataTask(this, null).execute(new String[]{grammarId});
+        }
     }
 
     /* renamed from: t */

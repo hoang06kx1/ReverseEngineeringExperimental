@@ -38,7 +38,8 @@ class SelectCategoryDialogFragment: DialogFragment() {
                 setOnClickListener {
                     appPreference.selectedPracticeId = category.id.toString()
                     notifyDataSetChanged()
-                    (this@SelectCategoryDialogFragment.activity as QuizActivity1).getData(category.id.toString())
+                    (this@SelectCategoryDialogFragment.activity as QuizActivity1).initViews()
+                    (this@SelectCategoryDialogFragment.activity as QuizActivity1).initBundle(category.id)
                     this@SelectCategoryDialogFragment.dismiss()
                 }
             }
