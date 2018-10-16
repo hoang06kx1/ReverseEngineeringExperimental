@@ -36,6 +36,7 @@ import java.util.ArrayList;
 
 import app.giaotieptienghan.adapter.PhraseAdapter;
 import app.giaotieptienghan.model.C0768b;
+import app.giaotieptienghan.model.CategoryItem;
 import app.giaotieptienghan.model.PhraseItem;
 import app.giaotieptienghan.repository.AppPreference;
 
@@ -50,6 +51,8 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     protected ImageView btVolume;
     /* renamed from: D */
     protected ArrayList<PhraseItem> phraseItems;
+    /* category items */
+    public ArrayList<CategoryItem> categoryItems = new ArrayList<>();
     /* renamed from: E */
     protected PhraseAdapter phraseAdapter;
     /* renamed from: F */

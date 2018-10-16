@@ -13,6 +13,7 @@ import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -32,6 +33,7 @@ import java.util.Random;
 
 import app.giaotieptienghan.customview.QuizTypeOne;
 import app.giaotieptienghan.customview.CustomViewPager;
+import app.giaotieptienghan.customview.SelectCategoryDialogFragment;
 import app.giaotieptienghan.model.QuizAdapter;
 import app.giaotieptienghan.model.PhraseItem;
 import app.giaotieptienghan.repository.EndlessLoveDB;
@@ -154,6 +156,9 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
         protected List<PhraseItem> doInBackground(String... strArr) {
             EndlessLoveDB db = new EndlessLoveDB(QuizActivity1.this);
             List<PhraseItem> arrayList = new ArrayList();
+            if (categoryItems.size() == 0) {
+                categoryItems = db.getFavoriteCategories(null);
+            }
             try {
                 db.initDB();
                 db.getReadableDB();
@@ -443,7 +448,17 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        return false;
+        getMenuInflater().inflate(R.menu.menu_quiz_1, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if (menuItem.getItemId() == R.id.menu_category) {
+            SelectCategoryDialogFragment selectCategoryDialogFragment = new SelectCategoryDialogFragment();
+            selectCategoryDialogFragment.show(getSupportFragmentManager(), "category_dialog_fragment");
+        }
+        return super.onOptionsItemSelected(menuItem);
     }
 
     /* renamed from: r */
@@ -511,7 +526,11 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
             stringBuilder.append("");
             textView.setText(stringBuilder.toString());
         }
-        new getDataTask(this, null).execute(new String[]{this.plus_id});
+        getData(this.plus_id);
+    }
+
+    public void getData(String categoryId) {
+        new getDataTask(this, null).execute(new String[]{categoryId});
     }
 
     /* renamed from: t */

@@ -36,6 +36,8 @@ public class AppPreference { // App preference
     private final String f1981n = "com.fun.korean:display_max";
     /* renamed from: o */
     private final String f1982o = "com.fun.korean:db_version";
+
+    private final String SELECTED_PRACTICE_ID = "com.fun.korean:selected_practice";
     /* renamed from: p */
     private SharedPreferences sharedPreferences = null;
     /* renamed from: q */
@@ -46,10 +48,20 @@ public class AppPreference { // App preference
         this.editor = this.sharedPreferences.edit();
     }
 
+    public String getSelectedPracticeId() {
+        return this.sharedPreferences.getString(SELECTED_PRACTICE_ID, "0");
+    }
+
+    public void setSelectedPracticeId(String str) {
+        this.editor.putString(SELECTED_PRACTICE_ID, str);
+        this.editor.commit();
+    }
+
     /* renamed from: a */
     public int mo2896a() {
         return this.sharedPreferences.getInt("com.fun.korean:high_score", 0);
     }
+
 
     /* renamed from: a */
     public int mo2897a(String str) {
