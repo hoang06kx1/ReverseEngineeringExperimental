@@ -108,7 +108,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
             cancel();
         }
 
-        private int TIME_OUT = 60;
+        private int TIME_OUT = 10;
 
         public void onTick(long j) {
             try {
@@ -158,23 +158,21 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
 
         /* renamed from: a */
         protected ArrayList<PhraseItem> doInBackground(String... strArr) {
-            if (C0768b.phraseItems == null) {
-                EndlessLoveDB db = new EndlessLoveDB(QuizDetail.this);
-                try {
-                    db.initDB();
-                    db.getReadableDB();
-                    if (QuizDetail.this.categoryItems.size() == 0) {
-                        QuizDetail.this.categoryItems = db.getFavoriteCategories(null);
-                    }
-                    C0768b.phraseItems = db.getPhrasesByCategoryId(QuizDetail.this.categoryId);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } catch (Throwable th) {
-                    db.closeDB();
+            EndlessLoveDB db = new EndlessLoveDB(QuizDetail.this);
+            try {
+                db.initDB();
+                db.getReadableDB();
+                if (QuizDetail.this.categoryItems.size() == 0) {
+                    QuizDetail.this.categoryItems = db.getFavoriteCategories(null);
                 }
+                QuizDetail.this.phraseItems = db.getPhrasesByCategoryId(QuizDetail.this.categoryId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } catch (Throwable th) {
                 db.closeDB();
             }
-            return C0768b.phraseItems;
+            db.closeDB();
+            return QuizDetail.this.phraseItems;
         }
 
         /* renamed from: a */
@@ -284,8 +282,8 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
                 this.f12112W.clear();
             }
             Random random = new Random();
-            int nextInt = random.nextInt(C0768b.phraseItems.size());
-            PhraseItem phraseItem = (PhraseItem) C0768b.phraseItems.get(nextInt);
+            int nextInt = random.nextInt(this.phraseItems.size());
+            PhraseItem phraseItem = (PhraseItem) this.phraseItems.get(nextInt);
             String str = phraseItem.voice;
             this.f12111V.add(Integer.valueOf(nextInt));
             if (Utils.isStringEmpty(phraseItem.korean)) {
@@ -300,10 +298,10 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
                 this.f12110U = phraseItem.korean;
                 this.f12112W.add(phraseItem.korean);
                 while (this.f12112W.size() < 4) {
-                    nextInt = random.nextInt(C0768b.phraseItems.size());
+                    nextInt = random.nextInt(this.phraseItems.size());
                     if (!this.f12111V.contains(Integer.valueOf(nextInt))) {
                         this.f12111V.add(Integer.valueOf(nextInt));
-                        this.f12112W.add(((PhraseItem) C0768b.phraseItems.get(nextInt)).korean);
+                        this.f12112W.add(((PhraseItem) this.phraseItems.get(nextInt)).korean);
                     }
                 }
                 while (this.f12112W.size() > 0) {
@@ -489,11 +487,10 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         this.f12102M = (ProgressBar) findViewById(R.id.progressBar);
         m16363s();
         this.quizCountdown = new QuizCountdown(60000, 1000);
-        if (C0768b.phraseItems == null) {
-            new GetDataTask(this, null).execute(new String[0]);
-            return;
-        }
-        m16364t();
-        this.quizCountdown.start();
+        this.categoryId = Integer.valueOf(appPreference.getSelectedGameId());
+        new GetDataTask(this, null).execute(new String[0]);
+        return;
+        //m16364t();
+        //this.quizCountdown.start();
     }
 }

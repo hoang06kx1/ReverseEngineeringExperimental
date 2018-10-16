@@ -122,7 +122,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
                 this.f1829b = Utils.m3034a(j / 1000);
                 TextView g = QuizDetailSmal.this.f12130U;
                 StringBuilder stringBuilder3 = new StringBuilder();
-                if (this.f1829b[0] >= 60) {
+                if (this.f1829b[0] >= 10) {
                     valueOf = Integer.valueOf(this.f1829b[0]);
                 } else {
                     stringBuilder = new StringBuilder();
@@ -132,7 +132,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
                 }
                 stringBuilder3.append(valueOf);
                 stringBuilder3.append(":");
-                if (this.f1829b[1] >= 60) {
+                if (this.f1829b[1] >= 10) {
                     valueOf = Integer.valueOf(this.f1829b[1]);
                 } else {
                     stringBuilder = new StringBuilder();
