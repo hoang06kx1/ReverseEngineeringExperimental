@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import app.giaotieptienghan.customview.SelectCategoryDialogFragment;
-import app.giaotieptienghan.model.C0768b;
 import app.giaotieptienghan.model.PhraseItem;
 import app.giaotieptienghan.repository.AppPreference;
 import app.giaotieptienghan.repository.EndlessLoveDB;
@@ -45,11 +44,11 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
     /* renamed from: U */
     private String f12110U;
     /* renamed from: V */
-    private ArrayList<Integer> f12111V;
+    private ArrayList<Integer> playedQuizs;
     /* renamed from: W */
-    private ArrayList<String> f12112W;
+    private ArrayList<String> sampleAnswers;
     /* renamed from: X */
-    private int f12113X = 0;
+    private int currentScore = 0;
     /* renamed from: Y */
     private QuizCountdown quizCountdown;
     /* renamed from: Z */
@@ -75,7 +74,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         }
 
         public void run() {
-            QuizDetail.this.f12113X = QuizDetail.this.f12113X + 1;
+            QuizDetail.this.currentScore = QuizDetail.this.currentScore + 1;
             QuizDetail.this.m16364t();
             if (QuizDetail.this.quizCountdown != null) {
                 QuizDetail.this.quizCountdown.start();
@@ -104,7 +103,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
 
         public void onFinish() {
             QuizDetail.this.tvTime.setText("Hết giờ");
-            QuizDetail.this.m16366v();
+            QuizDetail.this.showQuizScore();
             cancel();
         }
 
@@ -205,7 +204,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
     }
 
     /* renamed from: s */
-    private void m16363s() {
+    private void layoutViews() {
         int b = Utils.getScreenHeight(this);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(-2, -2);
         layoutParams.addRule(11);
@@ -266,24 +265,24 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
             TextView textView = this.tvPoint;
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("Điểm: ");
-            stringBuilder.append(this.f12113X);
+            stringBuilder.append(this.currentScore);
             textView.setText(stringBuilder.toString());
-            m16365u();
-            if (this.f12111V == null) {
-                this.f12111V = new ArrayList();
+            resetSampleAnswers();
+            if (this.playedQuizs == null) {
+                this.playedQuizs = new ArrayList();
             } else {
-                this.f12111V.clear();
+                this.playedQuizs.clear();
             }
-            if (this.f12112W == null) {
-                this.f12112W = new ArrayList();
+            if (this.sampleAnswers == null) {
+                this.sampleAnswers = new ArrayList();
             } else {
-                this.f12112W.clear();
+                this.sampleAnswers.clear();
             }
             Random random = new Random();
             int nextInt = random.nextInt(this.phraseItems.size());
             PhraseItem phraseItem = (PhraseItem) this.phraseItems.get(nextInt);
             String str = phraseItem.voice;
-            this.f12111V.add(Integer.valueOf(nextInt));
+            this.playedQuizs.add(Integer.valueOf(nextInt));
             if (Utils.isStringEmpty(phraseItem.korean)) {
                 m16364t();
             } else {
@@ -294,35 +293,35 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
                 stringBuilder2.append(phraseItem.pinyin == null ? "" : phraseItem.pinyin);
                 textView2.setText(stringBuilder2.toString());
                 this.f12110U = phraseItem.korean;
-                this.f12112W.add(phraseItem.korean);
-                while (this.f12112W.size() < 4) {
+                this.sampleAnswers.add(phraseItem.korean);
+                while (this.sampleAnswers.size() < 4) {
                     nextInt = random.nextInt(this.phraseItems.size());
-                    if (!this.f12111V.contains(Integer.valueOf(nextInt))) {
-                        this.f12111V.add(Integer.valueOf(nextInt));
-                        this.f12112W.add(((PhraseItem) this.phraseItems.get(nextInt)).korean);
+                    if (!this.playedQuizs.contains(Integer.valueOf(nextInt))) {
+                        this.playedQuizs.add(Integer.valueOf(nextInt));
+                        this.sampleAnswers.add(((PhraseItem) this.phraseItems.get(nextInt)).korean);
                     }
                 }
-                while (this.f12112W.size() > 0) {
+                while (this.sampleAnswers.size() > 0) {
                     TextView textView3 = new TextView(this);
                     CharSequence charSequence = "";
-                    nextInt = random.nextInt(this.f12112W.size());
+                    nextInt = random.nextInt(this.sampleAnswers.size());
                     if (Utils.isStringEmpty(this.tvAns1.getText().toString())) {
                         textView3 = this.tvAns1;
-                        charSequence = (CharSequence) this.f12112W.get(nextInt);
+                        charSequence = (CharSequence) this.sampleAnswers.get(nextInt);
                     } else if (Utils.isStringEmpty(this.tvAns2.getText().toString())) {
                         textView3 = this.tvAns2;
-                        charSequence = (CharSequence) this.f12112W.get(nextInt);
+                        charSequence = (CharSequence) this.sampleAnswers.get(nextInt);
                     } else if (Utils.isStringEmpty(this.tvAns3.getText().toString())) {
                         textView3 = this.tvAns3;
-                        charSequence = (CharSequence) this.f12112W.get(nextInt);
+                        charSequence = (CharSequence) this.sampleAnswers.get(nextInt);
                     } else if (Utils.isStringEmpty(this.tvAns4.getText().toString())) {
                         textView3 = this.tvAns4;
-                        charSequence = (CharSequence) this.f12112W.get(nextInt);
+                        charSequence = (CharSequence) this.sampleAnswers.get(nextInt);
                     } else {
-                        this.f12112W.remove(nextInt);
+                        this.sampleAnswers.remove(nextInt);
                     }
                     textView3.setText(charSequence);
-                    this.f12112W.remove(nextInt);
+                    this.sampleAnswers.remove(nextInt);
                 }
             }
             if (this.appPreference1.mo2916i()) {
@@ -344,7 +343,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
     }
 
     /* renamed from: u */
-    private void m16365u() {
+    private void resetSampleAnswers() {
         this.tvAns1.setText("");
         this.tvAns2.setText("");
         this.tvAns3.setText("");
@@ -352,20 +351,20 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
     }
 
     /* renamed from: v */
-    private void m16366v() {
+    private void showQuizScore() {
         this.rlScore.setVisibility(0);
         TextView textView = this.tvScore;
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Điểm: ");
-        stringBuilder.append(this.f12113X);
+        stringBuilder.append(this.currentScore);
         textView.setText(stringBuilder.toString());
         textView = this.tvHighScore;
         stringBuilder = new StringBuilder();
         stringBuilder.append("Kỉ lục điểm: ");
         stringBuilder.append(this.appPreference1.mo2896a());
         textView.setText(stringBuilder.toString());
-        if (this.appPreference1.mo2896a() < this.f12113X) {
-            this.appPreference1.mo2898a(this.f12113X);
+        if (this.appPreference1.mo2896a() < this.currentScore) {
+            this.appPreference1.mo2898a(this.currentScore);
         }
     }
 
@@ -373,7 +372,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         int id = view.getId();
         if (id == R.id.btnRetry) {
             this.rlScore.setVisibility(8);
-            this.f12113X = 0;
+            this.currentScore = 0;
             m16364t();
             if (this.quizCountdown != null) {
                 this.quizCountdown.start();
@@ -483,7 +482,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         this.tvAns3.setOnClickListener(this);
         this.tvAns4.setOnClickListener(this);
         this.progressBar1 = (ProgressBar) findViewById(R.id.progressBar);
-        m16363s();
+        layoutViews();
         this.quizCountdown = new QuizCountdown(60000, 1000);
         this.categoryId = Integer.valueOf(appPreference.getSelectedGameId());
         new GetDataTask(this, null).execute(new String[0]);
