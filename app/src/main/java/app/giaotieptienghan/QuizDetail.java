@@ -44,7 +44,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
     /* renamed from: U */
     private String correctAnswer;
     /* renamed from: V */
-    private ArrayList<Integer> playedQuizs;
+    private ArrayList<Integer> selectedPhraseIndices;
     /* renamed from: W */
     private ArrayList<String> sampleAnswers;
     /* renamed from: X */
@@ -65,6 +65,8 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
     private TextView btHome;
     /* renamed from: af */
     private TextView btRetry;
+
+    private String currentPhraseVoice;
 
     private int categoryId = -1;
 
@@ -268,10 +270,10 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
             stringBuilder.append(this.currentScore);
             textView.setText(stringBuilder.toString());
             resetSampleAnswers();
-            if (this.playedQuizs == null) {
-                this.playedQuizs = new ArrayList();
+            if (this.selectedPhraseIndices == null) {
+                this.selectedPhraseIndices = new ArrayList();
             } else {
-                this.playedQuizs.clear();
+                this.selectedPhraseIndices.clear();
             }
             if (this.sampleAnswers == null) {
                 this.sampleAnswers = new ArrayList();
@@ -281,8 +283,8 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
             Random random = new Random();
             int nextInt = random.nextInt(this.phraseItems.size());
             PhraseItem phraseItem = (PhraseItem) this.phraseItems.get(nextInt);
-            String str = phraseItem.voice;
-            this.playedQuizs.add(Integer.valueOf(nextInt));
+            currentPhraseVoice = phraseItem.voice;
+            this.selectedPhraseIndices.add(Integer.valueOf(nextInt));
             if (Utils.isStringEmpty(phraseItem.korean)) {
                 generateSampleAnswers();
             } else {
@@ -296,8 +298,8 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
                 this.sampleAnswers.add(phraseItem.korean);
                 while (this.sampleAnswers.size() < 4) {
                     nextInt = random.nextInt(this.phraseItems.size());
-                    if (!this.playedQuizs.contains(Integer.valueOf(nextInt))) {
-                        this.playedQuizs.add(Integer.valueOf(nextInt));
+                    if (!this.selectedPhraseIndices.contains(Integer.valueOf(nextInt))) {
+                        this.selectedPhraseIndices.add(Integer.valueOf(nextInt));
                         this.sampleAnswers.add(((PhraseItem) this.phraseItems.get(nextInt)).korean);
                     }
                 }
@@ -330,7 +332,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
                 }
                 Resources resources = getResources();
                 stringBuilder = new StringBuilder();
-                stringBuilder.append(str);
+                stringBuilder.append(currentPhraseVoice);
                 stringBuilder.append("_f");
                 int identifier = resources.getIdentifier(stringBuilder.toString(), "raw", getPackageName());
                 if (identifier != 0) {
@@ -376,6 +378,20 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
             generateSampleAnswers();
             if (this.quizCountdown != null) {
                 this.quizCountdown.start();
+            }
+        } else if (id == R.id.bt_replay) {
+            if (this.appPreference1.isSoundOn()) {
+                if (this.mediaPlayer != null && this.mediaPlayer.isPlaying()) {
+                    resetMediaPlayer();
+                }
+                Resources resources = getResources();
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append(currentPhraseVoice);
+                stringBuilder.append("_f");
+                int identifier = resources.getIdentifier(stringBuilder.toString(), "raw", getPackageName());
+                if (identifier != 0) {
+                    playAudio(identifier, (OnCompletionListener) this);
+                }
             }
         } else if (id != R.id.rlScore) {
             TextView textView;
@@ -481,9 +497,10 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         this.tvAns2.setOnClickListener(this);
         this.tvAns3.setOnClickListener(this);
         this.tvAns4.setOnClickListener(this);
+        findViewById(R.id.bt_replay).setOnClickListener(this);
         this.progressBar1 = (ProgressBar) findViewById(R.id.progressBar);
         layoutViews();
-        this.quizCountdown = new QuizCountdown(60000, 1000);
+        this.quizCountdown = new QuizCountdown(15000, 1000);
         this.categoryId = Integer.valueOf(appPreference.getSelectedGameId());
         new GetDataTask(this, null).execute(new String[0]);
         return;

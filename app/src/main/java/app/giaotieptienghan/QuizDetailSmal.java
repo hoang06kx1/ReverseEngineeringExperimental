@@ -72,6 +72,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
     private TextView tvHome;
     /* renamed from: aj */
     private TextView tvRetry;
+    private String currentPhraseVoice;
 
     /* renamed from: com.example.english.QuizDetailSmal$1 */
     class NextQuizRunnable implements Runnable {
@@ -299,7 +300,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
             Random random = new Random();
             int nextInt = random.nextInt(this.phraseItems1.size());
             PhraseItem phraseItem = (PhraseItem) this.phraseItems1.get(nextInt);
-            String str = phraseItem.voice;
+            currentPhraseVoice = phraseItem.voice;
             this.f12132W.add(Integer.valueOf(nextInt));
             if (Utils.isStringEmpty(phraseItem.korean)) {
                 generateSampleAnswers();
@@ -348,7 +349,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
                 }
                 Resources resources = getResources();
                 stringBuilder = new StringBuilder();
-                stringBuilder.append(str);
+                stringBuilder.append(currentPhraseVoice);
                 stringBuilder.append("_f");
                 int identifier = resources.getIdentifier(stringBuilder.toString(), "raw", getPackageName());
                 if (identifier != 0) {
@@ -394,6 +395,20 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
             generateSampleAnswers();
             if (this.quizCountDown != null) {
                 this.quizCountDown.start();
+            }
+        } else if (id == R.id.bt_replay) {
+            if (this.appPreference1.isSoundOn()) {
+                if (this.mediaPlayer != null && this.mediaPlayer.isPlaying()) {
+                    resetMediaPlayer();
+                }
+                Resources resources = getResources();
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append(currentPhraseVoice);
+                stringBuilder.append("_f");
+                int identifier = resources.getIdentifier(stringBuilder.toString(), "raw", getPackageName());
+                if (identifier != 0) {
+                    playAudio(identifier, (OnCompletionListener) this);
+                }
             }
         } else if (id != R.id.rlScore) {
             TextView textView;
@@ -505,8 +520,9 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
         this.tvAns3.setOnClickListener(this);
         this.tvAns4.setOnClickListener(this);
         this.progressBar1 = (ProgressBar) findViewById(R.id.progressBar);
+        findViewById(R.id.bt_replay).setOnClickListener(this);
         layoutViews();
-        this.quizCountDown = new QuizCountdownTimer(60000, 1000);
+        this.quizCountDown = new QuizCountdownTimer(15000, 1000);
         if (this.phraseItems1 == null) {
             new GetDataTask(this, null).execute(new String[]{this.plusId});
             return;
