@@ -2,6 +2,7 @@ package app.giaotieptienghan;
 
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
+import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -76,10 +77,24 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         }
 
         public void run() {
-            QuizDetail.this.currentScore = QuizDetail.this.currentScore + 1;
-            QuizDetail.this.generateSampleAnswers();
-            if (QuizDetail.this.quizCountdown != null) {
-                QuizDetail.this.quizCountdown.start();
+            QuizDetail.this.quizCountdown.cancel();
+            if (QuizDetail.this.appPreference1.isSoundOn()) {
+                if (QuizDetail.this.mediaPlayer != null && QuizDetail.this.mediaPlayer.isPlaying()) {
+                    resetMediaPlayer();
+                }
+                int identifier = getResources().getIdentifier("success", "raw", getPackageName());
+                if (identifier != 0) {
+                    playAudio(identifier, new OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            QuizDetail.this.currentScore = QuizDetail.this.currentScore + 1;
+                            QuizDetail.this.generateSampleAnswers();
+                            if (QuizDetail.this.quizCountdown != null) {
+                                QuizDetail.this.quizCountdown.start();
+                            }
+                        }
+                    });
+                }
             }
         }
     }
@@ -90,6 +105,15 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         }
 
         public void run() {
+            if (QuizDetail.this.appPreference1.isSoundOn()) {
+                if (QuizDetail.this.mediaPlayer != null && QuizDetail.this.mediaPlayer.isPlaying()) {
+                    resetMediaPlayer();
+                }
+                int identifier = getResources().getIdentifier("fail", "raw", getPackageName());
+                if (identifier != 0) {
+                    playAudio(identifier, (OnCompletionListener) QuizDetail.this);
+                }
+            }
             QuizDetail.this.quizCountdown.onFinish();
         }
     }
