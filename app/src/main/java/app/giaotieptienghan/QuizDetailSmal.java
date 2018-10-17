@@ -25,25 +25,25 @@ import app.giaotieptienghan.repository.EndlessLoveDB;
 @SuppressLint("WrongConstant")
 public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickListener {
     /* renamed from: M */
-    public ArrayList<PhraseItem> f12122M;
+    public ArrayList<PhraseItem> phraseItems1;
     /* renamed from: N */
-    private ProgressBar f12123N;
+    private ProgressBar progressBar1;
     /* renamed from: O */
-    private TextView f12124O;
+    private TextView tvWord;
     /* renamed from: P */
-    private TextView f12125P;
+    private TextView tvPoint;
     /* renamed from: Q */
-    private TextView f12126Q;
+    private TextView tvAns1;
     /* renamed from: R */
-    private TextView f12127R;
+    private TextView tvAns2;
     /* renamed from: S */
-    private TextView f12128S;
+    private TextView tvAns3;
     /* renamed from: T */
-    private TextView f12129T;
+    private TextView tvAns4;
     /* renamed from: U */
-    private TextView f12130U;
+    private TextView tvTime;
     /* renamed from: V */
-    private String f12131V;
+    private String correctAnswer;
     /* renamed from: W */
     private ArrayList<Integer> f12132W;
     /* renamed from: X */
@@ -51,11 +51,11 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
     /* renamed from: Y */
     private int f12134Y = 0;
     /* renamed from: Z */
-    private C0725a f12135Z;
+    private QuizCountdownTimer quizCountDown;
     /* renamed from: aa */
-    private AppPreference f12136aa;
+    private AppPreference appPreference1;
     /* renamed from: ab */
-    private ScrollView f12137ab;
+    private ScrollView slMain;
     /* renamed from: ac */
     private int categoryId;
     /* renamed from: ad */
@@ -63,52 +63,52 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
     /* renamed from: ae */
     private String plusId;
     /* renamed from: af */
-    private RelativeLayout f12141af;
+    private RelativeLayout rlScore;
     /* renamed from: ag */
-    private TextView f12142ag;
+    private TextView tvScore;
     /* renamed from: ah */
-    private TextView f12143ah;
+    private TextView tvHighScore;
     /* renamed from: ai */
-    private TextView f12144ai;
+    private TextView tvHome;
     /* renamed from: aj */
-    private TextView f12145aj;
+    private TextView tvRetry;
 
     /* renamed from: com.example.english.QuizDetailSmal$1 */
-    class C07231 implements Runnable {
-        C07231() {
+    class NextQuizRunnable implements Runnable {
+        NextQuizRunnable() {
         }
 
         public void run() {
             QuizDetailSmal.this.f12134Y = QuizDetailSmal.this.f12134Y + 1;
-            QuizDetailSmal.this.m16379t();
-            if (QuizDetailSmal.this.f12135Z != null) {
-                QuizDetailSmal.this.f12135Z.start();
+            QuizDetailSmal.this.generateSampleAnswers();
+            if (QuizDetailSmal.this.quizCountDown != null) {
+                QuizDetailSmal.this.quizCountDown.start();
             }
         }
     }
 
     /* renamed from: com.example.english.QuizDetailSmal$2 */
-    class C07242 implements Runnable {
-        C07242() {
+    class WrongAnswerRunnable implements Runnable {
+        WrongAnswerRunnable() {
         }
 
         public void run() {
-            QuizDetailSmal.this.f12135Z.onFinish();
+            QuizDetailSmal.this.quizCountDown.onFinish();
         }
     }
 
     /* renamed from: com.example.english.QuizDetailSmal$a */
-    public class C0725a extends CountDownTimer {
+    public class QuizCountdownTimer extends CountDownTimer {
         /* renamed from: b */
         private int[] f1829b;
 
-        public C0725a(long j, long j2) {
+        public QuizCountdownTimer(long j, long j2) {
             super(j, j2);
         }
 
         public void onFinish() {
-            QuizDetailSmal.this.f12130U.setText("Hết giờ");
-            QuizDetailSmal.this.m16381v();
+            QuizDetailSmal.this.tvTime.setText("Hết giờ");
+            QuizDetailSmal.this.showScore();
             cancel();
         }
 
@@ -120,7 +120,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
                 stringBuilder2.append(j);
                 stringBuilder2.append("");
                 this.f1829b = Utils.m3034a(j / 1000);
-                TextView g = QuizDetailSmal.this.f12130U;
+                TextView g = QuizDetailSmal.this.tvTime;
                 StringBuilder stringBuilder3 = new StringBuilder();
                 if (this.f1829b[0] >= 10) {
                     valueOf = Integer.valueOf(this.f1829b[0]);
@@ -153,7 +153,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
         private GetDataTask() {
         }
 
-        /* synthetic */ GetDataTask(QuizDetailSmal quizDetailSmal, C07231 c07231) {
+        /* synthetic */ GetDataTask(QuizDetailSmal quizDetailSmal, NextQuizRunnable nextQuizRunnable) {
             this();
         }
 
@@ -180,41 +180,41 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
                     quizDetailSmal = QuizDetailSmal.this;
                     e = db.getGrammarsByCategoryId(QuizDetailSmal.this.categoryId);
                 }
-                quizDetailSmal.f12122M = e;
+                quizDetailSmal.phraseItems1 = e;
             } catch (Exception e2) {
                 e2.printStackTrace();
             } catch (Throwable th) {
                 db.closeDB();
             }
             db.closeDB();
-            return QuizDetailSmal.this.f12122M;
+            return QuizDetailSmal.this.phraseItems1;
         }
 
         /* renamed from: a */
         protected void onPostExecute(ArrayList<PhraseItem> arrayList) {
             super.onPostExecute(arrayList);
             if (arrayList != null && arrayList.size() > 0) {
-                QuizDetailSmal.this.m16379t();
-                QuizDetailSmal.this.f12135Z.start();
-                QuizDetailSmal.this.f12123N.setVisibility(8);
-                QuizDetailSmal.this.f12137ab.setVisibility(0);
+                QuizDetailSmal.this.generateSampleAnswers();
+                QuizDetailSmal.this.quizCountDown.start();
+                QuizDetailSmal.this.progressBar1.setVisibility(8);
+                QuizDetailSmal.this.slMain.setVisibility(0);
             }
         }
 
         protected void onPreExecute() {
             super.onPreExecute();
-            QuizDetailSmal.this.f12123N.setVisibility(0);
-            QuizDetailSmal.this.f12137ab.setVisibility(8);
+            QuizDetailSmal.this.progressBar1.setVisibility(0);
+            QuizDetailSmal.this.slMain.setVisibility(8);
         }
     }
 
     /* renamed from: b */
-    private void m16370b(String str) {
+    private void checkResult(String str) {
         try {
-            if (this.f12131V.equalsIgnoreCase(str)) {
-                this.handler.postDelayed(new C07231(), 100);
+            if (this.correctAnswer.equalsIgnoreCase(str)) {
+                this.handler.postDelayed(new NextQuizRunnable(), 100);
             } else {
-                this.handler.postDelayed(new C07242(), 500);
+                this.handler.postDelayed(new WrongAnswerRunnable(), 500);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -222,7 +222,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
     }
 
     /* renamed from: s */
-    private void m16378s() {
+    private void layoutViews() {
         int b = Utils.getScreenHeight(this);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(-2, -2);
         layoutParams.addRule(11);
@@ -230,47 +230,47 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
         b = (int) (0.0125d * d);
         layoutParams.rightMargin = b;
         layoutParams.topMargin = b;
-        this.f12130U.setLayoutParams(layoutParams);
+        this.tvTime.setLayoutParams(layoutParams);
         layoutParams = new RelativeLayout.LayoutParams(-2, -2);
         layoutParams.addRule(9);
         layoutParams.leftMargin = b;
         layoutParams.topMargin = b;
-        this.f12125P.setLayoutParams(layoutParams);
+        this.tvPoint.setLayoutParams(layoutParams);
         RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(-2, -2);
         layoutParams2.addRule(3, R.id.point);
         layoutParams2.addRule(14);
         int i = (int) (0.025d * d);
         layoutParams2.topMargin = i;
-        this.f12124O.setLayoutParams(layoutParams2);
+        this.tvWord.setLayoutParams(layoutParams2);
         layoutParams2 = new RelativeLayout.LayoutParams(-1, -2);
         layoutParams2.addRule(3, R.id.word);
         layoutParams2.addRule(14);
         int i2 = (int) (d * 0.02d);
         layoutParams2.setMargins(i, i, i, 0);
-        this.f12126Q.setPadding(i2, i2, i2, i2);
-        this.f12126Q.setGravity(1);
-        this.f12126Q.setLayoutParams(layoutParams2);
+        this.tvAns1.setPadding(i2, i2, i2, i2);
+        this.tvAns1.setGravity(1);
+        this.tvAns1.setLayoutParams(layoutParams2);
         layoutParams2 = new RelativeLayout.LayoutParams(-1, -2);
         layoutParams2.addRule(3, R.id.btnAns1);
         layoutParams2.addRule(14);
         layoutParams2.setMargins(i, i, i, 0);
-        this.f12127R.setPadding(i2, i2, i2, i2);
-        this.f12127R.setGravity(1);
-        this.f12127R.setLayoutParams(layoutParams2);
+        this.tvAns2.setPadding(i2, i2, i2, i2);
+        this.tvAns2.setGravity(1);
+        this.tvAns2.setLayoutParams(layoutParams2);
         layoutParams2 = new RelativeLayout.LayoutParams(-1, -2);
         layoutParams2.addRule(3, R.id.btnAns2);
         layoutParams2.addRule(14);
         layoutParams2.setMargins(i, i, i, 0);
-        this.f12128S.setPadding(i2, i2, i2, i2);
-        this.f12128S.setGravity(1);
-        this.f12128S.setLayoutParams(layoutParams2);
+        this.tvAns3.setPadding(i2, i2, i2, i2);
+        this.tvAns3.setGravity(1);
+        this.tvAns3.setLayoutParams(layoutParams2);
         layoutParams2 = new RelativeLayout.LayoutParams(-1, -2);
         layoutParams2.addRule(3, R.id.btnAns3);
         layoutParams2.addRule(14);
         layoutParams2.setMargins(i, i, i, 0);
-        this.f12129T.setPadding(i2, i2, i2, i2);
-        this.f12129T.setGravity(1);
-        this.f12129T.setLayoutParams(layoutParams2);
+        this.tvAns4.setPadding(i2, i2, i2, i2);
+        this.tvAns4.setGravity(1);
+        this.tvAns4.setLayoutParams(layoutParams2);
         if (Utils.getScreenHeight(this) >= 800) {
             layoutParams2 = new RelativeLayout.LayoutParams(-1, -2);
             layoutParams2.addRule(12);
@@ -278,14 +278,14 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
     }
 
     /* renamed from: t */
-    private void m16379t() {
+    private void generateSampleAnswers() {
         try {
-            TextView textView = this.f12125P;
+            TextView textView = this.tvPoint;
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("Điểm: ");
             stringBuilder.append(this.f12134Y);
             textView.setText(stringBuilder.toString());
-            m16380u();
+            resetAnswers();
             if (this.f12132W == null) {
                 this.f12132W = new ArrayList();
             } else {
@@ -297,43 +297,43 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
                 this.f12133X.clear();
             }
             Random random = new Random();
-            int nextInt = random.nextInt(this.f12122M.size());
-            PhraseItem phraseItem = (PhraseItem) this.f12122M.get(nextInt);
+            int nextInt = random.nextInt(this.phraseItems1.size());
+            PhraseItem phraseItem = (PhraseItem) this.phraseItems1.get(nextInt);
             String str = phraseItem.voice;
             this.f12132W.add(Integer.valueOf(nextInt));
             if (Utils.isStringEmpty(phraseItem.korean)) {
-                m16379t();
+                generateSampleAnswers();
             } else {
-                TextView textView2 = this.f12124O;
+                TextView textView2 = this.tvWord;
                 StringBuilder stringBuilder2 = new StringBuilder();
                 stringBuilder2.append(phraseItem.vietnamese);
                 stringBuilder2.append("\n");
                 stringBuilder2.append(phraseItem.pinyin == null ? "" : phraseItem.pinyin);
                 textView2.setText(stringBuilder2.toString());
-                this.f12131V = phraseItem.korean;
+                this.correctAnswer = phraseItem.korean;
                 this.f12133X.add(phraseItem.korean);
                 while (this.f12133X.size() < 4) {
-                    nextInt = random.nextInt(this.f12122M.size());
+                    nextInt = random.nextInt(this.phraseItems1.size());
                     if (!this.f12132W.contains(Integer.valueOf(nextInt))) {
                         this.f12132W.add(Integer.valueOf(nextInt));
-                        this.f12133X.add(((PhraseItem) this.f12122M.get(nextInt)).korean);
+                        this.f12133X.add(((PhraseItem) this.phraseItems1.get(nextInt)).korean);
                     }
                 }
                 while (this.f12133X.size() > 0) {
                     TextView textView3 = null;
                     CharSequence charSequence = null;
                     nextInt = random.nextInt(this.f12133X.size());
-                    if (Utils.isStringEmpty(this.f12126Q.getText().toString())) {
-                        textView3 = this.f12126Q;
+                    if (Utils.isStringEmpty(this.tvAns1.getText().toString())) {
+                        textView3 = this.tvAns1;
                         charSequence = (CharSequence) this.f12133X.get(nextInt);
-                    } else if (Utils.isStringEmpty(this.f12127R.getText().toString())) {
-                        textView3 = this.f12127R;
+                    } else if (Utils.isStringEmpty(this.tvAns2.getText().toString())) {
+                        textView3 = this.tvAns2;
                         charSequence = (CharSequence) this.f12133X.get(nextInt);
-                    } else if (Utils.isStringEmpty(this.f12128S.getText().toString())) {
-                        textView3 = this.f12128S;
+                    } else if (Utils.isStringEmpty(this.tvAns3.getText().toString())) {
+                        textView3 = this.tvAns3;
                         charSequence = (CharSequence) this.f12133X.get(nextInt);
-                    } else if (Utils.isStringEmpty(this.f12129T.getText().toString())) {
-                        textView3 = this.f12129T;
+                    } else if (Utils.isStringEmpty(this.tvAns4.getText().toString())) {
+                        textView3 = this.tvAns4;
                         charSequence = (CharSequence) this.f12133X.get(nextInt);
                     } else {
                         this.f12133X.remove(nextInt);
@@ -342,7 +342,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
                     this.f12133X.remove(nextInt);
                 }
             }
-            if (this.f12136aa.isSoundOn()) {
+            if (this.appPreference1.isSoundOn()) {
                 if (this.mediaPlayer != null && this.mediaPlayer.isPlaying()) {
                     resetMediaPlayer();
                 }
@@ -361,54 +361,54 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
     }
 
     /* renamed from: u */
-    private void m16380u() {
-        this.f12126Q.setText("");
-        this.f12127R.setText("");
-        this.f12128S.setText("");
-        this.f12129T.setText("");
+    private void resetAnswers() {
+        this.tvAns1.setText("");
+        this.tvAns2.setText("");
+        this.tvAns3.setText("");
+        this.tvAns4.setText("");
     }
 
     /* renamed from: v */
-    private void m16381v() {
-        this.f12141af.setVisibility(0);
-        TextView textView = this.f12142ag;
+    private void showScore() {
+        this.rlScore.setVisibility(0);
+        TextView textView = this.tvScore;
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Điểm: ");
         stringBuilder.append(this.f12134Y);
         textView.setText(stringBuilder.toString());
-        textView = this.f12143ah;
+        textView = this.tvHighScore;
         stringBuilder = new StringBuilder();
         stringBuilder.append("Kỉ lục điểm: ");
-        stringBuilder.append(this.f12136aa.getHighScore());
+        stringBuilder.append(this.appPreference1.getHighScore());
         textView.setText(stringBuilder.toString());
-        if (this.f12136aa.getHighScore() < this.f12134Y) {
-            this.f12136aa.setHighScore(this.f12134Y);
+        if (this.appPreference1.getHighScore() < this.f12134Y) {
+            this.appPreference1.setHighScore(this.f12134Y);
         }
     }
 
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.btnRetry) {
-            this.f12141af.setVisibility(8);
+            this.rlScore.setVisibility(8);
             this.f12134Y = 0;
-            m16379t();
-            if (this.f12135Z != null) {
-                this.f12135Z.start();
+            generateSampleAnswers();
+            if (this.quizCountDown != null) {
+                this.quizCountDown.start();
             }
         } else if (id != R.id.rlScore) {
             TextView textView;
             switch (id) {
                 case R.id.btnAns1:
-                    textView = this.f12126Q;
+                    textView = this.tvAns1;
                     break;
                 case R.id.btnAns2:
-                    textView = this.f12127R;
+                    textView = this.tvAns2;
                     break;
                 case R.id.btnAns3:
-                    textView = this.f12128S;
+                    textView = this.tvAns3;
                     break;
                 case R.id.btnAns4:
-                    textView = this.f12129T;
+                    textView = this.tvAns4;
                     break;
                 case R.id.btnHome:
                     finish();
@@ -416,7 +416,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
                 default:
                     return;
             }
-            m16370b(textView.getText().toString());
+            checkResult(textView.getText().toString());
         }
     }
 
@@ -443,7 +443,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
         int i;
         getMenuInflater().inflate(R.menu.menu_search, menu);
         MenuItem findItem = menu.findItem(R.id.action_volume);
-        if (this.f12136aa.isSoundOn()) {
+        if (this.appPreference1.isSoundOn()) {
             resources = getResources();
             i = R.drawable.ic_action_volume_up;
         } else {
@@ -456,8 +456,8 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
 
     protected void onDestroy() {
         super.onDestroy();
-        if (this.f12135Z != null) {
-            this.f12135Z.cancel();
+        if (this.quizCountDown != null) {
+            this.quizCountDown.cancel();
         }
     }
 
@@ -465,12 +465,12 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
         if (menuItem.getItemId() == R.id.action_volume) {
             Resources resources;
             int i;
-            if (this.f12136aa.isSoundOn()) {
-                this.f12136aa.setSoundOn(false);
+            if (this.appPreference1.isSoundOn()) {
+                this.appPreference1.setSoundOn(false);
                 resources = getResources();
                 i = R.drawable.ic_action_volume_off;
             } else {
-                this.f12136aa.setSoundOn(true);
+                this.appPreference1.setSoundOn(true);
                 resources = getResources();
                 i = R.drawable.ic_action_volume_up;
             }
@@ -481,37 +481,37 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
 
     /* renamed from: r */
     public void mo10050r() {
-        if (this.f12136aa == null) {
-            this.f12136aa = new AppPreference(this);
+        if (this.appPreference1 == null) {
+            this.appPreference1 = new AppPreference(this);
         }
-        this.f12137ab = (ScrollView) findViewById(R.id.slMain);
-        this.f12125P = (TextView) findViewById(R.id.point);
-        this.f12130U = (TextView) findViewById(R.id.tvTime);
-        this.f12124O = (TextView) findViewById(R.id.word);
-        this.f12126Q = (TextView) findViewById(R.id.btnAns1);
-        this.f12127R = (TextView) findViewById(R.id.btnAns2);
-        this.f12128S = (TextView) findViewById(R.id.btnAns3);
-        this.f12129T = (TextView) findViewById(R.id.btnAns4);
-        this.f12141af = (RelativeLayout) findViewById(R.id.rlScore);
-        this.f12142ag = (TextView) findViewById(R.id.tvScore);
-        this.f12143ah = (TextView) findViewById(R.id.tvHighScore);
-        this.f12144ai = (TextView) findViewById(R.id.btnHome);
-        this.f12145aj = (TextView) findViewById(R.id.btnRetry);
-        this.f12141af.setOnClickListener(this);
-        this.f12145aj.setOnClickListener(this);
-        this.f12144ai.setOnClickListener(this);
-        this.f12126Q.setOnClickListener(this);
-        this.f12127R.setOnClickListener(this);
-        this.f12128S.setOnClickListener(this);
-        this.f12129T.setOnClickListener(this);
-        this.f12123N = (ProgressBar) findViewById(R.id.progressBar);
-        m16378s();
-        this.f12135Z = new C0725a(60000, 1000);
-        if (this.f12122M == null) {
+        this.slMain = (ScrollView) findViewById(R.id.slMain);
+        this.tvPoint = (TextView) findViewById(R.id.point);
+        this.tvTime = (TextView) findViewById(R.id.tvTime);
+        this.tvWord = (TextView) findViewById(R.id.word);
+        this.tvAns1 = (TextView) findViewById(R.id.btnAns1);
+        this.tvAns2 = (TextView) findViewById(R.id.btnAns2);
+        this.tvAns3 = (TextView) findViewById(R.id.btnAns3);
+        this.tvAns4 = (TextView) findViewById(R.id.btnAns4);
+        this.rlScore = (RelativeLayout) findViewById(R.id.rlScore);
+        this.tvScore = (TextView) findViewById(R.id.tvScore);
+        this.tvHighScore = (TextView) findViewById(R.id.tvHighScore);
+        this.tvHome = (TextView) findViewById(R.id.btnHome);
+        this.tvRetry = (TextView) findViewById(R.id.btnRetry);
+        this.rlScore.setOnClickListener(this);
+        this.tvRetry.setOnClickListener(this);
+        this.tvHome.setOnClickListener(this);
+        this.tvAns1.setOnClickListener(this);
+        this.tvAns2.setOnClickListener(this);
+        this.tvAns3.setOnClickListener(this);
+        this.tvAns4.setOnClickListener(this);
+        this.progressBar1 = (ProgressBar) findViewById(R.id.progressBar);
+        layoutViews();
+        this.quizCountDown = new QuizCountdownTimer(60000, 1000);
+        if (this.phraseItems1 == null) {
             new GetDataTask(this, null).execute(new String[]{this.plusId});
             return;
         }
-        m16379t();
-        this.f12135Z.start();
+        generateSampleAnswers();
+        this.quizCountDown.start();
     }
 }
