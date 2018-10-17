@@ -60,6 +60,10 @@ class MainActivity : AppCompatActivity() {
 //        menuItems.image = R.drawable.ic_world8
 //        this.listMenuItem.add(menuItems)
         menuItems = MenuItem()
+        menuItems.name = "Update" //faked
+        menuItems.image = R.drawable.ic_favorite
+        this.listMenuItem.add(menuItems)
+        menuItems = MenuItem()
         menuItems.name = "Đánh Giá"
         menuItems.image = R.drawable.ic_favorite
         this.listMenuItem.add(menuItems)
@@ -116,17 +120,17 @@ class MainActivity : AppCompatActivity() {
                     cls = QuizActivity1::class.java
                 } else if (i == 3) {
                     cls = QuizDetail::class.java
-                } else if (i == 4) {
+                } else if (i == 4 + 1) {
                     this@MainActivity.openPlayStore(packageName)
                     return@Runnable
-                } else if (i == 5) {
+                } else if (i == 5 + 1) {
                     val intent = Intent()
                     intent.action = "android.intent.action.SEND"
                     intent.putExtra("android.intent.extra.TEXT", getString(R.string.share_app_text).replace("__PACKAGE_NAME__", packageName))
                     intent.type = "text/plain"
                     startActivity(intent)
                     return@Runnable
-                } else if (i == 6) {
+                } else if (i == 6 + 1) {
                     this@MainActivity.ourApp()
                     return@Runnable
                 }

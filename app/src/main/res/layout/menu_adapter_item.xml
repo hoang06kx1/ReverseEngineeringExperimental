@@ -5,6 +5,28 @@
                 android:layout_height="match_parent"
                 android:padding="7dp">
 
+    <View
+        android:visibility="gone"
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_marginRight="16dp"
+        android:alpha="0.8"
+        android:layout_height="0.5dp"
+        android:background="@color/black1"/>
+
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thông tin thêm"
+        android:alpha="0.8"
+        android:textSize="16dp"
+        android:textColor="@color/black1"
+        android:layout_marginTop="3dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:visibility="gone"
+        android:layout_below="@id/line"/>
+
     <ImageView
         android:id="@+id/icon"
         android:layout_width="28dp"

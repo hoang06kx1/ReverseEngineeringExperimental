@@ -15,25 +15,25 @@ import app.giaotieptienghan.R;
 import app.giaotieptienghan.model.MenuItem;
 
 public class DrawerAdapter extends ArrayAdapter<MenuItem> {
-/* renamed from: a */
-private Context context;
-/* renamed from: b */
-private ArrayList<MenuItem> items;
-/* renamed from: c */
-private LayoutInflater inflater;
-/* renamed from: d */
-private final int[] colors = new int[]{-1499549, -10498817, -677838, -2735818, -10701220, -13730867, -1499549, -10498817, -677838, -2735818, -10701220};
-
-/* renamed from: com.example.english.a.f$a */
-private class ViewHolder {
+    /* renamed from: a */
+    private Context context;
     /* renamed from: b */
-    private TextView textView;
+    private ArrayList<MenuItem> items;
     /* renamed from: c */
-    private ImageView imageView;
+    private LayoutInflater inflater;
+    /* renamed from: d */
+    private final int[] colors = new int[]{-1499549, -10498817, -677838, -2735818, -10701220, -13730867, -1499549, -10498817, -677838, -2735818, -10701220};
 
-    private ViewHolder() {
+    /* renamed from: com.example.english.a.f$a */
+    private class ViewHolder {
+        /* renamed from: b */
+        private TextView textView;
+        /* renamed from: c */
+        private ImageView imageView;
+
+        private ViewHolder() {
+        }
     }
-}
 
     public DrawerAdapter(Context context, ArrayList<MenuItem> arrayList) {
         super(context, 0, arrayList);
@@ -69,8 +69,14 @@ private class ViewHolder {
             viewHolder = (ViewHolder) view.getTag();
         }
         MenuItem item = getItem(i);
-        viewHolder.textView.setText(item.getName());
-        loadIcon(viewHolder.imageView, item.getImage(), i);
+        view.findViewById(R.id.line).setVisibility(item.getName().equals("Update") ? View.VISIBLE : View.GONE);
+        view.findViewById(R.id.tv_info).setVisibility(item.getName().equals("Update") ? View.VISIBLE : View.GONE);
+        viewHolder.textView.setVisibility(item.getName().equals("Update") ? View.GONE : View.VISIBLE);
+        viewHolder.imageView.setVisibility(item.getName().equals("Update") ? View.GONE : View.VISIBLE);
+        if (!item.getName().equals("Update")) {
+            viewHolder.textView.setText(item.getName());
+            loadIcon(viewHolder.imageView, item.getImage(), i);
+        }
         return view;
     }
 }
