@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import app.giaotieptienghan.customview.QuizTypeOne;
-import app.giaotieptienghan.customview.C0789b;
+import app.giaotieptienghan.customview.QuizTypeThree;
 import app.giaotieptienghan.customview.QuizTypeTwoView;
 
 /* renamed from: com.example.english.a.g */
@@ -91,8 +91,8 @@ public class QuizAdapter extends PagerAdapter {
                 ((QuizTypeTwoView) c0785a).setData((PhraseItem) this.f7862c.get(i));
                 break;
             case 2:
-                c0785a = new C0789b(this.f7861b);
-                ((C0789b) c0785a).setData((PhraseItem) this.f7862c.get(i));
+                c0785a = new QuizTypeThree(this.f7861b);
+                ((QuizTypeThree) c0785a).setData((PhraseItem) this.f7862c.get(i));
                 break;
             default:
                 c0785a = null;

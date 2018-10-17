@@ -33,6 +33,8 @@ import java.util.Random;
 
 import app.giaotieptienghan.customview.QuizTypeOne;
 import app.giaotieptienghan.customview.CustomViewPager;
+import app.giaotieptienghan.customview.QuizTypeThree;
+import app.giaotieptienghan.customview.QuizTypeTwoView;
 import app.giaotieptienghan.customview.SelectCategoryDialogFragment;
 import app.giaotieptienghan.model.QuizAdapter;
 import app.giaotieptienghan.model.PhraseItem;
@@ -156,12 +158,12 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
         protected List<PhraseItem> doInBackground(String... strArr) {
             EndlessLoveDB db = new EndlessLoveDB(QuizActivity1.this);
             List<PhraseItem> arrayList = new ArrayList();
-            if (categoryItems.size() == 0) {
-                categoryItems = db.getFavoriteCategories(null);
-            }
             try {
                 db.initDB();
                 db.getReadableDB();
+                if (QuizActivity1.this.categoryItems.size() == 0) {
+                    QuizActivity1.this.categoryItems = db.getFavoriteCategories(null);
+                }
                 ArrayList e = strArr[0] == null ? QuizActivity1.this.favorite_id != null ? db.getFavoritePhrases() : db.getPhrasesByCategoryId(QuizActivity1.this.categoryId) : "0".equals(QuizActivity1.this.favorite_id) ? db.getFavoriteGrammars() : db.getGrammarsByCategoryId(QuizActivity1.this.categoryId);
                 arrayList = e;
             } catch (Exception e2) {
@@ -177,6 +179,7 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
         protected void onPostExecute(List<PhraseItem> list) {
             super.onPostExecute(list);
             if (list != null && list.size() > 0) {
+                QuizActivity1.this.phraseItems.clear();
                 for (PhraseItem phraseItem : list) {
                     QuizActivity1.this.phraseItems.add(phraseItem);
                     QuizActivity1.this.phraseItems.add(phraseItem);
@@ -369,20 +372,27 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
                     return;
                 case R.id.tvContinue:
                     if (!this.isAnswerCorrected) {
-                        PrintStream printStream = System.out;
                         StringBuilder stringBuilder2 = new StringBuilder();
                         stringBuilder2.append("getCurrentItem ");
                         stringBuilder2.append(this.viewPager.getCurrentItem());
-                        printStream.println(stringBuilder2.toString());
                         CustomViewPager customViewPager = this.viewPager;
                         stringBuilder2 = new StringBuilder();
                         stringBuilder2.append("myview");
                         stringBuilder2.append(this.viewPager.getCurrentItem());
                         View findViewWithTag = customViewPager.findViewWithTag(stringBuilder2.toString());
-                        if (findViewWithTag != null && (findViewWithTag instanceof QuizTypeOne)) {
-                            ((QuizTypeOne) findViewWithTag).resetQuiz();
-                            break;
+                        if (findViewWithTag != null) {
+                            if (findViewWithTag instanceof QuizTypeOne) {
+                                ((QuizTypeOne) findViewWithTag).resetQuiz();
+                            } else if (findViewWithTag instanceof QuizTypeTwoView) {
+                                ((QuizTypeTwoView) findViewWithTag).resetQuiz();
+                            }
                         }
+                        this.llCheckParent.setVisibility(8);
+                        this.tvCheck.setBackgroundResource(R.drawable.bg_phrase_answer);
+                        this.tvCheck.setEnabled(false);
+                        this.tvCheck.setTextColor(ContextCompat.getColor(this, R.color.quiz_text_color));
+                        this.tvEnglishTest.setVisibility(8);
+                        break;
                     }
                     this.nextViewPagerPageIndex = getViewPagerPagePlusOffset(1);
                     if (this.nextViewPagerPageIndex != this.phraseItems.size()) {
@@ -441,7 +451,7 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
             super.onCreate(bundle);
             setContentView(R.layout.quiz_activity);
             initViews();
-            initBundle();
+            initBundle(this.categoryId);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -509,7 +519,8 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
     }
 
     /* renamed from: s */
-    public void initBundle() {
+    public void initBundle(int categoryId) {
+        this.categoryId = categoryId;
         this.tvCheck.setOnClickListener(this);
         this.tvSkip.setOnClickListener(this);
         this.tvContinue.setOnClickListener(this);
@@ -525,12 +536,19 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
             stringBuilder.append(this.appPreference.mo2897a(this.bundle_title));
             stringBuilder.append("");
             textView.setText(stringBuilder.toString());
+        } else {
+            this.categoryId = Integer.valueOf(appPreference.getSelectedPracticeId());
         }
-        getData(this.plus_id);
+        getData(null, this.plus_id);
     }
 
-    public void getData(String categoryId) {
-        new getDataTask(this, null).execute(new String[]{categoryId});
+    public void getData(String categoryId, String grammarId) {
+        if (categoryId != null) {
+            this.categoryId = Integer.valueOf(categoryId);
+            new getDataTask(this, null).execute(new String[]{null});
+        } else {
+            new getDataTask(this, null).execute(new String[]{grammarId});
+        }
     }
 
     /* renamed from: t */

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Random;
 
+import app.giaotieptienghan.customview.SelectCategoryDialogFragment;
 import app.giaotieptienghan.model.C0768b;
 import app.giaotieptienghan.model.PhraseItem;
 import app.giaotieptienghan.repository.AppPreference;
@@ -50,7 +51,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
     /* renamed from: X */
     private int f12113X = 0;
     /* renamed from: Y */
-    private C0721a f12114Y;
+    private QuizCountdown quizCountdown;
     /* renamed from: Z */
     private AppPreference appPreference1;
     /* renamed from: aa */
@@ -66,6 +67,8 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
     /* renamed from: af */
     private TextView btRetry;
 
+    private int categoryId = -1;
+
     /* renamed from: com.example.english.QuizDetail$1 */
     class C07191 implements Runnable {
         C07191() {
@@ -74,8 +77,8 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         public void run() {
             QuizDetail.this.f12113X = QuizDetail.this.f12113X + 1;
             QuizDetail.this.m16364t();
-            if (QuizDetail.this.f12114Y != null) {
-                QuizDetail.this.f12114Y.start();
+            if (QuizDetail.this.quizCountdown != null) {
+                QuizDetail.this.quizCountdown.start();
             }
         }
     }
@@ -86,16 +89,16 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         }
 
         public void run() {
-            QuizDetail.this.f12114Y.onFinish();
+            QuizDetail.this.quizCountdown.onFinish();
         }
     }
 
     /* renamed from: com.example.english.QuizDetail$a */
-    public class C0721a extends CountDownTimer {
+    public class QuizCountdown extends CountDownTimer {
         /* renamed from: b */
         private int[] f1824b;
 
-        public C0721a(long j, long j2) {
+        public QuizCountdown(long j, long j2) {
             super(j, j2);
         }
 
@@ -143,30 +146,31 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
     }
 
     /* renamed from: com.example.english.QuizDetail$b */
-    private class C0722b extends AsyncTask<String, Void, ArrayList<PhraseItem>> {
-        private C0722b() {
+    private class GetDataTask extends AsyncTask<String, Void, ArrayList<PhraseItem>> {
+        private GetDataTask() {
         }
 
-        /* synthetic */ C0722b(QuizDetail quizDetail, C07191 c07191) {
+        /* synthetic */ GetDataTask(QuizDetail quizDetail, C07191 c07191) {
             this();
         }
 
         /* renamed from: a */
         protected ArrayList<PhraseItem> doInBackground(String... strArr) {
-            if (C0768b.f1957a == null) {
-                EndlessLoveDB db = new EndlessLoveDB(QuizDetail.this);
-                try {
-                    db.initDB();
-                    db.getReadableDB();
-                    C0768b.f1957a = db.getPhrasesByCategoryId(-1);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } catch (Throwable th) {
-                    db.closeDB();
+            EndlessLoveDB db = new EndlessLoveDB(QuizDetail.this);
+            try {
+                db.initDB();
+                db.getReadableDB();
+                if (QuizDetail.this.categoryItems.size() == 0) {
+                    QuizDetail.this.categoryItems = db.getFavoriteCategories(null);
                 }
+                QuizDetail.this.phraseItems = db.getPhrasesByCategoryId(QuizDetail.this.categoryId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } catch (Throwable th) {
                 db.closeDB();
             }
-            return C0768b.f1957a;
+            db.closeDB();
+            return QuizDetail.this.phraseItems;
         }
 
         /* renamed from: a */
@@ -174,7 +178,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
             super.onPostExecute(arrayList);
             if (arrayList != null) {
                 QuizDetail.this.m16364t();
-                QuizDetail.this.f12114Y.start();
+                QuizDetail.this.quizCountdown.start();
                 QuizDetail.this.progressBar1.setVisibility(8);
                 QuizDetail.this.scrollMain.setVisibility(0);
             }
@@ -276,8 +280,8 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
                 this.f12112W.clear();
             }
             Random random = new Random();
-            int nextInt = random.nextInt(C0768b.f1957a.size());
-            PhraseItem phraseItem = (PhraseItem) C0768b.f1957a.get(nextInt);
+            int nextInt = random.nextInt(this.phraseItems.size());
+            PhraseItem phraseItem = (PhraseItem) this.phraseItems.get(nextInt);
             String str = phraseItem.voice;
             this.f12111V.add(Integer.valueOf(nextInt));
             if (Utils.isStringEmpty(phraseItem.korean)) {
@@ -292,10 +296,10 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
                 this.f12110U = phraseItem.korean;
                 this.f12112W.add(phraseItem.korean);
                 while (this.f12112W.size() < 4) {
-                    nextInt = random.nextInt(C0768b.f1957a.size());
+                    nextInt = random.nextInt(this.phraseItems.size());
                     if (!this.f12111V.contains(Integer.valueOf(nextInt))) {
                         this.f12111V.add(Integer.valueOf(nextInt));
-                        this.f12112W.add(((PhraseItem) C0768b.f1957a.get(nextInt)).korean);
+                        this.f12112W.add(((PhraseItem) this.phraseItems.get(nextInt)).korean);
                     }
                 }
                 while (this.f12112W.size() > 0) {
@@ -371,8 +375,8 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
             this.rlScore.setVisibility(8);
             this.f12113X = 0;
             m16364t();
-            if (this.f12114Y != null) {
-                this.f12114Y.start();
+            if (this.quizCountdown != null) {
+                this.quizCountdown.start();
             }
         } else if (id != R.id.rlScore) {
             TextView textView;
@@ -412,7 +416,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
     public boolean onCreateOptionsMenu(Menu menu) {
         Resources resources;
         int i;
-        getMenuInflater().inflate(R.menu.menu_search, menu);
+        getMenuInflater().inflate(R.menu.menu_search_2, menu);
         MenuItem findItem = menu.findItem(R.id.action_volume);
         if (this.appPreference1.mo2916i()) {
             resources = getResources();
@@ -427,8 +431,8 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
 
     protected void onDestroy() {
         super.onDestroy();
-        if (this.f12114Y != null) {
-            this.f12114Y.cancel();
+        if (this.quizCountdown != null) {
+            this.quizCountdown.cancel();
         }
     }
 
@@ -446,6 +450,9 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
                 i = R.drawable.ic_action_volume_up;
             }
             menuItem.setIcon(resources.getDrawable(i));
+        } else if (menuItem.getItemId() == R.id.menu_category) {
+            SelectCategoryDialogFragment selectCategoryDialogFragment = new SelectCategoryDialogFragment();
+            selectCategoryDialogFragment.show(getSupportFragmentManager(), "category_dialog_fragment");
         }
         return super.onOptionsItemSelected(menuItem);
     }
@@ -477,12 +484,11 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         this.tvAns4.setOnClickListener(this);
         this.progressBar1 = (ProgressBar) findViewById(R.id.progressBar);
         m16363s();
-        this.f12114Y = new C0721a(10000, 1000);
-        if (C0768b.f1957a == null) {
-            new C0722b(this, null).execute(new String[0]);
-            return;
-        }
-        m16364t();
-        this.f12114Y.start();
+        this.quizCountdown = new QuizCountdown(60000, 1000);
+        this.categoryId = Integer.valueOf(appPreference.getSelectedGameId());
+        new GetDataTask(this, null).execute(new String[0]);
+        return;
+        //m16364t();
+        //this.quizCountdown.start();
     }
 }

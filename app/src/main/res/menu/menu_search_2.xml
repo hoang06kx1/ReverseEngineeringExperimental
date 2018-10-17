@@ -3,6 +3,13 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_category"
+        app:showAsAction="always"
+        android:icon="@android:drawable/ic_dialog_dialer"
+        android:orderInCategory="100"
+        android:title="Choosec category"/>
+
+    <item
         android:id="@+id/action_volume"
         android:icon="@drawable/ic_action_volume_up"
         android:orderInCategory="100"

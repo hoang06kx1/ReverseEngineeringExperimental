@@ -38,6 +38,8 @@ public class AppPreference { // App preference
     private final String f1982o = "com.fun.korean:db_version";
 
     private final String SELECTED_PRACTICE_ID = "com.fun.korean:selected_practice";
+
+    private final String SELECTED_GAME_ID = "com.fun.korean:selected_game_id";
     /* renamed from: p */
     private SharedPreferences sharedPreferences = null;
     /* renamed from: q */
@@ -54,6 +56,15 @@ public class AppPreference { // App preference
 
     public void setSelectedPracticeId(String str) {
         this.editor.putString(SELECTED_PRACTICE_ID, str);
+        this.editor.commit();
+    }
+
+    public String getSelectedGameId() {
+        return this.sharedPreferences.getString(SELECTED_GAME_ID, "-1");
+    }
+
+    public void setSelectedGameId(String str) {
+        this.editor.putString(SELECTED_GAME_ID, str);
         this.editor.commit();
     }
 

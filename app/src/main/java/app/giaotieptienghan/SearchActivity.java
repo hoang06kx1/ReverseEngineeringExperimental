@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -70,12 +71,12 @@ public class SearchActivity extends BaseAudioPlayActivity {
 
         /* renamed from: a */
         protected ArrayList<PhraseItem> doInBackground(String... strArr) {
-            if (C0768b.f1957a == null) {
+            if (C0768b.phraseItems == null) {
                 EndlessLoveDB endlessLoveDB = new EndlessLoveDB(SearchActivity.this);
                 try {
                     endlessLoveDB.initDB();
                     endlessLoveDB.getReadableDB();
-                    C0768b.f1957a = endlessLoveDB.getPhrasesByCategoryId(-1);
+                    C0768b.phraseItems = endlessLoveDB.getPhrasesByCategoryId(-1);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } catch (Throwable th) {
@@ -83,7 +84,7 @@ public class SearchActivity extends BaseAudioPlayActivity {
                 }
                 endlessLoveDB.closeDB();
             }
-            return C0768b.f1957a;
+            return C0768b.phraseItems;
         }
 
         /* renamed from: a */
@@ -114,6 +115,11 @@ public class SearchActivity extends BaseAudioPlayActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return false;
     }
 
     /* renamed from: r */
