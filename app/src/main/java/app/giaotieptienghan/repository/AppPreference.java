@@ -123,7 +123,7 @@ public class AppPreference { // App preference
     }
 
     /* renamed from: b */
-    public void mo2904b(boolean z) {
+    public void setSoundOn(boolean z) {
         this.editor.putBoolean("com.fun.korean:volumes", z);
         this.editor.commit();
     }
@@ -189,7 +189,7 @@ public class AppPreference { // App preference
     }
 
     /* renamed from: i */
-    public boolean mo2916i() {
+    public boolean isSoundOn() {
         return this.sharedPreferences.getBoolean("com.fun.korean:volumes", true);
     }
 

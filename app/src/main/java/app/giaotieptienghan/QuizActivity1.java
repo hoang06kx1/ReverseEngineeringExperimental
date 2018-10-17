@@ -25,7 +25,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -33,7 +32,6 @@ import java.util.Random;
 
 import app.giaotieptienghan.customview.QuizTypeOne;
 import app.giaotieptienghan.customview.CustomViewPager;
-import app.giaotieptienghan.customview.QuizTypeThree;
 import app.giaotieptienghan.customview.QuizTypeTwoView;
 import app.giaotieptienghan.customview.SelectCategoryDialogFragment;
 import app.giaotieptienghan.model.QuizAdapter;
@@ -306,7 +304,7 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
     /* renamed from: a */
     public void mo2841a(PhraseItem phraseItem, OnCompletionListener onCompletionListener) {
         if (Utils.isStringEmpty(phraseItem.voice)) {
-            mo10026a(phraseItem.korean, onCompletionListener, false);
+            playAudioByGoogleTranslate(phraseItem.korean, onCompletionListener, false);
         } else {
             Resources resources = getResources();
             StringBuilder stringBuilder = new StringBuilder();

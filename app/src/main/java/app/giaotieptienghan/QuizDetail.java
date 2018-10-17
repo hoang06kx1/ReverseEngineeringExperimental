@@ -324,7 +324,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
                     this.sampleAnswers.remove(nextInt);
                 }
             }
-            if (this.appPreference1.mo2916i()) {
+            if (this.appPreference1.isSoundOn()) {
                 if (this.mediaPlayer != null && this.mediaPlayer.isPlaying()) {
                     resetMediaPlayer();
                 }
@@ -417,7 +417,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         int i;
         getMenuInflater().inflate(R.menu.menu_search_2, menu);
         MenuItem findItem = menu.findItem(R.id.action_volume);
-        if (this.appPreference1.mo2916i()) {
+        if (this.appPreference1.isSoundOn()) {
             resources = getResources();
             i = R.drawable.ic_action_volume_up;
         } else {
@@ -439,12 +439,12 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         if (menuItem.getItemId() == R.id.action_volume) {
             Resources resources;
             int i;
-            if (this.appPreference1.mo2916i()) {
-                this.appPreference1.mo2904b(false);
+            if (this.appPreference1.isSoundOn()) {
+                this.appPreference1.setSoundOn(false);
                 resources = getResources();
                 i = R.drawable.ic_action_volume_off;
             } else {
-                this.appPreference1.mo2904b(true);
+                this.appPreference1.setSoundOn(true);
                 resources = getResources();
                 i = R.drawable.ic_action_volume_up;
             }

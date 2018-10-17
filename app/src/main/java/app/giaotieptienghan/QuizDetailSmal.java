@@ -342,7 +342,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
                     this.f12133X.remove(nextInt);
                 }
             }
-            if (this.f12136aa.mo2916i()) {
+            if (this.f12136aa.isSoundOn()) {
                 if (this.mediaPlayer != null && this.mediaPlayer.isPlaying()) {
                     resetMediaPlayer();
                 }
@@ -443,7 +443,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
         int i;
         getMenuInflater().inflate(R.menu.menu_search, menu);
         MenuItem findItem = menu.findItem(R.id.action_volume);
-        if (this.f12136aa.mo2916i()) {
+        if (this.f12136aa.isSoundOn()) {
             resources = getResources();
             i = R.drawable.ic_action_volume_up;
         } else {
@@ -465,12 +465,12 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
         if (menuItem.getItemId() == R.id.action_volume) {
             Resources resources;
             int i;
-            if (this.f12136aa.mo2916i()) {
-                this.f12136aa.mo2904b(false);
+            if (this.f12136aa.isSoundOn()) {
+                this.f12136aa.setSoundOn(false);
                 resources = getResources();
                 i = R.drawable.ic_action_volume_off;
             } else {
-                this.f12136aa.mo2904b(true);
+                this.f12136aa.setSoundOn(true);
                 resources = getResources();
                 i = R.drawable.ic_action_volume_up;
             }

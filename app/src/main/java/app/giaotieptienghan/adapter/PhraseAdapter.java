@@ -30,7 +30,7 @@ public class PhraseAdapter extends ArrayAdapter<PhraseItem> {
     /* renamed from: c */
     private LayoutInflater inflater;
     /* renamed from: d */
-    private int f1900d = -1;
+    private int currentPlaySound = -1;
     /* renamed from: e */
     private String f1901e = null;
 
@@ -103,8 +103,8 @@ public class PhraseAdapter extends ArrayAdapter<PhraseItem> {
     }
 
     /* renamed from: a */
-    public void mo2830a(int i) {
-        this.f1900d = i;
+    public void setCurrentPlaySoundIndex(int i) {
+        this.currentPlaySound = i;
     }
 
     /* renamed from: a */
@@ -143,7 +143,7 @@ public class PhraseAdapter extends ArrayAdapter<PhraseItem> {
             phraseViewHolder = (PhraseViewHolder) view.getTag();
         }
         final PhraseItem b = getItem(i);
-        view.setBackgroundColor(i == this.f1900d ? this.context.getResources().getColor(R.color.bg_solid) : 0);
+        view.setBackgroundColor(i == this.currentPlaySound ? this.context.getResources().getColor(R.color.bg_solid) : 0);
         if (b.favorite == 1) {
             i2 = R.drawable.ic_action_favorite_active;
         } else {

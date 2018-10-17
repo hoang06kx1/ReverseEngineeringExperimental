@@ -35,7 +35,6 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import app.giaotieptienghan.adapter.PhraseAdapter;
-import app.giaotieptienghan.model.C0768b;
 import app.giaotieptienghan.model.CategoryItem;
 import app.giaotieptienghan.model.PhraseItem;
 import app.giaotieptienghan.repository.AppPreference;
@@ -62,7 +61,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     /* renamed from: H */
     protected int f12005H;
     /* renamed from: I */
-    protected int f12006I;
+    protected int currentPlayIndex;
     /* renamed from: J */
     protected ListView listView;
     /* renamed from: K */
@@ -113,7 +112,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
         this.playerDuration = 0;
         this.f12003F = 1;
         this.f12004G = 2;
-        this.f12006I = 0;
+        this.currentPlayIndex = 0;
         this.adID = "ca-app-pub-8172083498288402/7749521771";
     }
 
@@ -198,26 +197,26 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     //}
 
     /* renamed from: u */
-    private void m16234u() {
-        this.f12006I++;
-        if (this.f12006I >= this.phraseItems.size()) {
-            this.f12006I = 0;
+    private void playNextPharase() {
+        this.currentPlayIndex++;
+        if (this.currentPlayIndex >= this.phraseItems.size()) {
+            this.currentPlayIndex = 0;
         }
         Resources resources = getResources();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(((PhraseItem) this.phraseItems.get(this.f12006I)).voice);
+        stringBuilder.append(((PhraseItem) this.phraseItems.get(this.currentPlayIndex)).voice);
         stringBuilder.append("_f");
         int identifier = resources.getIdentifier(stringBuilder.toString(), "raw", getPackageName());
         if (identifier != 0) {
             playAudio(identifier, (OnCompletionListener) this);
         } else {
-            mo10026a(((PhraseItem) this.phraseItems.get(this.f12006I)).korean, this, true);
+            playAudioByGoogleTranslate(((PhraseItem) this.phraseItems.get(this.currentPlayIndex)).korean, this, true);
         }
         if (this.phraseAdapter != null) {
-            this.phraseAdapter.mo2830a(this.f12006I);
+            this.phraseAdapter.setCurrentPlaySoundIndex(this.currentPlayIndex);
             this.phraseAdapter.notifyDataSetChanged();
-            if (this.listView.getLastVisiblePosition() < this.f12006I + 1) {
-                this.listView.setSelection(this.f12006I);
+            if (this.listView.getLastVisiblePosition() < this.currentPlayIndex + 1) {
+                this.listView.setSelection(this.currentPlayIndex);
             }
         }
     }
@@ -282,7 +281,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     /* renamed from: a */
     protected void mo10025a(String str) {
         if (this.phraseItems != null && this.phraseItems.size() > 0) {
-            str = ((PhraseItem) this.phraseItems.get(this.f12006I)).voice;
+            str = ((PhraseItem) this.phraseItems.get(this.currentPlayIndex)).voice;
         }
         if (!Utils.isStringEmpty(str)) {
             Resources resources = getResources();
@@ -293,10 +292,10 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
             if (identifier != 0) {
                 playAudio(identifier, (OnCompletionListener) this);
             } else {
-                mo10026a(((PhraseItem) this.phraseItems.get(this.f12006I)).korean, this, true);
+                playAudioByGoogleTranslate(((PhraseItem) this.phraseItems.get(this.currentPlayIndex)).korean, this, true);
             }
             if (this.phraseAdapter != null) {
-                this.phraseAdapter.mo2830a(this.f12006I);
+                this.phraseAdapter.setCurrentPlaySoundIndex(this.currentPlayIndex);
                 this.phraseAdapter.notifyDataSetChanged();
             }
         }
@@ -304,7 +303,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
 
     /* renamed from: a */
     @SuppressLint("WrongConstant")
-    protected final void mo10026a(String str, OnCompletionListener onCompletionListener, boolean z) {
+    protected final void playAudioByGoogleTranslate(String str, OnCompletionListener onCompletionListener, boolean z) {
         try {
             if (Utils.m3038c(this)) {
                 if (this.mediaPlayer != null && this.mediaPlayer.isPlaying()) {
@@ -322,7 +321,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
         } catch (IOException e) {
             e.printStackTrace();
             if (z) {
-                m16234u();
+                playNextPharase();
             }
         }
     }
@@ -468,13 +467,13 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
                     this.btPlay.setImageResource(R.drawable.ic_pause_footer);
                     stringBuilder = new StringBuilder();
                     stringBuilder.append(this.f12018s);
-                    stringBuilder.append(((PhraseItem) this.phraseItems.get(this.f12006I)).voice);
+                    stringBuilder.append(((PhraseItem) this.phraseItems.get(this.currentPlayIndex)).voice);
                     stringBuilder.append(".mp3");
                     if (!new File(stringBuilder.toString()).exists()) {
                         Toast.makeText(this, "Chọn ghi âm trước để có thể nghe lại...", 0).show();
                         break;
                     } else {
-                        playMp3AudioOrStop(this.f12020u, ((PhraseItem) this.phraseItems.get(this.f12006I)).voice);
+                        playMp3AudioOrStop(this.f12020u, ((PhraseItem) this.phraseItems.get(this.currentPlayIndex)).voice);
                         return;
                     }
                 }
@@ -502,13 +501,13 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
                 if (this.phraseItems != null && this.phraseItems.size() > 0) {
                     Resources resources = getResources();
                     stringBuilder = new StringBuilder();
-                    stringBuilder.append(((PhraseItem) this.phraseItems.get(this.f12006I)).voice);
+                    stringBuilder.append(((PhraseItem) this.phraseItems.get(this.currentPlayIndex)).voice);
                     stringBuilder.append("_f");
                     int identifier = resources.getIdentifier(stringBuilder.toString(), "raw", getPackageName());
                     if (identifier != 0) {
                         mo10028b(identifier);
                         if (this.phraseAdapter != null) {
-                            this.phraseAdapter.mo2830a(this.f12006I);
+                            this.phraseAdapter.setCurrentPlaySoundIndex(this.currentPlayIndex);
                             this.phraseAdapter.notifyDataSetChanged();
                             return;
                         }
@@ -519,7 +518,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
                 resetSoundPool();
                 resetMediaPlayer();
                 if (this.phraseItems != null && this.phraseItems.size() > 0) {
-                    PhraseItem phraseItem = (PhraseItem) this.phraseItems.get(this.f12006I);
+                    PhraseItem phraseItem = (PhraseItem) this.phraseItems.get(this.currentPlayIndex);
                     Intent intent = new Intent(this, RecordActivity.class);
                     intent.addFlags(268435456);
                     intent.putExtra("korean", phraseItem.korean);
@@ -551,7 +550,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
                     this.mediaPlayer.setOnCompletionListener(null);
                     this.mediaPlayer = null;
                 }
-                m16234u();
+                playNextPharase();
                 return;
             }
             if (this.f12005H == 2) {
@@ -596,10 +595,10 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
 
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long j) {
         this.f12005H = 2;
-        if (this.f12006I != i) {
+        if (this.currentPlayIndex != i) {
             this.f12021v = false;
-            this.f12006I = i;
-            this.phraseAdapter.mo2830a(i);
+            this.currentPlayIndex = i;
+            this.phraseAdapter.setCurrentPlaySoundIndex(i);
             this.phraseAdapter.notifyDataSetChanged();
         }
         if (this.mediaPlayer != null && this.mediaPlayer.isPlaying()) {

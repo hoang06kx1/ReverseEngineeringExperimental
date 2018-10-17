@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import java.io.PrintStream;
+
 import java.util.ArrayList;
 
 import app.giaotieptienghan.adapter.PhraseAdapter;
@@ -64,7 +64,7 @@ public class PhraseDetailActivity extends BaseAudioPlayActivity implements OnIte
                     PhraseDetailActivity.this.setTitle(PhraseDetailActivity.this.vietnamese);
                     int a = PhraseDetailActivity.this.m16323a((ArrayList) arrayList, PhraseDetailActivity.this.phraseId);
                     if (a != -1) {
-                        PhraseDetailActivity.this.phraseAdapter.mo2830a(a);
+                        PhraseDetailActivity.this.phraseAdapter.setCurrentPlaySoundIndex(a);
                         PhraseDetailActivity.this.phraseAdapter.notifyDataSetChanged();
                         PhraseDetailActivity.this.listView.smoothScrollToPosition(a);
                     }
