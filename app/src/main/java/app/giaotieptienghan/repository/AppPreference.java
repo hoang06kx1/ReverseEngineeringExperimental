@@ -69,7 +69,7 @@ public class AppPreference { // App preference
     }
 
     /* renamed from: a */
-    public int mo2896a() {
+    public int getHighScore() {
         return this.sharedPreferences.getInt("com.fun.korean:high_score", 0);
     }
 
@@ -84,7 +84,7 @@ public class AppPreference { // App preference
     }
 
     /* renamed from: a */
-    public void mo2898a(int i) {
+    public void setHighScore(int i) {
         this.editor.putInt("com.fun.korean:high_score", i);
         this.editor.commit();
     }

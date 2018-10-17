@@ -42,7 +42,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
     /* renamed from: T */
     private TextView tvTime;
     /* renamed from: U */
-    private String f12110U;
+    private String correctAnswer;
     /* renamed from: V */
     private ArrayList<Integer> playedQuizs;
     /* renamed from: W */
@@ -69,13 +69,13 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
     private int categoryId = -1;
 
     /* renamed from: com.example.english.QuizDetail$1 */
-    class C07191 implements Runnable {
-        C07191() {
+    class NextQuizRunnable implements Runnable {
+        NextQuizRunnable() {
         }
 
         public void run() {
             QuizDetail.this.currentScore = QuizDetail.this.currentScore + 1;
-            QuizDetail.this.m16364t();
+            QuizDetail.this.generateSampleAnswers();
             if (QuizDetail.this.quizCountdown != null) {
                 QuizDetail.this.quizCountdown.start();
             }
@@ -83,8 +83,8 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
     }
 
     /* renamed from: com.example.english.QuizDetail$2 */
-    class C07202 implements Runnable {
-        C07202() {
+    class WrongAnswerRunnable implements Runnable {
+        WrongAnswerRunnable() {
         }
 
         public void run() {
@@ -149,7 +149,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         private GetDataTask() {
         }
 
-        /* synthetic */ GetDataTask(QuizDetail quizDetail, C07191 c07191) {
+        /* synthetic */ GetDataTask(QuizDetail quizDetail, NextQuizRunnable nextQuizRunnable) {
             this();
         }
 
@@ -176,7 +176,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         protected void onPostExecute(ArrayList<PhraseItem> arrayList) {
             super.onPostExecute(arrayList);
             if (arrayList != null) {
-                QuizDetail.this.m16364t();
+                QuizDetail.this.generateSampleAnswers();
                 QuizDetail.this.quizCountdown.start();
                 QuizDetail.this.progressBar1.setVisibility(8);
                 QuizDetail.this.scrollMain.setVisibility(0);
@@ -191,12 +191,12 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
     }
 
     /* renamed from: b */
-    private void m16357b(String str) {
+    private void checkResult(String str) {
         try {
-            if (this.f12110U.equalsIgnoreCase(str)) {
-                this.handler.postDelayed(new C07191(), 100);
+            if (this.correctAnswer.equalsIgnoreCase(str)) {
+                this.handler.postDelayed(new NextQuizRunnable(), 100);
             } else {
-                this.handler.postDelayed(new C07202(), 500);
+                this.handler.postDelayed(new WrongAnswerRunnable(), 500);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -260,7 +260,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
     }
 
     /* renamed from: t */
-    private void m16364t() {
+    private void generateSampleAnswers() {
         try {
             TextView textView = this.tvPoint;
             StringBuilder stringBuilder = new StringBuilder();
@@ -284,7 +284,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
             String str = phraseItem.voice;
             this.playedQuizs.add(Integer.valueOf(nextInt));
             if (Utils.isStringEmpty(phraseItem.korean)) {
-                m16364t();
+                generateSampleAnswers();
             } else {
                 TextView textView2 = this.tvWord;
                 StringBuilder stringBuilder2 = new StringBuilder();
@@ -292,7 +292,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
                 stringBuilder2.append("\n");
                 stringBuilder2.append(phraseItem.pinyin == null ? "" : phraseItem.pinyin);
                 textView2.setText(stringBuilder2.toString());
-                this.f12110U = phraseItem.korean;
+                this.correctAnswer = phraseItem.korean;
                 this.sampleAnswers.add(phraseItem.korean);
                 while (this.sampleAnswers.size() < 4) {
                     nextInt = random.nextInt(this.phraseItems.size());
@@ -361,10 +361,10 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         textView = this.tvHighScore;
         stringBuilder = new StringBuilder();
         stringBuilder.append("Kỉ lục điểm: ");
-        stringBuilder.append(this.appPreference1.mo2896a());
+        stringBuilder.append(this.appPreference1.getHighScore());
         textView.setText(stringBuilder.toString());
-        if (this.appPreference1.mo2896a() < this.currentScore) {
-            this.appPreference1.mo2898a(this.currentScore);
+        if (this.appPreference1.getHighScore() < this.currentScore) {
+            this.appPreference1.setHighScore(this.currentScore);
         }
     }
 
@@ -373,7 +373,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         if (id == R.id.btnRetry) {
             this.rlScore.setVisibility(8);
             this.currentScore = 0;
-            m16364t();
+            generateSampleAnswers();
             if (this.quizCountdown != null) {
                 this.quizCountdown.start();
             }
@@ -398,7 +398,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
                 default:
                     return;
             }
-            m16357b(textView.getText().toString());
+            checkResult(textView.getText().toString());
         }
     }
 
@@ -487,7 +487,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         this.categoryId = Integer.valueOf(appPreference.getSelectedGameId());
         new GetDataTask(this, null).execute(new String[0]);
         return;
-        //m16364t();
+        //generateSampleAnswers();
         //this.quizCountdown.start();
     }
 }

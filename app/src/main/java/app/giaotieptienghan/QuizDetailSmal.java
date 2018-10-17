@@ -379,10 +379,10 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
         textView = this.f12143ah;
         stringBuilder = new StringBuilder();
         stringBuilder.append("Kỉ lục điểm: ");
-        stringBuilder.append(this.f12136aa.mo2896a());
+        stringBuilder.append(this.f12136aa.getHighScore());
         textView.setText(stringBuilder.toString());
-        if (this.f12136aa.mo2896a() < this.f12134Y) {
-            this.f12136aa.mo2898a(this.f12134Y);
+        if (this.f12136aa.getHighScore() < this.f12134Y) {
+            this.f12136aa.setHighScore(this.f12134Y);
         }
     }
 
