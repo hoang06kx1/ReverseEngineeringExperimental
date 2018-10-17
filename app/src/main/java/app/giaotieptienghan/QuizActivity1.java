@@ -234,10 +234,18 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
             this.tvKoreanTest.setText(selectedAnswerText);
             this.llCheckParent.setVisibility(0);
             if (correct) {
+                int identifier = getResources().getIdentifier("success", "raw", getPackageName());
+                if (identifier != 0) {
+                    playAudio(identifier, this);
+                }
                 this.currentBonusScore = 5;
                 this.currentScore += 5;
                 this.isAnswerCorrected = true;
             } else {
+                int identifier = getResources().getIdentifier("fail", "raw", getPackageName());
+                if (identifier != 0) {
+                    playAudio(identifier, this);
+                }
                 this.isAnswerCorrected = false;
                 this.currentBonusScore = -3;
                 if (this.currentScore >= 3) {
