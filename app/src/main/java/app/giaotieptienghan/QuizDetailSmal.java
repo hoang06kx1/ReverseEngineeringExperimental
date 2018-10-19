@@ -523,6 +523,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
         if (this.appPreference1 == null) {
             this.appPreference1 = new AppPreference(this);
         }
+        initAds();
         this.slMain = (ScrollView) findViewById(R.id.slMain);
         this.tvPoint = (TextView) findViewById(R.id.point);
         this.tvTime = (TextView) findViewById(R.id.tvTime);

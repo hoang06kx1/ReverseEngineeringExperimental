@@ -28,6 +28,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -100,6 +104,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     protected ImageView btPlay;
     /* renamed from: z */
     protected ImageView btVoice;
+    private AdView mAdView;
 
     public BaseAudioPlayActivity() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -113,7 +118,6 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
         this.f12003F = 1;
         this.f12004G = 2;
         this.currentPlayIndex = 0;
-        this.adID = "ca-app-pub-8172083498288402/7749521771";
     }
 
     /* renamed from: b */
@@ -581,6 +585,13 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    protected void initAds() {
+        // ad init
+        mAdView = findViewById(R.id.llAds);
+        AdRequest adRequest = (BuildConfig.DEBUG) ? new AdRequest.Builder().addTestDevice("A335A7A192255371F76D62FA9B9B66B6").build() : new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

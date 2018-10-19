@@ -150,13 +150,15 @@
 
     <include layout="@layout/check"/>
 
-    <LinearLayout
+    <com.google.android.gms.ads.AdView
         android:id="@+id/llAds"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center_horizontal"
-        android:orientation="horizontal"/>
+        android:orientation="horizontal"
+        app:adSize="SMART_BANNER"
+        app:adUnitId="adUnit_2"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

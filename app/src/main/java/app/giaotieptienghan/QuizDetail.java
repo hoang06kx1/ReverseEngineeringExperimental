@@ -501,6 +501,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         if (this.appPreference1 == null) {
             this.appPreference1 = new AppPreference(this);
         }
+        initAds();
         this.scrollMain = (ScrollView) findViewById(R.id.slMain);
         this.tvPoint = (TextView) findViewById(R.id.point);
         this.tvTime = (TextView) findViewById(R.id.tvTime);

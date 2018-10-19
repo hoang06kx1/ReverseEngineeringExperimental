@@ -143,6 +143,7 @@ public class PhraseDetailActivity extends BaseAudioPlayActivity implements OnIte
             this.listView = (ListView) findViewById(R.id.listView);
         }
         //mo10030k();
+        initAds();
         initBaseViews(); // initViews views
     }
 

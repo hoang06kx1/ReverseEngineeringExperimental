@@ -481,6 +481,7 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
     @SuppressLint("ResourceType")
     public void initViews() {
         //mo10030k();
+        initAds();
         this.f12090ab = (LinearLayout) findViewById(R.id.view);
         this.progressBar1 = (ProgressBar) findViewById(R.id.progressBar);
         this.viewPager = (CustomViewPager) findViewById(R.id.pager);

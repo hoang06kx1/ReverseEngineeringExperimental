@@ -71,4 +71,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="share_app_text">Ứng dụng học tiếng Hàn siêu tốc rất hay và đầy đủ trên Android đây. Mọi người tải về học nhé! http://play.google.com/store/apps/details?id=__PACKAGE_NAME__</string>
+    <string name="adUnit_1">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="adUnit_2">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="adUnit_3">ca-app-pub-3940256099942544/6300978111</string>
 </resources>
