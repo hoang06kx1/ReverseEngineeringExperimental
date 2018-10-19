@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -378,7 +379,11 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
         if (id != R.id.tvSkip) {
             switch (id) {
                 case R.id.tvCheck:
-                    displayResultBoard(this.selectedAnswerText, this.isAnswerCorrected);
+                    if (viewPager.getCurrentItem() % 3 == 2) {
+                        loadNextQuiz();
+                    } else {
+                        displayResultBoard(this.selectedAnswerText, this.isAnswerCorrected);
+                    }
                     return;
                 case R.id.tvContinue:
                     if (!this.isAnswerCorrected) {
@@ -466,6 +471,7 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
 
     private InterstitialAd mInterstitialAd = null;
     private Boolean isAdReady = false;
+
     protected void onCreate(Bundle bundle) {
         try {
             super.onCreate(bundle);
@@ -478,7 +484,7 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
                 mInterstitialAd.setAdUnitId(getString(R.string.ad_popup_2));
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
             }
-            mInterstitialAd.setAdListener(new AdListener(){
+            mInterstitialAd.setAdListener(new AdListener() {
                 @Override
                 public void onAdClosed() {
                     super.onAdClosed();
@@ -564,6 +570,22 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(-1, screenHeight / 4);
         layoutParams.addRule(12);
         this.llCheck.setLayoutParams(layoutParams);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                ((TextView) findViewById(R.id.tvCheck)).setText((i % 3 == 2) ? "Tiếp tục" : "Kiểm tra");
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
     }
 
     /* renamed from: s */
