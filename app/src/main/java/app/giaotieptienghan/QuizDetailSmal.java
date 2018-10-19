@@ -16,6 +16,10 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -117,6 +121,9 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
                 if (identifier != 0) {
                     playAudio(identifier, (OnCompletionListener) QuizDetailSmal.this);
                 }
+            }
+            if (isAdReady) {
+                mInterstitialAd.show();
             }
             QuizDetailSmal.this.quizCountDown.onFinish();
         }
@@ -459,9 +466,37 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
         }
     }
 
+    private InterstitialAd mInterstitialAd = null;
+    private Boolean isAdReady = false;
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView((int) R.layout.quiz_detail_screen);
+        mInterstitialAd = new InterstitialAd(this);
+        if (BuildConfig.DEBUG) {
+            mInterstitialAd.setAdUnitId(getString(R.string.ad_popup_demo_id));
+            mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice("D9E46D2AE14D4064F48C60B07D4218FC").build());
+        } else {
+            mInterstitialAd.setAdUnitId(getString(R.string.ad_popup_4));
+            mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        }
+        mInterstitialAd.setAdListener(new AdListener(){
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                isAdReady = false;
+                if (BuildConfig.DEBUG) {
+                    mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice("D9E46D2AE14D4064F48C60B07D4218FC").build());
+                } else {
+                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                }
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                isAdReady = true;
+            }
+        });
         bundle = getIntent().getExtras();
         if (bundle != null) {
             try {
