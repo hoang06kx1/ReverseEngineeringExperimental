@@ -369,7 +369,7 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        TextView textView;
+        TextView tvCurrentQuiz;
         StringBuilder stringBuilder;
         if (id != R.id.tvSkip) {
             switch (id) {
@@ -403,12 +403,12 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
                     this.nextViewPagerPageIndex = getViewPagerPagePlusOffset(1);
                     if (this.nextViewPagerPageIndex != this.phraseItems.size()) {
                         this.viewPager.setCurrentItem(getViewPagerPagePlusOffset(1), true);
-                        textView = this.tvTitle;
+                        tvCurrentQuiz = this.tvTitle;
                         stringBuilder = new StringBuilder();
                         stringBuilder.append(1 + this.nextViewPagerPageIndex);
                         stringBuilder.append("/");
                         stringBuilder.append(this.phraseItems.size());
-                        textView.setText(stringBuilder.toString());
+                        tvCurrentQuiz.setText(stringBuilder.toString());
                         this.llCheckParent.setVisibility(8);
                         this.tvCheck.setBackgroundResource(R.drawable.bg_phrase_answer);
                         this.tvCheck.setEnabled(false);
@@ -430,12 +430,12 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
             this.nextViewPagerPageIndex = getViewPagerPagePlusOffset(1);
             if (this.nextViewPagerPageIndex != this.phraseItems.size()) {
                 this.viewPager.setCurrentItem(getViewPagerPagePlusOffset(1), true);
-                textView = this.tvTitle;
+                tvCurrentQuiz = this.tvTitle;
                 stringBuilder = new StringBuilder();
                 stringBuilder.append(1 + this.nextViewPagerPageIndex);
                 stringBuilder.append("/");
                 stringBuilder.append(this.phraseItems.size());
-                textView.setText(stringBuilder.toString());
+                tvCurrentQuiz.setText(stringBuilder.toString());
                 this.llCheckParent.setVisibility(8);
                 this.tvCheck.setBackgroundResource(R.drawable.bg_phrase_answer);
                 this.tvCheck.setEnabled(false);
@@ -545,6 +545,10 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
         } else {
             this.categoryId = Integer.valueOf(appPreference.getSelectedPracticeId());
         }
+        this.nextViewPagerPageIndex = 0;
+        this.tvScore.setText("0");
+        this.currentScore = 0;
+        this.currentBonusScore = 0;
         getData(null, this.plus_id);
     }
 
@@ -558,7 +562,7 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
     }
 
     /* renamed from: t */
-    public void mo2844t() {
+    public void minusScore() {
         this.currentScore--;
         TextView textView = this.tvScore;
         StringBuilder stringBuilder = new StringBuilder();

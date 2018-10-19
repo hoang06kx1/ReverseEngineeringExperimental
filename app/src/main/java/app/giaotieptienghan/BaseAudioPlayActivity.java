@@ -190,7 +190,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     //}
     //
     ///* renamed from: t */
-    //private void mo2844t() {
+    //private void minusScore() {
     //    if (C0768b.f1962f.mo4666a()) {
     //        C0768b.f1962f.mo4667b();
     //    }
@@ -420,7 +420,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     //        initViews();
     //        boolean a = C0768b.f1962f.mo4666a();
     //        if ((!C0768b.f1960d || C0768b.f1961e >= this.appPreference.mo2915h()) && a) {
-    //            mo2844t();
+    //            minusScore();
     //            C0768b.f1961e = 0;
     //            C0768b.f1960d = true;
     //        }

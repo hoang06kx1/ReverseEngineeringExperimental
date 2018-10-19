@@ -34,7 +34,7 @@ public class QuizAdapter extends PagerAdapter {
         void mo2843a(PhraseItem phraseItem, boolean z);
 
         /* renamed from: t */
-        void mo2844t();
+        void minusScore();
     }
 
     public QuizAdapter(Context context, List<PhraseItem> list) {

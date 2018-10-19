@@ -121,7 +121,7 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
         int b = m9510b(str);
         this.staggeredAdapter.renderViewWithAnimation(str, b, this.staggeredTextGridView.getTextViewAtIndex(b), true);
         if (this.quizInterface != null) {
-            this.quizInterface.mo2844t();
+            this.quizInterface.minusScore();
         }
     }
 
