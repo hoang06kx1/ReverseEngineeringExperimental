@@ -549,6 +549,11 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
         this.tvScore.setText("0");
         this.currentScore = 0;
         this.currentBonusScore = 0;
+        this.llCheckParent.setVisibility(8);
+        this.tvCheck.setBackgroundResource(R.drawable.bg_phrase_answer);
+        this.tvCheck.setEnabled(false);
+        this.tvCheck.setTextColor(ContextCompat.getColor(this, R.color.quiz_text_color));
+        this.tvEnglishTest.setVisibility(8);
         getData(null, this.plus_id);
     }
 

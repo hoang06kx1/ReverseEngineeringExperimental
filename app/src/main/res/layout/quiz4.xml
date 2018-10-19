@@ -136,7 +136,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/selector_items"
                     android:padding="7dp"
-                    android:text=" Del "/>
+                    android:text=" Xóa "/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
