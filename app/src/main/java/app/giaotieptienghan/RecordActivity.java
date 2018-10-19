@@ -87,7 +87,7 @@ public class RecordActivity extends BaseAudioPlayActivity implements OnClickList
                 return;
             }
             Toast.makeText(this, "Chọn ghi âm trước để có thể nghe lại...", 0).show();
-            playVoice(this.audioString);
+            playCurrentAudio(this.audioString);
         } else if (id == R.id.record) {
             PrintStream printStream = System.out;
             stringBuilder = new StringBuilder();

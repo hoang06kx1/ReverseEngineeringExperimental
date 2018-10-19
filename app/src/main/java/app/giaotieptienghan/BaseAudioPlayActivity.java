@@ -279,7 +279,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     }
 
     /* renamed from: a */
-    protected void playVoice(String str) {
+    protected void playCurrentAudio(String str) {
         if (this.phraseItems != null && this.phraseItems.size() > 0) {
             str = ((PhraseItem) this.phraseItems.get(this.currentPlayIndex)).voice;
         }
@@ -445,7 +445,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     }
 
     /* JADX WARNING: Missing block: B:9:0x0029, code:
-            playVoice(null);
+            playCurrentAudio(null);
      */
     /* JADX WARNING: Missing block: B:10:0x002c, code:
             return;
@@ -485,7 +485,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
                 if (this.phraseItems != null && this.phraseItems.size() > 0) {
                     if (this.isPlaying != 1) {
                         this.btPlayAll.setImageResource(R.drawable.ic_pause_footer);
-                        playVoice(null);
+                        playCurrentAudio(null);
                         this.isPlaying = 1;
                         return;
                     }
@@ -534,6 +534,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
                 if (this.mediaPlayer != null && this.mediaPlayer.isPlaying()) {
                     resetMediaPlayer();
                 }
+                playCurrentAudio(null);
                 this.btVolume.setImageResource(R.drawable.ic_volume1);
                 break;
             default:
@@ -604,7 +605,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
         if (this.mediaPlayer != null && this.mediaPlayer.isPlaying()) {
             resetMediaPlayer();
         }
-        playVoice(null);
+        playCurrentAudio(null);
     }
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {
