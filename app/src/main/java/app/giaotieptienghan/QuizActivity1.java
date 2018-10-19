@@ -215,16 +215,16 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
             textView.setText(stringBuilder.toString());
         }
         Builder builder = new Builder(context, R.style.MyDialogTheme);
-        builder.setTitle("Congratulations!!!");
+        builder.setTitle("Chúc mừng!!!");
         builder.setIcon(Utils.getDrawable(this, R.drawable.ic_launcher));
         StringBuilder stringBuilder2 = new StringBuilder();
-        stringBuilder2.append("You have completed the quizAdapter with ");
+        stringBuilder2.append("Bạn đã hoàn thành luyện tập với số điểm là ");
         stringBuilder2.append(this.currentScore);
-        stringBuilder2.append(" score! ");
+        stringBuilder2.append(" điểm! ");
         builder.setMessage(stringBuilder2.toString());
         builder.setCancelable(false);
-        builder.setPositiveButton("Again", new C07151());
-        builder.setNegativeButton("Cancel", new C07162());
+        builder.setPositiveButton("Thử lại", new C07151());
+        builder.setNegativeButton("Thoát", new C07162());
         builder.create().show();
     }
 
