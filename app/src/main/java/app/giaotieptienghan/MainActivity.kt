@@ -16,16 +16,51 @@ import android.os.Handler
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
     private val listMenuItem: ArrayList<MenuItem> = ArrayList()
     lateinit var homeFragment: HomeFragment
-
+    private var mInterstitialAd: InterstitialAd? = null
+    private var isAdShown: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mInterstitialAd = InterstitialAd(this)
+        if (BuildConfig.DEBUG) {
+            mInterstitialAd!!.adUnitId = getString(R.string.ad_popup_demo_id)
+            mInterstitialAd!!.loadAd(AdRequest.Builder().addTestDevice("D9E46D2AE14D4064F48C60B07D4218FC").build())
+        } else {
+            mInterstitialAd!!.adUnitId = getString(R.string.ad_popup_1)
+            mInterstitialAd!!.loadAd(AdRequest.Builder().build())
+        }
+        mInterstitialAd!!.adListener = object : AdListener() {
+            override fun onAdClosed() {
+                super.onAdClosed()
+                // Load the next interstitial.
+                if (BuildConfig.DEBUG) {
+                    mInterstitialAd!!.loadAd(AdRequest.Builder().addTestDevice("D9E46D2AE14D4064F48C60B07D4218FC").build())
+                } else {
+                    mInterstitialAd!!.loadAd(AdRequest.Builder().build())
+                }
+            }
+
+            override fun onAdOpened() {
+                super.onAdOpened()
+            }
+
+            override fun onAdLoaded() {
+                super.onAdLoaded()
+                if (this@MainActivity.getWindow().getDecorView().isShown() && !isAdShown) {
+                    isAdShown = true
+                    mInterstitialAd!!.show()
+                }
+            }
+        }
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         val mDrawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
