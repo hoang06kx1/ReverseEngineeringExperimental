@@ -211,6 +211,7 @@ public class QuizTypeTwoView extends LinearLayout implements OnClickListener, on
         if (this.listWords != null) {
             this.listWords.clear();
         }
+        edtAnswer.setText("");
         this.selectedWordCount = 0;
         this.selectedWords = new StringBuilder();
         this.staggeredTextGridView.removeViews();
