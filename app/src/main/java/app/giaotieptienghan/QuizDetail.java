@@ -79,9 +79,9 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         public void run() {
             QuizDetail.this.quizCountdown.cancel();
             if (QuizDetail.this.appPreference1.isSoundOn()) {
-                if (QuizDetail.this.mediaPlayer != null && QuizDetail.this.mediaPlayer.isPlaying()) {
-                    resetMediaPlayer();
-                }
+                //if (QuizDetail.this.mediaPlayer != null && QuizDetail.this.mediaPlayer.isPlaying()) {
+                //    resetMediaPlayer();
+                //}
                 int identifier = getResources().getIdentifier("success", "raw", getPackageName());
                 if (identifier != 0) {
                     playAudio(identifier, new OnCompletionListener() {
@@ -106,9 +106,9 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
 
         public void run() {
             if (QuizDetail.this.appPreference1.isSoundOn()) {
-                if (QuizDetail.this.mediaPlayer != null && QuizDetail.this.mediaPlayer.isPlaying()) {
-                    resetMediaPlayer();
-                }
+                //if (QuizDetail.this.mediaPlayer != null && QuizDetail.this.mediaPlayer.isPlaying()) {
+                //    resetMediaPlayer();
+                //}
                 int identifier = getResources().getIdentifier("fail", "raw", getPackageName());
                 if (identifier != 0) {
                     playAudio(identifier, (OnCompletionListener) QuizDetail.this);
@@ -405,9 +405,9 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
             }
         } else if (id == R.id.bt_replay) {
             if (this.appPreference1.isSoundOn()) {
-                if (this.mediaPlayer != null && this.mediaPlayer.isPlaying()) {
-                    resetMediaPlayer();
-                }
+                //if (this.mediaPlayer != null && this.mediaPlayer.isPlaying()) {
+                //    resetMediaPlayer();
+                //}
                 Resources resources = getResources();
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.append(currentPhraseVoice);
@@ -524,7 +524,7 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         findViewById(R.id.bt_replay).setOnClickListener(this);
         this.progressBar1 = (ProgressBar) findViewById(R.id.progressBar);
         layoutViews();
-        this.quizCountdown = new QuizCountdown(15000, 1000);
+        this.quizCountdown = new QuizCountdown(30000, 1000);
         this.categoryId = Integer.valueOf(appPreference.getSelectedGameId());
         new GetDataTask(this, null).execute(new String[0]);
         return;

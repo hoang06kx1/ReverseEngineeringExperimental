@@ -83,9 +83,9 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
         public void run() {
             QuizDetailSmal.this.quizCountDown.cancel();
             if (QuizDetailSmal.this.appPreference1.isSoundOn()) {
-                if (QuizDetailSmal.this.mediaPlayer != null && QuizDetailSmal.this.mediaPlayer.isPlaying()) {
-                    resetMediaPlayer();
-                }
+                //if (QuizDetailSmal.this.mediaPlayer != null && QuizDetailSmal.this.mediaPlayer.isPlaying()) {
+                //    resetMediaPlayer();
+                //}
                 int identifier = getResources().getIdentifier("success", "raw", getPackageName());
                 if (identifier != 0) {
                     playAudio(identifier, new OnCompletionListener() {
@@ -110,9 +110,9 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
 
         public void run() {
             if (QuizDetailSmal.this.appPreference1.isSoundOn()) {
-                if (QuizDetailSmal.this.mediaPlayer != null && QuizDetailSmal.this.mediaPlayer.isPlaying()) {
-                    resetMediaPlayer();
-                }
+                //if (QuizDetailSmal.this.mediaPlayer != null && QuizDetailSmal.this.mediaPlayer.isPlaying()) {
+                //    resetMediaPlayer();
+                //}
                 int identifier = getResources().getIdentifier("fail", "raw", getPackageName());
                 if (identifier != 0) {
                     playAudio(identifier, (OnCompletionListener) QuizDetailSmal.this);
@@ -422,9 +422,9 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
             }
         } else if (id == R.id.bt_replay) {
             if (this.appPreference1.isSoundOn()) {
-                if (this.mediaPlayer != null && this.mediaPlayer.isPlaying()) {
-                    resetMediaPlayer();
-                }
+                //if (this.mediaPlayer != null && this.mediaPlayer.isPlaying()) {
+                //    resetMediaPlayer();
+                //}
                 Resources resources = getResources();
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.append(currentPhraseVoice);
@@ -546,7 +546,7 @@ public class QuizDetailSmal extends BaseAudioPlayActivity implements OnClickList
         this.progressBar1 = (ProgressBar) findViewById(R.id.progressBar);
         findViewById(R.id.bt_replay).setOnClickListener(this);
         layoutViews();
-        this.quizCountDown = new QuizCountdownTimer(15000, 1000);
+        this.quizCountDown = new QuizCountdownTimer(30000, 1000);
         if (this.phraseItems1 == null) {
             new GetDataTask(this, null).execute(new String[]{this.plusId});
             return;
