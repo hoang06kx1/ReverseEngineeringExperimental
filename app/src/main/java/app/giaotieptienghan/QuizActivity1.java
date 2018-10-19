@@ -25,6 +25,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -427,35 +431,72 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
                     return;
             }
         } else {
-            this.nextViewPagerPageIndex = getViewPagerPagePlusOffset(1);
-            if (this.nextViewPagerPageIndex != this.phraseItems.size()) {
-                this.viewPager.setCurrentItem(getViewPagerPagePlusOffset(1), true);
-                tvCurrentQuiz = this.tvTitle;
-                stringBuilder = new StringBuilder();
-                stringBuilder.append(1 + this.nextViewPagerPageIndex);
-                stringBuilder.append("/");
-                stringBuilder.append(this.phraseItems.size());
-                tvCurrentQuiz.setText(stringBuilder.toString());
-                this.llCheckParent.setVisibility(8);
-                this.tvCheck.setBackgroundResource(R.drawable.bg_phrase_answer);
-                this.tvCheck.setEnabled(false);
-                this.tvCheck.setTextColor(ContextCompat.getColor(this, R.color.quiz_text_color));
-                this.tvEnglishTest.setVisibility(8);
+            if (isAdReady) {
+                mInterstitialAd.show();
             } else {
-                completeQuiz((Context) this);
-                this.llCheckParent.setVisibility(8);
-                this.tvCheck.setBackgroundResource(R.drawable.bg_phrase_answer);
-                this.tvCheck.setEnabled(false);
-                this.tvCheck.setTextColor(ContextCompat.getColor(this, R.color.quiz_text_color));
-                this.tvEnglishTest.setVisibility(8);
+                loadNextQuiz();
             }
         }
     }
 
+    private void loadNextQuiz() {
+        this.nextViewPagerPageIndex = getViewPagerPagePlusOffset(1);
+        if (this.nextViewPagerPageIndex != this.phraseItems.size()) {
+            this.viewPager.setCurrentItem(getViewPagerPagePlusOffset(1), true);
+            TextView tvCurrentQuiz = this.tvTitle;
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(1 + this.nextViewPagerPageIndex);
+            stringBuilder.append("/");
+            stringBuilder.append(this.phraseItems.size());
+            tvCurrentQuiz.setText(stringBuilder.toString());
+            this.llCheckParent.setVisibility(8);
+            this.tvCheck.setBackgroundResource(R.drawable.bg_phrase_answer);
+            this.tvCheck.setEnabled(false);
+            this.tvCheck.setTextColor(ContextCompat.getColor(this, R.color.quiz_text_color));
+            this.tvEnglishTest.setVisibility(8);
+        } else {
+            completeQuiz((Context) this);
+            this.llCheckParent.setVisibility(8);
+            this.tvCheck.setBackgroundResource(R.drawable.bg_phrase_answer);
+            this.tvCheck.setEnabled(false);
+            this.tvCheck.setTextColor(ContextCompat.getColor(this, R.color.quiz_text_color));
+            this.tvEnglishTest.setVisibility(8);
+        }
+    }
+
+    private InterstitialAd mInterstitialAd = null;
+    private Boolean isAdReady = false;
     protected void onCreate(Bundle bundle) {
         try {
             super.onCreate(bundle);
             setContentView(R.layout.quiz_activity);
+            mInterstitialAd = new InterstitialAd(this);
+            if (BuildConfig.DEBUG) {
+                mInterstitialAd.setAdUnitId(getString(R.string.ad_popup_demo_id));
+                mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice("D9E46D2AE14D4064F48C60B07D4218FC").build());
+            } else {
+                mInterstitialAd.setAdUnitId(getString(R.string.ad_popup_2));
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+            mInterstitialAd.setAdListener(new AdListener(){
+                @Override
+                public void onAdClosed() {
+                    super.onAdClosed();
+                    isAdReady = false;
+                    if (BuildConfig.DEBUG) {
+                        mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice("D9E46D2AE14D4064F48C60B07D4218FC").build());
+                    } else {
+                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                    }
+                    loadNextQuiz();
+                }
+
+                @Override
+                public void onAdLoaded() {
+                    super.onAdLoaded();
+                    isAdReady = true;
+                }
+            });
             initViews();
             initBundle(this.categoryId);
         } catch (Exception e) {
