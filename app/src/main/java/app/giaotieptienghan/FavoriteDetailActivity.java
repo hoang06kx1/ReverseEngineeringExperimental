@@ -76,7 +76,7 @@ public class FavoriteDetailActivity extends BaseAudioPlayActivity {
         super.onCreate(bundle);
         setContentView((int) R.layout.detail_screen);
         try {
-            this.f12005H = 2;
+            this.isPlaying = 2;
             setTitle(getString(R.string.menu_fav));
             mo10050r();
             mo10051s();
@@ -122,7 +122,7 @@ public class FavoriteDetailActivity extends BaseAudioPlayActivity {
             this.tvEmpty = (TextView) findViewById(R.id.empty);
         }
         //mo10030k();
-        mo10031l();
+        initBaseViews();
     }
 
     /* renamed from: s */

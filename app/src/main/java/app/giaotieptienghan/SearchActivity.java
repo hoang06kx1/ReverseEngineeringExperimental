@@ -109,7 +109,7 @@ public class SearchActivity extends BaseAudioPlayActivity {
         super.onCreate(bundle);
         setContentView((int) R.layout.search_screen);
         try {
-            this.f12005H = 2;
+            this.isPlaying = 2;
             setTitle("Tìm Kiếm...");
             mo10050r();
         } catch (Exception e) {
@@ -139,7 +139,7 @@ public class SearchActivity extends BaseAudioPlayActivity {
             this.f12160N = (TextView) findViewById(R.id.empty);
         }
         this.listView.setOnItemClickListener(this);
-        mo10031l();
+        initBaseViews();
         new C0728a(this, null).execute(new String[0]);
     }
 }

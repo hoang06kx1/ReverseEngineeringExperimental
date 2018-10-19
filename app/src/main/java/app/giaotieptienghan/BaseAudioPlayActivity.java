@@ -59,7 +59,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     /* renamed from: G */
     protected final int f12004G;
     /* renamed from: H */
-    protected int f12005H;
+    protected int isPlaying;
     /* renamed from: I */
     protected int currentPlayIndex;
     /* renamed from: J */
@@ -136,7 +136,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
 
     /* renamed from: c */
     @SuppressLint("WrongConstant")
-    private void m16230c(String str) {
+    private void recording(String str) {
         try {
             System.out.println("startRecording");
             File file = new File(this.f12018s);
@@ -279,7 +279,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     }
 
     /* renamed from: a */
-    protected void mo10025a(String str) {
+    protected void playVoice(String str) {
         if (this.phraseItems != null && this.phraseItems.size() > 0) {
             str = ((PhraseItem) this.phraseItems.get(this.currentPlayIndex)).voice;
         }
@@ -327,9 +327,9 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     }
 
     /* renamed from: a */
-    protected void mo10027a(boolean z, String str) {
+    protected void recordingOrStop(boolean z, String str) {
         if (z) {
-            m16230c(str);
+            recording(str);
         } else {
             resetMediaRecorder();
         }
@@ -337,7 +337,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
 
     @TargetApi(21)
     /* renamed from: b */
-    protected void mo10028b(int i) {
+    protected void playSoundSlowly(int i) {
         final float streamMaxVolume = (float) ((AudioManager) getSystemService("audio")).getStreamMaxVolume(3);
         if (VERSION.SDK_INT >= 21) {
             this.soundPool = new SoundPool.Builder().setMaxStreams(25).setAudioAttributes(new Builder().setUsage(14).setContentType(4).build()).build();
@@ -379,7 +379,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
         }
     }
     /* renamed from: l */
-    protected void mo10031l() {
+    protected void initBaseViews() {
         if (this.progressBar == null) {
             this.progressBar = (ProgressBar) findViewById(R.id.progressBar);
         }
@@ -445,7 +445,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     }
 
     /* JADX WARNING: Missing block: B:9:0x0029, code:
-            mo10025a(null);
+            playVoice(null);
      */
     /* JADX WARNING: Missing block: B:10:0x002c, code:
             return;
@@ -459,7 +459,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
         switch (view.getId()) {
             case R.id.btnPlay:
                 if (this.phraseItems != null && this.phraseItems.size() > 0) {
-                    this.f12005H = 2;
+                    this.isPlaying = 2;
                     resetSoundPool();
                     if (this.mediaPlayer != null && this.mediaPlayer.isPlaying()) {
                         resetMediaPlayer();
@@ -483,13 +483,13 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
                     resetMediaPlayer();
                 }
                 if (this.phraseItems != null && this.phraseItems.size() > 0) {
-                    if (this.f12005H != 1) {
+                    if (this.isPlaying != 1) {
                         this.btPlayAll.setImageResource(R.drawable.ic_pause_footer);
-                        mo10025a(null);
-                        this.f12005H = 1;
+                        playVoice(null);
+                        this.isPlaying = 1;
                         return;
                     }
-                    this.f12005H = 2;
+                    this.isPlaying = 2;
                     return;
                 }
             case R.id.btnSlow:
@@ -505,7 +505,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
                     stringBuilder.append("_f");
                     int identifier = resources.getIdentifier(stringBuilder.toString(), "raw", getPackageName());
                     if (identifier != 0) {
-                        mo10028b(identifier);
+                        playSoundSlowly(identifier);
                         if (this.phraseAdapter != null) {
                             this.phraseAdapter.setCurrentPlaySoundIndex(this.currentPlayIndex);
                             this.phraseAdapter.notifyDataSetChanged();
@@ -529,7 +529,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
                     return;
                 }
             case R.id.btnVolume:
-                this.f12005H = 2;
+                this.isPlaying = 2;
                 resetSoundPool();
                 if (this.mediaPlayer != null && this.mediaPlayer.isPlaying()) {
                     resetMediaPlayer();
@@ -543,7 +543,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
 
     public void onCompletion(MediaPlayer mediaPlayer) {
         try {
-            if (this.f12005H == 1) {
+            if (this.isPlaying == 1) {
                 if (this.mediaPlayer != null) {
                     this.mediaPlayer.reset();
                     this.mediaPlayer.release();
@@ -553,7 +553,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
                 playNextPharase();
                 return;
             }
-            if (this.f12005H == 2) {
+            if (this.isPlaying == 2) {
                 resetMediaPlayer();
             }
         } catch (Exception e) {
@@ -565,7 +565,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     protected void onCreate(Bundle bundle) {
         try {
             super.onCreate(bundle);
-            this.f12005H = 2;
+            this.isPlaying = 2;
             if (this.handler == null) {
                 this.handler = new Handler();
             }
@@ -594,7 +594,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     }
 
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long j) {
-        this.f12005H = 2;
+        this.isPlaying = 2;
         if (this.currentPlayIndex != i) {
             this.f12021v = false;
             this.currentPlayIndex = i;
@@ -604,7 +604,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
         if (this.mediaPlayer != null && this.mediaPlayer.isPlaying()) {
             resetMediaPlayer();
         }
-        mo10025a(null);
+        playVoice(null);
     }
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {

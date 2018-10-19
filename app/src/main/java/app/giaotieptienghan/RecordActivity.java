@@ -73,7 +73,7 @@ public class RecordActivity extends BaseAudioPlayActivity implements OnClickList
                 animationDrawable.stop();
                 animationDrawable.selectDrawable(0);
                 this.f12021v = false;
-                mo10027a(this.f12021v, this.audioString);
+                recordingOrStop(this.f12021v, this.audioString);
                 this.imgMicro.setBackgroundResource(R.drawable.record_loader);
                 this.btRecord.setImageResource(R.drawable.ic_voice);
             }
@@ -87,7 +87,7 @@ public class RecordActivity extends BaseAudioPlayActivity implements OnClickList
                 return;
             }
             Toast.makeText(this, "Chọn ghi âm trước để có thể nghe lại...", 0).show();
-            mo10025a(this.audioString);
+            playVoice(this.audioString);
         } else if (id == R.id.record) {
             PrintStream printStream = System.out;
             stringBuilder = new StringBuilder();
@@ -100,13 +100,13 @@ public class RecordActivity extends BaseAudioPlayActivity implements OnClickList
                 animationDrawable.selectDrawable(0);
                 this.f12021v = false;
                 this.imgMicro.setBackgroundResource(R.drawable.record_loader);
-                mo10027a(this.f12021v, this.audioString);
+                recordingOrStop(this.f12021v, this.audioString);
                 this.btRecord.setImageResource(R.drawable.ic_voice);
                 return;
             }
             animationDrawable.start();
             this.f12021v = true;
-            mo10027a(this.f12021v, this.audioString);
+            recordingOrStop(this.f12021v, this.audioString);
             this.btRecord.setImageResource(R.drawable.ic_pause_footer);
         }
     }

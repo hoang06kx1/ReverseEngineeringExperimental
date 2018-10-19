@@ -96,7 +96,7 @@ public class PhraseDetailActivity extends BaseAudioPlayActivity implements OnIte
             bundle = getIntent().getExtras();
             this.categoryId = bundle.getInt("bundle_id");
             this.phraseId = bundle.getInt("bundle_phrase_id");
-            this.f12005H = 2;
+            this.isPlaying = 2;
             this.vietnamese = bundle.getString("bundle_title");
             if (Utils.isStringEmpty(this.vietnamese)) {
                 this.vietnamese = getString(R.string.app_name);
@@ -143,7 +143,7 @@ public class PhraseDetailActivity extends BaseAudioPlayActivity implements OnIte
             this.listView = (ListView) findViewById(R.id.listView);
         }
         //mo10030k();
-        mo10031l(); // initViews views
+        initBaseViews(); // initViews views
     }
 
     /* renamed from: s */
