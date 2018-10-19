@@ -9,7 +9,8 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "app.giaotieptienghan"
-        minSdkVersion 19
+        minSdkVersion 21
+        multiDexEnabled true
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
