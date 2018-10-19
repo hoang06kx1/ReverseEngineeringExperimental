@@ -28,13 +28,11 @@
 
         <com.google.android.gms.ads.AdView
             android:id="@+id/llAds"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:gravity="center_horizontal"
-            android:orientation="horizontal"
             app:adSize="SMART_BANNER"
-            app:adUnitId="adUnit_3"/>
+            app:adUnitId="@string/adUnit_3"/>
     </LinearLayout>
 
     <ProgressBar

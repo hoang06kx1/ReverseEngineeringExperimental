@@ -29,6 +29,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -382,6 +383,7 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
             resetMediaPlayer();
         }
     }
+
     /* renamed from: l */
     protected void initBaseViews() {
         if (this.progressBar == null) {
@@ -590,8 +592,26 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
     protected void initAds() {
         // ad init
         mAdView = findViewById(R.id.llAds);
-        AdRequest adRequest = (BuildConfig.DEBUG) ? new AdRequest.Builder().addTestDevice("A335A7A192255371F76D62FA9B9B66B6").build() : new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        if (mAdView != null) {
+            mAdView.setVisibility(View.GONE);
+            AdRequest adRequest = (BuildConfig.DEBUG) ? new AdRequest.Builder().addTestDevice("D9E46D2AE14D4064F48C60B07D4218FC").build() : new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+            mAdView.setAdListener(new AdListener() {
+                @Override
+                public void onAdLoaded() {
+                    if (mAdView != null) {
+                        mAdView.setVisibility(View.VISIBLE);
+                    }
+                }
+
+                @Override
+                public void onAdFailedToLoad(int i) {
+                    if (mAdView != null) {
+                        mAdView.setVisibility(View.GONE);
+                    }
+                }
+            });
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
