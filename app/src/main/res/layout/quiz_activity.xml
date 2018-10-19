@@ -131,7 +131,7 @@
             android:background="@drawable/bg_check_disable"
             android:gravity="center"
             android:minHeight="40dp"
-            android:text="Check"
+            android:text="Kiểm tra"
             android:textAppearance="@android:style/TextAppearance.Medium"
             android:textColor="@color/white"/>
 

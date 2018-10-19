@@ -287,7 +287,7 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
         this.tvContinue.setBackgroundResource(correct ? R.drawable.bg_continue_true : R.drawable.bg_continue_false);
         this.tvCorrect.setTextColor(Utils.getColor(this, correct ? R.color.you_are_corect : R.color.you_are_wrong));
         this.tvCorrect.setText(correct ? this.courageWords[new Random().nextInt(this.courageWords.length)] : "You are wrong!");
-        this.tvContinue.setText(correct ? "Continue" : "Try Again");
+        this.tvContinue.setText(correct ? "Tiếp tục" : "Thử lại");
     }
 
     /* renamed from: c */
