@@ -1,10 +1,11 @@
 package app.giaotieptienghan;
 
 import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import com.google.android.gms.ads.MobileAds;
 
-public class CustomApplication extends Application {
+public class CustomApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();

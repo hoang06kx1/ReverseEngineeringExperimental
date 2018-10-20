@@ -68,14 +68,14 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="share_app_text">Ứng dụng học tiếng Hàn siêu tốc rất hay và đầy đủ trên Android đây. Mọi người tải về học nhé! http://play.google.com/store/apps/details?id=__PACKAGE_NAME__</string>
-    <string name="adUnit_1">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="adUnit_2">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="adUnit_3">ca-app-pub-3940256099942544/6300978111</string>
     <string name="admob_demo_id">ca-app-pub-3940256099942544~3347511713</string>
-    <string name="admob_release_id">ca-app-pub-3940256099942544~3347511713</string>
     <string name="ad_popup_demo_id">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="ad_popup_1">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="ad_popup_2">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="ad_popup_3">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="ad_popup_4">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="admob_release_id">ca-app-pub-4865836935943267~3250539283</string>
+    <string name="adUnit_1">ca-app-pub-4865836935943267/7224060425</string>
+    <string name="adUnit_2">ca-app-pub-4865836935943267/3058967593</string>
+    <string name="adUnit_3">ca-app-pub-4865836935943267/8169067315</string>
+    <string name="ad_popup_1">ca-app-pub-4865836935943267/6608573632</string>
+    <string name="ad_popup_2">ca-app-pub-4865836935943267/4912348588</string>
+    <string name="ad_popup_3">ca-app-pub-4865836935943267/7594352245</string>
+    <string name="ad_popup_4">ca-app-pub-4865836935943267/5110415860</string>
 </resources>
