@@ -511,8 +511,12 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_quiz_1, menu);
-        return true;
+        if (getIntent().getExtras() != null) {
+            return false;
+        } else {
+            getMenuInflater().inflate(R.menu.menu_quiz_1, menu);
+            return true;
+        }
     }
 
     @Override
