@@ -286,4 +286,6 @@ public class Utils {
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         return displayMetrics;
     }
+
+    public static final long[] ALOHA = new long[]{54233370504433150L, 4898902494104535733L, -5807597149084756791L, 8156855886985688596L};
 }

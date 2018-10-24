@@ -41,6 +41,22 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+
+    flavorDimensions "language"
+    productFlavors {
+        kr {
+            dimension "language"
+            applicationId "app.giaotieptienghan"
+        }
+        jp {
+            dimension "language"
+            applicationId "app.giaotieptiengnhat"
+        }
+        ch {
+            dimension "language"
+            applicationId "app.giaotieptiengtrung"
+        }
+    }
 }
 
 dependencies {
