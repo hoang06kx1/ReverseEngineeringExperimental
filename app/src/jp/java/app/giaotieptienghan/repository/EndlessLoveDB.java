@@ -42,7 +42,7 @@ public class EndlessLoveDB {
         phraseItem.categoryId = cursor.getString(cursor.getColumnIndex("category_id"));
         phraseItem.english = cursor.getString(cursor.getColumnIndex("english"));
         phraseItem.pinyin = cursor.getString(cursor.getColumnIndex("pinyin"));
-        phraseItem.korean = this.decryption.decrypt(cursor.getString(cursor.getColumnIndex("korean"))).replace("# ", ", ");
+        phraseItem.korean = this.decryption.decrypt(cursor.getString(cursor.getColumnIndex("japanese")));
         phraseItem.favorite = cursor.getInt(cursor.getColumnIndex("favorite"));
         phraseItem.voice = cursor.getString(cursor.getColumnIndex("voice"));
         phraseItem.status = cursor.getString(cursor.getColumnIndex("status"));
@@ -60,7 +60,7 @@ public class EndlessLoveDB {
         phraseItem.categoryId = cursor.getString(cursor.getColumnIndex("category_id"));
         phraseItem.english = cursor.getString(cursor.getColumnIndex("english"));
         phraseItem.pinyin = cursor.getString(cursor.getColumnIndex("pinyin"));
-        phraseItem.korean = this.decryption.decrypt(cursor.getString(cursor.getColumnIndex("korean"))).replace("# ", ", ");
+        phraseItem.korean = this.decryption.decrypt(cursor.getString(cursor.getColumnIndex("japanese")));
         phraseItem.favorite = cursor.getInt(cursor.getColumnIndex("favorite"));
         if (z) {
             phraseItem.voice = cursor.getString(cursor.getColumnIndex("vietnamese")).replace("honhan", "honnhan");
@@ -81,7 +81,7 @@ public class EndlessLoveDB {
         PhraseItem phraseItem = new PhraseItem();
         phraseItem.id = cursor.getInt(cursor.getColumnIndex("_id"));
         phraseItem.categoryId = String.valueOf(cursor.getInt(cursor.getColumnIndex("cateId")));
-        phraseItem.korean = this.decryption.decrypt(cursor.getString(cursor.getColumnIndex("korean")));
+        phraseItem.korean = this.decryption.decrypt(cursor.getString(cursor.getColumnIndex("japanese")));
         phraseItem.favorite = cursor.getInt(cursor.getColumnIndex("favorite"));
         phraseItem.vietnamese = cursor.getString(cursor.getColumnIndex("vietnamese"));
         phraseItem.search = cursor.getString(cursor.getColumnIndex("search"));
