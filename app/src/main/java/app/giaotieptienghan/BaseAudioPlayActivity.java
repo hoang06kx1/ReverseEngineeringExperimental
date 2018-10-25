@@ -401,45 +401,6 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
         this.btVolume.setOnClickListener(this);
     }
 
-    /* renamed from: m */
-    //public void mo10032m() {
-    //    if (Utils.m3038c(this) && "1".equals(this.appPreference.mo2914g())) {
-    //        if (C0768b.f1959c == null) {
-    //            C0768b.f1959c = new C0758a(this);
-    //            try {
-    //                C0768b.f1959c.mo2857a(getString(R.string.admob_id));
-    //                C0768b.f1959c.mo2856a(0);
-    //            } catch (Exception e) {
-    //                e.printStackTrace();
-    //            }
-    //        }
-    //        if (this.linearLayout != null) {
-    //            this.linearLayout.addView(C0768b.f1959c);
-    //        }
-    //    }
-    //}
-
-    ///* renamed from: n */
-    //public void mo10033n() {
-    //    if (Utils.m3038c(this)) {
-    //        C0768b.f1961e++;
-    //        initViews();
-    //        boolean a = C0768b.f1962f.mo4666a();
-    //        if ((!C0768b.f1960d || C0768b.f1961e >= this.appPreference.mo2915h()) && a) {
-    //            minusScore();
-    //            C0768b.f1961e = 0;
-    //            C0768b.f1960d = true;
-    //        }
-    //    }
-    //}
-
-    ///* renamed from: o */
-    //public void mo10034o() {
-    //    if (this.linearLayout != null) {
-    //        this.linearLayout.removeAllViews();
-    //    }
-    //}
-
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
@@ -450,16 +411,6 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
         printStream.println(stringBuilder.toString());
     }
 
-    /* JADX WARNING: Missing block: B:9:0x0029, code:
-            playCurrentAudio(null);
-     */
-    /* JADX WARNING: Missing block: B:10:0x002c, code:
-            return;
-     */
-    /* JADX WARNING: Missing block: B:61:0x017d, code:
-            return;
-     */
-    /* Code decompiled incorrectly, please refer to instructions dump. */
     public void onClick(View view) {
         StringBuilder stringBuilder;
         switch (view.getId()) {

@@ -19,6 +19,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build.VERSION;
 import android.os.Parcelable;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.EditText;
@@ -27,6 +28,9 @@ import android.widget.TextView;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -34,6 +38,13 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
 import app.giaotieptienghan.model.BaseData;
 
@@ -67,6 +78,21 @@ public class Utils {
     /* renamed from: a */
     public static Class<?> m3028a(Field field) {
         return ParameterizedType.class.isAssignableFrom(field.getGenericType().getClass()) ? (Class) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0] : new Boolean(false).getClass();
+    }
+
+    public static String m4773a(String str, String str2) {
+        try {
+            return new String(m4776a(str.getBytes("UTF-8"), Base64.decode(str2.getBytes(), 2)));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return "Errorrrr";
+        }
+    }
+
+    private static byte[] m4776a(byte[] bArr, byte[] bArr2) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+        Cipher instance = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        instance.init(2, new SecretKeySpec(bArr, "AES"), new IvParameterSpec(new byte[16]));
+        return instance.doFinal(bArr2);
     }
 
     /* renamed from: a */

@@ -86,10 +86,12 @@ class MainActivity : AppCompatActivity() {
         menuItems.name = "Game luyện nghe"
         menuItems.image = R.drawable.ic_action_dictionary
         this.listMenuItem.add(menuItems)
-//        menuItems = MenuItem()
-//        menuItems.name = "Ngữ Pháp"
-//        menuItems.image = R.drawable.ic_comments16
-//        this.listMenuItem.add(menuItems)
+        if (BuildConfig.FLAVOR.contains("jp", true)) {
+            menuItems = MenuItem()
+            menuItems.name = "Ngữ Pháp"
+            menuItems.image = R.drawable.ic_comments16
+            this.listMenuItem.add(menuItems)
+        }
 //        menuItems = MenuItem()
 //        menuItems.name = "Nâng Cao"
 //        menuItems.image = R.drawable.ic_world8
@@ -155,17 +157,19 @@ class MainActivity : AppCompatActivity() {
                     cls = QuizActivity1::class.java
                 } else if (i == 3) {
                     cls = QuizDetail::class.java
-                } else if (i == 4 + 1) {
+                } else if (i == 4) {
+                    cls = GrammaActivity::class.java
+                } else if (i == 4 + 2) {
                     this@MainActivity.openPlayStore(packageName)
                     return@Runnable
-                } else if (i == 5 + 1) {
+                } else if (i == 5 + 2) {
                     val intent = Intent()
                     intent.action = "android.intent.action.SEND"
                     intent.putExtra("android.intent.extra.TEXT", getString(R.string.share_app_text).replace("__PACKAGE_NAME__", packageName))
                     intent.type = "text/plain"
                     startActivity(intent)
                     return@Runnable
-                } else if (i == 6 + 1) {
+                } else if (i == 6 + 2) {
                     this@MainActivity.ourApp()
                     return@Runnable
                 }
