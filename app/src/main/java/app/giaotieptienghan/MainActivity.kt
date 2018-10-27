@@ -165,7 +165,7 @@ class MainActivity : AppCompatActivity() {
                 } else if (i == 5 + 2) {
                     val intent = Intent()
                     intent.action = "android.intent.action.SEND"
-                    intent.putExtra("android.intent.extra.TEXT", getString(R.string.share_app_text).replace("__PACKAGE_NAME__", packageName))
+                    intent.putExtra("android.intent.extra.TEXT", getString(R.string.share_app_text).replace("__PACKAGE_NAME__", BuildConfig.APPLICATION_ID))
                     intent.type = "text/plain"
                     startActivity(intent)
                     return@Runnable

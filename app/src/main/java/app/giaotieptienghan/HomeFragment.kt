@@ -82,7 +82,11 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 }
                 -3 -> {
                     try {
-                        startActivity(Intent("android.intent.action.VIEW", Uri.parse("market://details?id=ngoaingu.hoctienghan.video")))
+                        if (BuildConfig.FLAVOR.contains("kr", true)) {
+                            startActivity(Intent("android.intent.action.VIEW", Uri.parse("market://details?id=ngoaingu.hoctienghan.video")))
+                        } else if (BuildConfig.FLAVOR.contains("jp", true)){
+                            startActivity(Intent("android.intent.action.VIEW", Uri.parse("market://details?id=app.tuhoctiengnhat")))
+                        }
                     } catch (e: ActivityNotFoundException) {
                         Toast.makeText(activity, "Không tìm được chợ ứng dụng", Toast.LENGTH_LONG).show()
                     }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">Học Giao Tiếp Tiếng Nhật</string>
-	<string name="ad_popup_demo_id">ca-app-pub-3940256099942544/1033173712</string>
+	<string name="app_name">Giao Tiếp Tiếng Nhật Pro</string>
+    <string name="share_app_text">Ứng dụng học tiếng Nhật siêu tốc rất hay và đầy đủ trên Android đây. Mọi người tải về học nhé! http://play.google.com/store/apps/details?id=__PACKAGE_NAME__</string>
+    <string name="ad_popup_demo_id">ca-app-pub-3940256099942544/1033173712</string>
     <string name="admob_release_id">ca-app-pub-4865836935943267~3250539283</string>
     <string name="adUnit_1">ca-app-pub-4865836935943267/7224060425</string>
     <string name="adUnit_2">ca-app-pub-4865836935943267/3058967593</string>
