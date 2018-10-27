@@ -12,6 +12,7 @@ import android.media.MediaRecorder;
 import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.os.Environment;
@@ -316,7 +317,11 @@ public class BaseAudioPlayActivity extends AppCompatActivity implements OnComple
                 }
                 this.mediaPlayer = new MediaPlayer();
                 initMediaPlayer();
-                this.mediaPlayer.setDataSource(String.format("https://translate.google.com/translate_tts?ie=UTF-8&q=%s&tl=%s&client=tw-ob", new Object[]{URLEncoder.encode(str, "UTF-8"), "ko"}));
+                if (BuildConfig.FLAVOR.contains("kr")) {
+                    this.mediaPlayer.setDataSource(String.format("https://translate.google.com/translate_tts?ie=UTF-8&q=%s&tl=%s&client=tw-ob", new Object[]{URLEncoder.encode(str, "UTF-8"), "ko"}));
+                } else if  (BuildConfig.FLAVOR.contains("jp")) {
+                    this.mediaPlayer.setDataSource(String.format("https://translate.google.com/translate_tts?ie=UTF-8&q=%s&tl=%s&client=tw-ob", new Object[]{URLEncoder.encode(str, "UTF-8"), "jp"}));
+                }
                 this.mediaPlayer.prepare();
                 this.mediaPlayer.setOnCompletionListener(onCompletionListener);
                 this.mediaPlayer.start();

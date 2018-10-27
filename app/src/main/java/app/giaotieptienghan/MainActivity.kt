@@ -160,7 +160,7 @@ class MainActivity : AppCompatActivity() {
                 } else if (i == 4) {
                     cls = GrammaActivity::class.java
                 } else if (i == 4 + 2) {
-                    this@MainActivity.openPlayStore(packageName)
+                    this@MainActivity.openPlayStore(BuildConfig.APPLICATION_ID)
                     return@Runnable
                 } else if (i == 5 + 2) {
                     val intent = Intent()

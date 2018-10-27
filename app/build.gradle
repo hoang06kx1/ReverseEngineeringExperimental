@@ -45,14 +45,20 @@ android {
     flavorDimensions "language"
     productFlavors {
         kr {
+            versionCode 1
+            versionName "1.0"
             dimension "language"
             applicationId "app.giaotieptienghan"
         }
         jp {
+            versionCode 1
+            versionName "1.0"
             dimension "language"
             applicationId "app.giaotieptiengnhat"
         }
         ch {
+            versionCode 1
+            versionName "1.0"
             dimension "language"
             applicationId "app.giaotieptiengtrung"
         }
