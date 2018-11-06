@@ -9,6 +9,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import app.giaotieptienghan.Utils;
+import app.giaotieptienghan.cipher.C0767a;
 import app.giaotieptienghan.cipher.Decryption;
 import app.giaotieptienghan.cipher.ObfuscatedString;
 import app.giaotieptienghan.model.CategoryItem;
@@ -25,11 +26,14 @@ public class EndlessLoveDB {
     /* renamed from: d */
     private Decryption decryption;
 
+    private C0767a revertCipher;
+
     public EndlessLoveDB(Context context) {
         try {
             this.context = context;
             this.helper = new DatabaseHelper(this.context);
             this.decryption = new Decryption(new ObfuscatedString(Utils.ALOHA).toString());
+            this.revertCipher = new C0767a(new ObfuscatedString(new long[]{10047167883570276L, -3936464861463571530L, 7479621358591293963L, 6776793961198095282L}).toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,8 +45,8 @@ public class EndlessLoveDB {
         phraseItem.id = cursor.getInt(cursor.getColumnIndex("_id"));
         phraseItem.categoryId = cursor.getString(cursor.getColumnIndex("category_id"));
         phraseItem.english = cursor.getString(cursor.getColumnIndex("english"));
-        phraseItem.pinyin = this.decryption.decrypt(cursor.getString(cursor.getColumnIndex("pinyin")));
-        phraseItem.korean = this.decryption.decrypt(cursor.getString(cursor.getColumnIndex("chinese")));
+        phraseItem.pinyin = this.revertCipher.mo2891a(cursor.getString(cursor.getColumnIndex("pinyin")));
+        phraseItem.korean = this.revertCipher.mo2891a(cursor.getString(cursor.getColumnIndex("chinese")));
         phraseItem.favorite = cursor.getInt(cursor.getColumnIndex("favorite"));
         phraseItem.voice = cursor.getString(cursor.getColumnIndex("voice"));
         phraseItem.status = cursor.getString(cursor.getColumnIndex("status"));

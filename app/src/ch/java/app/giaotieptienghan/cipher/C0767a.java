@@ -37,6 +37,23 @@ public class C0767a {
         }
     }
 
+    public C0767a(String str) {
+        try {
+            this.f1956b = SecretKeyFactory.getInstance("DES").generateSecret(new DESKeySpec(new Decryption(new ObfuscatedString(new long[]{54233370504433150L, 4898902494104535733L, -5807597149084756791L, 8156855886985688596L}).toString()).decrypt(str).getBytes("UTF8")));
+            this.f1955a = Cipher.getInstance("DES");
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e2) {
+            e2.printStackTrace();
+        } catch (NoSuchAlgorithmException e3) {
+            e3.printStackTrace();
+        } catch (InvalidKeySpecException e4) {
+            e4.printStackTrace();
+        } catch (NoSuchPaddingException e5) {
+            e5.printStackTrace();
+        }
+    }
+
     /* renamed from: a */
     public String mo2891a(String str) {
         byte[] decode = Base64.decode(str, 0);
