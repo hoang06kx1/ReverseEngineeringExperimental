@@ -19,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper { // enlesslove.dat helper
     /* renamed from: b */
     private static String filePath = "";
     /* renamed from: c */
-    private static String fileName = "endlesslovech.db";
+    private static String fileName = "endlesslove1ch.dat";
     /* renamed from: d */
     private SQLiteDatabase sqLiteDatabase;
     /* renamed from: e */

@@ -313,5 +313,5 @@ public class Utils {
         return displayMetrics;
     }
 
-    public static final long[] ALOHA = new long[]{591836717138351896L, 4550222356846130790L, -8561565741283733808L, 7267416563111126065L};
+    public static final long[] ALOHA = new long[]{10047167883570276L, -3936464861463571530L, 7479621358591293963L, 6776793961198095282L};
 }

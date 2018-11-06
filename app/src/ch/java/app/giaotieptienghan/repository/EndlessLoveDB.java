@@ -41,8 +41,8 @@ public class EndlessLoveDB {
         phraseItem.id = cursor.getInt(cursor.getColumnIndex("_id"));
         phraseItem.categoryId = cursor.getString(cursor.getColumnIndex("category_id"));
         phraseItem.english = cursor.getString(cursor.getColumnIndex("english"));
-        phraseItem.pinyin = cursor.getString(cursor.getColumnIndex("pinyin"));
-        phraseItem.korean = this.decryption.decrypt(cursor.getString(cursor.getColumnIndex("japanese")));
+        phraseItem.pinyin = this.decryption.decrypt(cursor.getString(cursor.getColumnIndex("pinyin")));
+        phraseItem.korean = this.decryption.decrypt(cursor.getString(cursor.getColumnIndex("chinese")));
         phraseItem.favorite = cursor.getInt(cursor.getColumnIndex("favorite"));
         phraseItem.voice = cursor.getString(cursor.getColumnIndex("voice"));
         phraseItem.status = cursor.getString(cursor.getColumnIndex("status"));
@@ -80,8 +80,15 @@ public class EndlessLoveDB {
     private PhraseItem m2974b(Cursor cursor) {
         PhraseItem phraseItem = new PhraseItem();
         phraseItem.id = cursor.getInt(cursor.getColumnIndex("_id"));
-        phraseItem.categoryId = String.valueOf(cursor.getInt(cursor.getColumnIndex("cateId")));
-        phraseItem.korean = this.decryption.decrypt(cursor.getString(cursor.getColumnIndex("japanese")));
+        phraseItem.categoryId = String.valueOf(cursor.getInt(cursor.getColumnIndex("category_id")));
+        try {
+            Decryption c0774g = new Decryption(new ObfuscatedString(new long[]{54233370504433150L, 4898902494104535733L, -5807597149084756791L, 8156855886985688596L}).toString());
+            phraseItem.pinyin = c0774g.decrypt(cursor.getString(cursor.getColumnIndex("pinyin")));
+            phraseItem.korean = c0774g.decrypt(cursor.getString(cursor.getColumnIndex("chinese")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //phraseItem.korean = this.decryption.decrypt(cursor.getString(cursor.getColumnIndex("japanese")));
         phraseItem.favorite = cursor.getInt(cursor.getColumnIndex("favorite"));
         phraseItem.vietnamese = cursor.getString(cursor.getColumnIndex("vietnamese"));
         phraseItem.search = cursor.getString(cursor.getColumnIndex("search"));
@@ -121,7 +128,7 @@ public class EndlessLoveDB {
             Log.e("GetData", stringBuilder2.toString());
             if (rawQuery.moveToFirst()) {
                 do {
-                    arrayList.add(i == 33 ? m2973a(rawQuery, true) : m2972a(rawQuery));
+                    arrayList.add(m2972a(rawQuery));
                 } while (rawQuery.moveToNext());
             }
             return arrayList;
@@ -213,7 +220,7 @@ public class EndlessLoveDB {
             if (i != -1) {
                 stringBuilder = new StringBuilder();
                 stringBuilder.append(str);
-                stringBuilder.append(" where cateId=");
+                stringBuilder.append(" where category_id=");
                 stringBuilder.append(i);
                 str = stringBuilder.toString();
             }

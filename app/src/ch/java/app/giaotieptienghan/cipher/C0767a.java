@@ -22,7 +22,7 @@ public class C0767a {
 
     public C0767a() {
         try {
-            this.f1956b = SecretKeyFactory.getInstance("DES").generateSecret(new DESKeySpec("fuck_you".getBytes("UTF8")));
+            this.f1956b = SecretKeyFactory.getInstance("DES").generateSecret(new DESKeySpec(new ObfuscatedString(new long[]{54233370504433150L, 4898902494104535733L, -5807597149084756791L, 8156855886985688596L}).toString().getBytes("UTF8")));
             this.f1955a = Cipher.getInstance("DES");
         } catch (InvalidKeyException e) {
             e.printStackTrace();
