@@ -92,7 +92,7 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
     /* renamed from: ai */
     private String selectedAnswerText;
     /* renamed from: aj */
-    private int categoryId;
+    private int categoryId = -1;
     /* renamed from: ak */
     private String favorite_id;
     /* renamed from: al */

@@ -51,7 +51,7 @@ public class AppPreference { // App preference
     }
 
     public String getSelectedPracticeId() {
-        return this.sharedPreferences.getString(SELECTED_PRACTICE_ID, "0");
+        return this.sharedPreferences.getString(SELECTED_PRACTICE_ID, "-1");
     }
 
     public void setSelectedPracticeId(String str) {

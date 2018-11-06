@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         menuItems.name = "Game luyện nghe"
         menuItems.image = R.drawable.ic_action_dictionary
         this.listMenuItem.add(menuItems)
-        if (BuildConfig.FLAVOR.contains("jp", true)) {
+        if (BuildConfig.FLAVOR.contains("jp", true) || BuildConfig.FLAVOR.contains("ch", true)) {
             menuItems = MenuItem()
             menuItems.name = "Ngữ Pháp"
             menuItems.image = R.drawable.ic_comments16

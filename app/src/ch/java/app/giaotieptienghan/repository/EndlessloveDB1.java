@@ -23,13 +23,14 @@ public class EndlessloveDB1 {
     /* renamed from: c */
     private DatabaseHelper1 DBHelper1;
     //private Decryption decryption;
-
+    private C0767a revertCipher;
 
     public EndlessloveDB1(Context context) {
         try {
             this.context = context;
             this.DBHelper1 = new DatabaseHelper1(this.context);
             //this.decryption = new Decryption(new ObfuscatedString(new long[]{2679435343808083287L, -7417836030320947728L, 168300512791597831L}).toString());
+            this.revertCipher = new C0767a(new ObfuscatedString(new long[]{3297864285793973364L, -6749867354775971907L, 683554246847815286L, -3535878960802658041L}).toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -50,7 +51,7 @@ public class EndlessloveDB1 {
             if (i != -1) {
                 stringBuilder = new StringBuilder();
                 stringBuilder.append(str);
-                stringBuilder.append(" where fav=");
+                stringBuilder.append(" where favorites=");
                 stringBuilder.append(i);
                 str = stringBuilder.toString();
             }
@@ -62,14 +63,14 @@ public class EndlessloveDB1 {
             if (rawQuery.moveToFirst()) {
                 do {
                     GrammaItem grammaItem = new GrammaItem();
-                    grammaItem.id = rawQuery.getInt(rawQuery.getColumnIndex("id"));
+                    grammaItem.id = rawQuery.getInt(rawQuery.getColumnIndex("_id"));
                     grammaItem.phrase = rawQuery.getString(rawQuery.getColumnIndex("word"));
                     try {
-                        grammaItem.description = Utils.m4773a(new ObfuscatedString(new long[]{2679435343808083287L, -7417836030320947728L, 168300512791597831L}).toString(),rawQuery.getString(rawQuery.getColumnIndex("content")));
+                        grammaItem.description = this.revertCipher.mo2891a(rawQuery.getString(rawQuery.getColumnIndex("content")));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    grammaItem.favorites = rawQuery.getInt(rawQuery.getColumnIndex("fav"));
+                    grammaItem.favorites = rawQuery.getInt(rawQuery.getColumnIndex("favorites"));
                     arrayList.add(grammaItem);
                 } while (rawQuery.moveToNext());
             }
@@ -86,7 +87,7 @@ public class EndlessloveDB1 {
     /* renamed from: a */
     public boolean mo2883a(int i, int i2) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("UPDATE np SET fav=");
+        stringBuilder.append("UPDATE np SET favorites=");
         stringBuilder.append(i);
         stringBuilder.append(" WHERE id=");
         stringBuilder.append(i2);
