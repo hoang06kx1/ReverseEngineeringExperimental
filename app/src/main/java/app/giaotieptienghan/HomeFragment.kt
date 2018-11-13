@@ -18,6 +18,7 @@ import app.giaotieptienghan.adapter.HomeAdapter
 import app.giaotieptienghan.model.CategoryItem
 import java.util.*
 import app.giaotieptienghan.repository.EndlessLoveDB
+import kotlinx.android.synthetic.main.gramma_adapter_item.*
 
 
 class HomeFragment : Fragment(), OnItemClickListener {
@@ -84,8 +85,13 @@ class HomeFragment : Fragment(), OnItemClickListener {
                     try {
                         if (BuildConfig.FLAVOR.contains("kr", true)) {
                             startActivity(Intent("android.intent.action.VIEW", Uri.parse("market://details?id=ngoaingu.hoctienghan.video")))
-                        } else if (BuildConfig.FLAVOR.contains("jp", true)){
+                        } else if (BuildConfig.FLAVOR.contains("jp", true)) {
                             startActivity(Intent("android.intent.action.VIEW", Uri.parse("market://details?id=app.tuhoctiengnhat")))
+                        } else if (BuildConfig.FLAVOR.contains("ch", true)) {
+                            try {
+                                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Ngoai+Ngu+Software")))
+                            } catch (unused: ActivityNotFoundException) {
+                            }
                         }
                     } catch (e: ActivityNotFoundException) {
                         Toast.makeText(activity, "Không tìm được chợ ứng dụng", Toast.LENGTH_LONG).show()
