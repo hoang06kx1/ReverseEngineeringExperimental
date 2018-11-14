@@ -118,9 +118,9 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
                     playAudio(identifier, (OnCompletionListener) QuizDetail.this);
                 }
             }
-            if (isAdReady) {
-                mInterstitialAd.show();
-            }
+            //if (isAdReady) {
+            //    mInterstitialAd.show();
+            //}
             QuizDetail.this.quizCountdown.onFinish();
         }
     }
@@ -449,37 +449,37 @@ public class QuizDetail extends BaseAudioPlayActivity implements OnClickListener
         }
     }
 
-    private InterstitialAd mInterstitialAd = null;
+    //private InterstitialAd mInterstitialAd = null;
     private Boolean isAdReady = false;
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView((int) R.layout.quiz_detail_screen);
-        mInterstitialAd = new InterstitialAd(this);
-        if (BuildConfig.DEBUG) {
-            mInterstitialAd.setAdUnitId(getString(R.string.ad_popup_demo_id));
-            mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice("D9E46D2AE14D4064F48C60B07D4218FC").build());
-        } else {
-            mInterstitialAd.setAdUnitId(getString(R.string.ad_popup_3));
-            mInterstitialAd.loadAd(new AdRequest.Builder().build());
-        }
-        mInterstitialAd.setAdListener(new AdListener(){
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-                isAdReady = false;
-                if (BuildConfig.DEBUG) {
-                    mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice("D9E46D2AE14D4064F48C60B07D4218FC").build());
-                } else {
-                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                }
-            }
-
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                isAdReady = true;
-            }
-        });
+        //mInterstitialAd = new InterstitialAd(this);
+        //if (BuildConfig.DEBUG) {
+        //    mInterstitialAd.setAdUnitId(getString(R.string.ad_popup_demo_id));
+        //    mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice("D9E46D2AE14D4064F48C60B07D4218FC").build());
+        //} else {
+        //    mInterstitialAd.setAdUnitId(getString(R.string.ad_popup_3));
+        //    mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        //}
+        //mInterstitialAd.setAdListener(new AdListener(){
+        //    @Override
+        //    public void onAdClosed() {
+        //        super.onAdClosed();
+        //        isAdReady = false;
+        //        if (BuildConfig.DEBUG) {
+        //            mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice("D9E46D2AE14D4064F48C60B07D4218FC").build());
+        //        } else {
+        //            mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        //        }
+        //    }
+        //
+        //    @Override
+        //    public void onAdLoaded() {
+        //        super.onAdLoaded();
+        //        isAdReady = true;
+        //    }
+        //});
         try {
             setTitle("Game luyện nghe");
             initViews();

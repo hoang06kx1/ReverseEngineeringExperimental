@@ -436,11 +436,11 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
                     return;
             }
         } else {
-            if (isAdReady) {
-                mInterstitialAd.show();
-            } else {
+            //if (isAdReady) {
+                //mInterstitialAd.show();
+            //} else {
                 loadNextQuiz();
-            }
+            //}
         }
     }
 
@@ -469,40 +469,40 @@ public class QuizActivity1 extends BaseAudioPlayActivity implements OnClickListe
         }
     }
 
-    private InterstitialAd mInterstitialAd = null;
+    //private InterstitialAd mInterstitialAd = null;
     private Boolean isAdReady = false;
 
     protected void onCreate(Bundle bundle) {
         try {
             super.onCreate(bundle);
             setContentView(R.layout.quiz_activity);
-            mInterstitialAd = new InterstitialAd(this);
-            if (BuildConfig.DEBUG) {
-                mInterstitialAd.setAdUnitId(getString(R.string.ad_popup_demo_id));
-                mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice("D9E46D2AE14D4064F48C60B07D4218FC").build());
-            } else {
-                mInterstitialAd.setAdUnitId(getString(R.string.ad_popup_2));
-                mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-            mInterstitialAd.setAdListener(new AdListener() {
-                @Override
-                public void onAdClosed() {
-                    super.onAdClosed();
-                    isAdReady = false;
-                    if (BuildConfig.DEBUG) {
-                        mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice("D9E46D2AE14D4064F48C60B07D4218FC").build());
-                    } else {
-                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                    }
-                    loadNextQuiz();
-                }
-
-                @Override
-                public void onAdLoaded() {
-                    super.onAdLoaded();
-                    isAdReady = true;
-                }
-            });
+            //mInterstitialAd = new InterstitialAd(this);
+            //if (BuildConfig.DEBUG) {
+            //    mInterstitialAd.setAdUnitId(getString(R.string.ad_popup_demo_id));
+            //    mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice("D9E46D2AE14D4064F48C60B07D4218FC").build());
+            //} else {
+            //    mInterstitialAd.setAdUnitId(getString(R.string.ad_popup_2));
+            //    mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            //}
+            //mInterstitialAd.setAdListener(new AdListener() {
+            //    @Override
+            //    public void onAdClosed() {
+            //        super.onAdClosed();
+            //        isAdReady = false;
+            //        if (BuildConfig.DEBUG) {
+            //            mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice("D9E46D2AE14D4064F48C60B07D4218FC").build());
+            //        } else {
+            //            mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            //        }
+            //
+            //    }
+            //
+            //    @Override
+            //    public void onAdLoaded() {
+            //        super.onAdLoaded();
+            //        isAdReady = true;
+            //    }
+            //});
             initViews();
             initBundle(this.categoryId);
         } catch (Exception e) {
