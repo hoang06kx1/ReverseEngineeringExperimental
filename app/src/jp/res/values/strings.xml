@@ -3,13 +3,13 @@
 	<string name="app_name">Giao Tiếp Tiếng Nhật Pro</string>
     <string name="share_app_text">Ứng dụng học tiếng Nhật siêu tốc rất hay và đầy đủ trên Android đây. Mọi người tải về học nhé! http://play.google.com/store/apps/details?id=__PACKAGE_NAME__</string>
     <string name="ad_popup_demo_id">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="admob_release_id">ca-app-pub-4865836935943267~9808697441</string>
-    <string name="adUnit_1">ca-app-pub-4865836935943267/3981655695</string>
-    <string name="adUnit_2">ca-app-pub-4865836935943267/8062046092</string>
-    <string name="adUnit_3">ca-app-pub-4865836935943267/4362883352</string>
-    <string name="adUnit_4">ca-app-pub-4865836935943267/9921922673</string>
-    <string name="ad_popup_1">ca-app-pub-4865836935943267/7104187642</string>
-    <string name="ad_popup_2">ca-app-pub-4865836935943267/2091943234</string>
-    <string name="ad_popup_3">ca-app-pub-4865836935943267/4094880923</string>
-    <string name="ad_popup_4">ca-app-pub-4865836935943267/1277145892</string>
+    <string name="admob_release_id">ca-app-pub-8212152827934204~9750926460</string>
+    <string name="adUnit_1">ca-app-pub-8212152827934204/4191478024</string>
+    <string name="adUnit_2">ca-app-pub-8212152827934204/7939151341</string>
+    <string name="adUnit_3">ca-app-pub-8212152827934204/6053270326</string>
+    <string name="adUnit_4">ca-app-pub-8212152827934204/9442970556</string>
+    <string name="ad_popup_1">ca-app-pub-8212152827934204/2285291993</string>
+    <string name="ad_popup_2">ca-app-pub-8212152827934204/6660593224</string>
+    <string name="ad_popup_3">ca-app-pub-8212152827934204/3981517041</string>
+    <string name="ad_popup_4">ca-app-pub-8212152827934204/6242926298</string>
 </resources>

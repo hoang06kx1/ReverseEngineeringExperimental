@@ -148,6 +148,7 @@ class MainActivity : AppCompatActivity() {
         this.drawer_layout.closeDrawer(this.drawer)
         Handler().postDelayed(Runnable {
             try {
+                val offset = if (BuildConfig.FLAVOR.contains("kr", true)) 1 else 2
                 var cls: Class<*>? = null
                 if (i == 0) {
                     cls = FavoriteDetailActivity::class.java
@@ -157,19 +158,19 @@ class MainActivity : AppCompatActivity() {
                     cls = QuizActivity1::class.java
                 } else if (i == 3) {
                     cls = QuizDetail::class.java
-                } else if (i == 4) {
+                } else if (i == 4 && !BuildConfig.FLAVOR.contains("kr", true)) {
                     cls = GrammaActivity::class.java
-                } else if (i == 4 + 2) {
+                } else if (i == 4 + offset) {
                     this@MainActivity.openPlayStore(BuildConfig.APPLICATION_ID)
                     return@Runnable
-                } else if (i == 5 + 2) {
+                } else if (i == 5 + offset) {
                     val intent = Intent()
                     intent.action = "android.intent.action.SEND"
                     intent.putExtra("android.intent.extra.TEXT", getString(R.string.share_app_text).replace("__PACKAGE_NAME__", BuildConfig.APPLICATION_ID))
                     intent.type = "text/plain"
                     startActivity(intent)
                     return@Runnable
-                } else if (i == 6 + 2) {
+                } else if (i == 6 + offset) {
                     this@MainActivity.ourApp()
                     return@Runnable
                 }
