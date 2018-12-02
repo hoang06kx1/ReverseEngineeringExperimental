@@ -3,13 +3,13 @@
 	<string name="app_name">Giao Tiếp Tiếng Trung Pro</string>
     <string name="share_app_text">Ứng dụng học tiếng Trung siêu tốc rất hay và đầy đủ trên Android đây. Mọi người tải về học nhé! http://play.google.com/store/apps/details?id=__PACKAGE_NAME__</string>
     <string name="ad_popup_demo_id">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="admob_release_id">ca-app-pub-8212152827934204~2494418827</string>
-    <string name="adUnit_1">ca-app-pub-8212152827934204/9629429545</string>
-    <string name="adUnit_2">ca-app-pub-8212152827934204/7326823543</string>
-    <string name="adUnit_3">ca-app-pub-8212152827934204/3579150228</string>
-    <string name="adUnit_4">ca-app-pub-8212152827934204/9023048592</string>
-    <string name="ad_popup_1">ca-app-pub-8212152827934204/1367796142</string>
-    <string name="ad_popup_2">ca-app-pub-8212152827934204/7933204491</string>
-    <string name="ad_popup_3">ca-app-pub-8212152827934204/9246286169</string>
-    <string name="ad_popup_4">ca-app-pub-8212152827934204/6811694515</string>
+    <string name="admob_release_id">ca-app-pub-9637962469533556~4761626537</string>
+    <string name="adUnit_1">ca-app-pub-9637962469533556/4395204147</string>
+    <string name="adUnit_2">ca-app-pub-9637962469533556/7310686682</string>
+    <string name="adUnit_3">ca-app-pub-9637962469533556/4684523343</string>
+    <string name="adUnit_4">ca-app-pub-9637962469533556/1385897428</string>
+    <string name="ad_popup_1">ca-app-pub-9637962469533556/3358999235</string>
+    <string name="ad_popup_2">ca-app-pub-9637962469533556/3054202314</string>
+    <string name="ad_popup_3">ca-app-pub-9637962469533556/4729836947</string>
+    <string name="ad_popup_4">ca-app-pub-9637962469533556/8661752218</string>
 </resources>
