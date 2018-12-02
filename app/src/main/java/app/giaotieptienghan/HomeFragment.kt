@@ -88,10 +88,11 @@ class HomeFragment : Fragment(), OnItemClickListener {
                         } else if (BuildConfig.FLAVOR.contains("jp", true)) {
                             startActivity(Intent("android.intent.action.VIEW", Uri.parse("market://details?id=app.tuhoctiengnhat")))
                         } else if (BuildConfig.FLAVOR.contains("ch", true)) {
-                            try {
-                                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Ngoai+Ngu+Software")))
-                            } catch (unused: ActivityNotFoundException) {
-                            }
+//                            try {
+//                                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Ngoai+Ngu+Software")))
+//                            } catch (unused: ActivityNotFoundException) {
+//                            }
+                            Toast.makeText(activity, "Tính năng chưa khả dụng tại phiên bản này.", Toast.LENGTH_LONG).show()
                         }
                     } catch (e: ActivityNotFoundException) {
                         Toast.makeText(activity, "Không tìm được chợ ứng dụng", Toast.LENGTH_LONG).show()
